@@ -1,0 +1,53 @@
+@import "_colors";
+
+.faqs {
+    margin-bottom: 60px;
+    .inner{
+        padding: 30px;
+        background: $bgmenu;
+        border-radius: 0 0 5px 5px;
+    }
+    
+    h1{
+        font-size: 30px;
+        text-align: center;
+        flex: 0 0 100%;
+        width: 100%;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+}
+
+
+.faqs-category{
+    h2{
+        color: #fff;
+        font-size: 30px;
+        font-weight: 500;
+        margin-bottom: 25px;
+    }
+}
+
+.faqs-answer{
+    margin-bottom: 25px;
+    border-bottom: 1px solid #fff;
+    padding: 10px 0;
+    h3{
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+}
+
+.faqs-answer-content{
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.faqs-answer-footer{
+    span{
+        color: #fff;
+    }
+}

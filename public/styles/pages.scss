@@ -1,0 +1,42 @@
+@import "_colors";
+
+.page{
+    margin-bottom: 60px;
+    .inner{
+        padding: 30px;
+        background: $bgmenu;
+        border-radius: 0 0 5px 5px;
+    }
+    h1,h2,h3,h4,h5{
+        color: #fff;
+    }
+    h1{
+        font-size: 30px;
+        text-align: center;
+        flex: 0 0 100%;
+        width: 100%;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+    
+    h2{
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+    p{
+        font-size: 16px;
+        line-height: 24px;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+    ul{
+        padding-left: 20px;
+        margin-bottom: 15px;
+        line-height: 24px;
+        li{
+            list-style: disc;
+            color: #fff;
+        }
+    }
+}

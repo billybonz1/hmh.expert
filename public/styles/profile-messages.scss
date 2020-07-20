@@ -1,0 +1,242 @@
+@import "_colors";
+
+.profile-messages-flex{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: hidden;
+}
+
+.profile-messages-users{
+    width: 30%;
+    background: $bgcolor;
+    max-height: 460px;
+    min-height: 460px;
+    @media(max-width: 1274px){
+        width: 35%;
+    }
+    @media(max-width: 1150px){
+        width: 45%;
+    }
+}
+
+.profile-messages-wrap{
+    flex: 1;
+    background: #fff;
+    position: relative;
+    &:after{
+        content: " ";
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        border-color: #fd4b4b transparent #fd4b4b transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -32px;
+        margin-left: -32px;
+    }
+}
+
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.profile-messages{
+    background: white;
+    z-index: 2;
+    &.empty{
+        font-size: 20px;
+    }
+}
+
+
+.profile-messages-user{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: #fff;
+    padding: 11px 15px;
+    max-height: 460px;
+    position: relative;
+    transition: .2s all;
+    text-decoration: none;
+    &:hover{
+        background: darken($bgcolor, 2);
+    }
+    &.active{
+        background: darken($bgcolor, 5);
+    }
+    &:last-child{
+        margin-bottom: 0;
+    }
+    img{
+        width: 70px;
+        height: auto;
+        border-radius: 100%;
+        @media(max-width: 1449px){
+            width: 30px;
+        }
+    }
+    div{
+        padding-left: 20px;
+        padding-right: 26px;
+        flex: 1;
+    }
+}
+
+
+.profile-messages-user-count{
+    color: #fff;
+    position: absolute;
+    border-radius: 100%;
+    background: #fd4b4b;
+    padding: 5px;
+    font-size: 14px;
+    min-width: 24px;
+    text-align: center;
+    right: 15px;
+    top: 50%;
+    margin-top: -12px;
+}
+
+
+.profile-message{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    background: #f3eeee;
+    &:last-child{
+        margin-bottom: 0;
+        padding-bottom: 40px;
+    }
+    &>div{
+        max-width: 90%;
+        background: #fd4b4b;
+        border-radius: 5px;
+        padding: 5px;
+        color: #fff;
+        font-size: 15px;
+        word-break: break-all;
+    }
+    p{
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+    }
+    &.to{
+        justify-content: flex-end;
+        p{
+            text-align: right;
+        }
+    }
+    &.readed{
+        background: transparent;
+    }
+}
+
+.profile-messages{
+    max-height: 394px;
+    min-height: 394px;
+    display: none;
+    &.active{
+        display: block;
+    }
+    &.empty{
+        font-size: 30px;
+        text-align: center;
+        background: #fff;
+        position: relative;
+        z-index: 2;
+        &.active{
+            display: flex !important;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+    }
+    .simplebar-offset{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    .simplebar-content-wrapper{
+        width: 100%;
+    }
+}
+
+
+.profile-message-date{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.profile-message-send{
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background: #fff;
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+    display: none;
+    form{
+        display: flex;
+        flex-wrap: wrap;
+        input[type=text]{
+            border-radius: 4px 0 0 4px;
+            padding: 5px;
+            outline: 0;
+            flex: 1;
+            border: 1px solid #ccc;
+            border-right: 0;
+            min-height: 35px;
+        }
+        
+        input[type=submit]{
+            background-image: url("data:image/svg+xml,%3Csvg enable-background='new 0 0 24 24' height='512' viewBox='0 0 24 24' width='512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m8.75 17.612v4.638c0 .324.208.611.516.713.077.025.156.037.234.037.234 0 .46-.11.604-.306l2.713-3.692z' style='fill:%23fd4b4b;'/%3E%3Cpath d='m23.685.139c-.23-.163-.532-.185-.782-.054l-22.5 11.75c-.266.139-.423.423-.401.722.023.3.222.556.505.653l6.255 2.138 13.321-11.39-10.308 12.419 10.483 3.583c.078.026.16.04.242.04.136 0 .271-.037.39-.109.19-.116.319-.311.352-.53l2.75-18.5c.041-.28-.077-.558-.307-.722z' style='fill:%23fd4b4b;'/%3E%3C/svg%3E");
+            border: 1px solid #ccc;
+            border-radius: 0 4px 4px 0;
+            background-size: 56%;
+            background-repeat: no-repeat;
+            background-position: 8px center;
+            font-size: 0;
+            min-width: 46px;
+            cursor: pointer;
+            background-color: #e6e1e1;
+            transition: .2s all;
+            &:hover{
+                background-color: darken(#e6e1e1, 4);
+            }
+        }
+    }
+}
+
+
+.profile-message-date{
+    font-size: 11px;
+}
+
+
+.user-typing{
+    position: absolute;
+    bottom: 66px;
+    left: 0;
+    padding: 5px 20px;
+    display: none;
+    background: #fff;
+    width: 100%;
+    &.active{
+        display: block;
+    }
+}

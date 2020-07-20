@@ -1,0 +1,351 @@
+@import "_colors";
+
+.blogs {
+    margin-bottom: 60px;
+    .inner{
+        padding: 30px;
+        background: $bgmenu;
+        border-radius: 0 0 5px 5px;
+    }
+
+    h1{
+        font-size: 30px;
+        text-align: center;
+        flex: 0 0 100%;
+        width: 100%;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+}
+
+
+.blogs-cats{
+    width: 100%;
+    background: $bgcolor;
+    position: relative;
+    z-index: 2;
+    .inner{
+        background: darken($bgcolor, 2);
+    }
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        li{
+            position: relative;
+            a{
+                color: #fff;
+                font-size: 18px;
+                text-decoration: none;
+                padding: 15px 15px;
+                display: block;
+                transition: .2s all;
+                &:hover{
+                    background: darken($bgcolor, 6) !important;
+                }
+            }
+            &>ul{
+                position: absolute;
+                top: 47px;
+                left: 0;
+                background: darken($bgcolor, 2);
+                opacity: 0;
+                visibility: hidden;
+                &>li>ul{
+                    left: 100%;
+                    top: 0;
+                }
+            }
+            &:hover{
+                &>ul{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            &.active{
+                &>a{
+                    background: darken($bgcolor, 4);
+                }
+            }
+        }
+    }
+}
+
+.blogs-posts{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+    min-width: 100%;
+}
+
+.blogs-post{
+    width: 25%;
+    padding: 0 15px;
+}
+
+.blogs-post{
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    &>div{
+        background: $bgcolor;
+    }
+    h4{
+        text-align: center;
+        font-size: 16px;
+        a{
+            min-height: 32px;
+            display: block;
+        }
+    }
+    p{
+        padding: 15px 0;
+        color: #fff;
+        font-weight: 400;
+        font-size: 14px;
+    }
+    .blogs-post-date{
+        text-align: left;
+        font-size: 11px;
+    }
+    h5{
+        a{
+            color: #f54949;
+        }
+    }
+}
+
+.blog-post-price-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p.blogs-post-price{
+    padding-bottom: 0;
+    padding-top: 0;
+    strong{
+        margin-top: 5px;
+        font-weight: 700;
+        display: block;
+    }
+}
+
+.blogs-post-img{
+    min-height: 196px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.blogs-post-content{
+    padding: 10px;
+    h4{
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+        &+p{
+            min-height: 86px;
+        }
+    }
+}
+
+
+.no-posts{
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+}
+
+
+.blog-content{
+    img:first-child{
+        float: left;
+        margin-right: 30px;
+        margin-bottom: 30px;
+        margin-top: 4px;
+        max-width: 100%;
+    }
+    p{
+        font-size: 14px;
+        color: #fff;
+        margin-bottom: 15px;
+        line-height: 18px;
+    }
+    h2{
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+    a{
+        color: #fff;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+
+.blog-attrs{
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+
+.blog-attr{
+    margin-right: 15px;
+    a{
+        color: #fff;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    strong{
+        font-weight: 600;
+    }
+}
+
+.blog-comments{
+    width: 100%;
+    h2{
+        font-size: 24px;
+        margin-top: 25px;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+    .form-group{
+        margin-bottom: 15px;
+        label{
+            display: block;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        textarea{
+            width: 100%;
+            height: 90px;
+            resize: none;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    }
+}
+
+
+.no-comments{
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+
+.btn-submit-comment{
+    display: block;
+    margin: 15px auto 0;
+}
+
+.commment-need-auth{
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    p{
+        margin-right: 20px;
+    }
+}
+
+
+.comments{
+    margin-bottom: 35px;
+}
+
+.comment{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    img{
+        margin-right: 20px;
+        width: 70px;
+        border-radius: 100%;
+    }
+    .media-body{
+        flex: 1;
+        color: #fff;
+        a{
+            color: #fff;
+        }
+    }
+    .total-popup{
+        &>div{
+            padding: 15px;
+            border-radius: 5px;
+            min-width: 533px;
+        }
+        h5{
+            font-size: 23px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    }
+}
+
+
+.comment-reply{
+    margin-top: 20px;
+}
+
+
+.comment-text{
+    background: $bgcolor;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 8px;
+    color: #fff;
+}
+
+.blogs-props{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    font-weight: 400;
+    &>div{
+        margin-right: 10px;
+        a{
+            color: #fff;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.blogs-post-bottom{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        color: #fff;
+        font-size: 13px;
+        font-weight: 400;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+
+.comment-btns{
+    margin-top: 10px;
+}
+.commment-need-auth{
+    margin-top: 20px;
+}

@@ -1,0 +1,255 @@
+@import "_colors";
+
+.tcp-detail-info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 15px;
+    position: relative;
+    z-index: 2;
+    &>div:last-child{
+        padding-left: 15px;
+    }
+}
+
+.tcp-detail-info-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-size: cover;
+}
+
+
+.pe-author{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    h1{
+        font-size: 30px;
+        font-weight: 500;
+        color: #fff;
+        margin-right: 25px;
+    }
+}
+
+
+.pe-info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.pei-item{
+    margin-right: 20px;
+    color: #fff;
+}
+.pei-item:last-child{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    line-height: 15px;
+    .tec-rating-block{
+        margin-top: 0;
+        margin-left: 15px;
+    }
+}
+
+.open-raspisanie{
+    background: #fd4b4b;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 8px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 15px;
+    transition: .2s all;
+    &:hover{
+        background: lighten(#fd4b4b, 4);
+    }
+}
+
+.user-status{
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    &.st-grey{
+        color: #d0cdcd;
+        &:before{
+            background: #d0cdcd;
+        }
+    }
+    &.now-online{
+        color: #71ef94;
+        &:before{
+            background: #71ef94;
+        }
+    }
+    &:before{
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        content: "";
+        margin-right: 5px;
+    }
+    &.active{
+        display: flex;
+    }
+}
+
+
+.expert-detail-second{
+    margin-top: 30px;
+    .inner{
+        align-items: flex-start;
+    }
+}
+
+
+.expert-detail-services{
+    border-radius: 6px;
+    background: $bgmenu;
+    width: 70%;
+    padding: 15px 30px;
+    margin-bottom: 35px; 
+    h3{
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .blogs-post{
+        width: 33.333333%;
+    }
+}
+
+.expert-detail-services-cont{
+    margin-bottom: 35px;
+    color: #fff;
+    &>p{
+        color: #fff;
+        line-height: 20px;
+    }
+    a{
+        color: #fff;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+.expert-detail-reviews{
+    border-radius: 6px;
+    background: $bgmenu;
+    width: 28%;
+    margin-left: 2%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    h3{
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+    .tec-rating-block{
+        margin-top: 0;
+    }
+}
+
+.expert-detail-review{
+    border-bottom: 1px solid #fff;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    &:last-child{
+        border-bottom: 0;
+    }
+    h4{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-weight: bold;
+        &>div{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            &>span{
+                color: #fff;
+                font-size: 18px;
+            }
+        }
+
+    }
+    p{
+        color: #fff;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .tec-rating-block{
+        margin-left: 15px;
+    }
+}
+
+
+.expert-detail-review-date{
+    color: #ccc;
+}
+
+
+.expert-detail-reviews-btns{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.send-review{
+    background-color: #ff4c4c;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: .2s all;
+    border-radius: 3px;
+    &:hover{
+        background-color: lighten(#ff4c4c, 5);
+    }
+}
+
+
+.show-more-reviews{
+    color: #fff;
+}
+
+.popup-rating-star{
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/star.svg);
+    background-size: cover;
+    margin-right: 5px;
+    cursor: pointer;
+    &.active{
+        background-image: url(../img/star-full.svg);
+    }
+}
+
+.popup-rating{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+label.popup-rating-label{
+    display: flex;
+    flex-wrap: wrap;
+    span{
+        margin-right: 15px;
+    }
+}
+
+.show-more-services{
+    color: #fff;
+}
