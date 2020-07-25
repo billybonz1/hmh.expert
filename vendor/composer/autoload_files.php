@@ -32,5 +32,6 @@ return array(
     '20738566fd0b4fa70fc3c1c048082ef6' => $vendorDir . '/bpocallaghan/impersonate/src/helpers.php',
     '4a8859eea7b53ed6d99ab03affdae9ee' => $vendorDir . '/bpocallaghan/log-activity/src/Helpers/helper.php',
     '4dd68f785ff5ccbb3a58c863d2074b49' => $vendorDir . '/bpocallaghan/notify/src/helpers.php',
+    '5e8fe2a5ffaded85af682684fe3bbf5a' => $vendorDir . '/mews/captcha/src/helpers.php',
     '0b47d6d4a00ca9112ba3953b49e7c9a4' => $vendorDir . '/yajra/laravel-datatables-oracle/src/helper.php',
 );

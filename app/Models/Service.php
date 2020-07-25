@@ -74,6 +74,21 @@ class Service extends Model
     }
 
     public function url(){
-        return "";
+        if(count($this->categories)>0){
+            return $this->categories[count($this->categories) - 1]->url()."/".$this->slug;
+        }
     }
+    
+    
+    public function breadcrumbs(){
+        if(count($this->categories)>0){
+            $breadcrumbs =  $this->categories[count($this->categories) - 1]->breadcrumbs();
+            $breadcrumbs[] = [
+                "title" => $this->name
+            ];
+            return $breadcrumbs;
+        }
+        return [];
+    }
+    
 }

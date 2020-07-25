@@ -47,7 +47,7 @@ class PostsCategory extends Model
     
     
     public function posts(){
-        return $this->belongsToMany('App\Post');
+        return $this->belongsToMany('App\Post')->where("active", "1");
     }
     
     public function allposts(){

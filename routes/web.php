@@ -140,11 +140,16 @@ Route::post('/profile/services/add', 'ProfileController@serviceStore')->middlewa
 Route::post('/profile/services/update', 'ProfileController@serviceUpdate');
 Route::get('/profile/service/{id}', 'ProfileController@serviceshow');
 
-Route::get('/blogs', 'BlogsController@index')->name("blogs");
 
+
+Route::get('/profile/orders', 'ProfileController@orders')->name("orders");
+
+
+Route::get('/blogs', 'BlogsController@index')->name("blogs");
 Route::get('/blogs/{url}', 'BlogsController@render')->where('url','^[a-zA-Z0-9-:,_\/]+$');
 
-Route::get('/blogs', 'BlogsController@index')->name("blogs");
+Route::get('/services', 'ServicesController@index')->name("services");
+Route::get('/services/{url}', 'ServicesController@render')->where('url','^[a-zA-Z0-9-:,_\/]+$');
 
 
 
@@ -153,7 +158,11 @@ Route::post('/profile/expert', 'ProfileController@expertUpdate')->middleware("ca
 
 
 Route::get('/get-services', 'ExpertsCategoryController@getServices')->name('get_services');
+Route::get('/get-reviews', 'ExpertsCategoryController@getReviews')->name('get_reviews');
 
+
+
+Route::get('/calendar', 'CalendarController@index')->name('calendar');
 
 
 
@@ -166,6 +175,9 @@ Route::get('/experts', 'ExpertsCategoryController@index');
 Route::get('/experts/{slug}', 'ExpertsCategoryController@category');
 Route::get('/experts/{slug2}/{slug}', 'ExpertsCategoryController@category');
 Route::post('/experts/addreview', 'ExpertsCategoryController@addReview')->middleware("auth");
+Route::get('/users/{slug}', 'UsersCategoryController@index');
+Route::get('/favourite', 'FavouriteController@index')->name("favourite");
+
 
 Route::group(['namespace' => 'Website'], function () {
     Route::get('{slug1}/{slug2?}/{slug3?}', 'PagesController@index');

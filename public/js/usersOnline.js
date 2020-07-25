@@ -1,7 +1,3 @@
-var socket1 = io.connect('https://still-escarpment-05954.herokuapp.com/', {
-    'sync disconnect on unload': true
-});
-
 var currentUser = document.querySelector("[data-user-id]");
 var userOnlineData = {};
 var broadcastUsers = document.querySelector(".broadcast-users-online");

@@ -14,6 +14,7 @@ use App\Chat;
 use App\Message;
 use App\Field;
 use App\Models\Service;
+use App\ServiceOrder;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -35,9 +36,7 @@ class ProfileController extends AdminController
         $this->middleware('auth');
     }
 
-
-    public function index()
-    {
+    public function index(){
         return view('profile.index')->with([
             'pageTitle' => "Аккаунт",
             'currentUser' => Auth::user(),
@@ -56,10 +55,7 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
-
-    public function update(Request $request)
-    {
+    public function update(Request $request){
 
         $data = $request->all();
         $currentUser = Auth::user();
@@ -86,7 +82,12 @@ class ProfileController extends AdminController
                         ->withErrors($validator)
                         ->withInput();
         }else{
-
+            if(isset($data['firstname'])){
+                $currentUser->firstname = $data['firstname'];
+            }
+            if(isset($data['firstname'])){
+                $currentUser->lastname = $data['lastname'];
+            }
             if(isset($data['email'])){
                 $currentUser->email = $data['email'];
             }
@@ -134,7 +135,6 @@ class ProfileController extends AdminController
         }
 
     }
-
     public function password(){
         return view('profile.password')->with([
             'pageTitle' => "Сменить пароль",
@@ -154,7 +154,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
     public function passwordUpdate(Request $request){
         $data = $request->all();
         $currentUser = Auth::user();
@@ -185,7 +184,6 @@ class ProfileController extends AdminController
             return redirect()->route('profile.password');
         }
     }
-
     public function avatarUpdate(Request $request){
         $currentUser = Auth::user();
         $data = $request->all();
@@ -236,7 +234,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
     public function blogshow($id){
         $post = Post::where('id', $id)->first();
         if($post->author_id != Auth::user()->id){
@@ -265,38 +262,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
-
-    public function serviceshow($id){
-        $post = Service::where('id', $id)->first();
-        if($post->expert_id != Auth::user()->id){
-            return response('Unauthorized.', 401);
-        }
-        return view("profile.serviceshow")->with([
-            'post' => $post,
-            'categories' => ServiceCategory::where("parent_id", 0)->get(),
-            'currentUser' => Auth::user(),
-            'breadcrumbs' => [
-                [
-                    "url" => "/",
-                    "title" => "HMH.EXPERT"
-                ],
-                [
-                    "url" => "/profile",
-                    "title" => "Аккаунт"
-                ],
-                [
-                    "title" => "Мои услуги",
-                    "url" => "/profile/blog"
-                ],
-                [
-                    "title" => $post->title
-                ]
-            ]
-        ]);
-    }
-
-
     public function postCreate(){
         return view("profile.postCreate")->with([
             'pageTitle' => "Создать пост в блоге",
@@ -321,8 +286,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
-
     public function postStore(Request $request){
         $data = $request->all();
         $validator = Validator::make($data, [
@@ -362,8 +325,6 @@ class ProfileController extends AdminController
             return redirect()->route('profile.blog');
         }
     }
-
-
     public function postUpdate(Request $request){
         $post = Post::where('id', $request->post_id)->first();
         if($post->author_id != Auth::user()->id){
@@ -384,18 +345,21 @@ class ProfileController extends AdminController
                         ->withErrors($validator)
                         ->withInput();
         } else {
+            $oldImage = $post->img;
+            $oldImageArr = explode("/", $oldImage);
+            $oldImageName = $oldImageArr[count($oldImageArr) - 1];
             $post->title = $data['title'];
             $post->slug = $data['slug'];
             $post->content = $data['content'];
             if(request()->img){
                 $image = request()->img;
+               
                 $time = time();
                 $imageName = $time.'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path('images');
                 $image->move($destinationPath, $imageName);
-                $data['img'] = "/public/images/".$imageName;
-                $resize_image = Image::make($data['img']);
-
+                $post->img = "/public/images/".$imageName;
+                $resize_image = Image::make($destinationPath."/".$imageName);
                 $resize_image->resize(338, 196, function($constraint){
                   $constraint->aspectRatio();
                 })->save($destinationPath . '/' . $time.'.338x196.'.$image->getClientOriginalExtension());
@@ -405,7 +369,10 @@ class ProfileController extends AdminController
             $cat = PostsCategory::where("id", $request->category)->first();
             $post->categories()->sync(array_merge([$cat->id], $cat->parents()));
             $post->save();
-
+            if(request()->img){
+                File::delete(public_path('images')."/".$oldImageName);
+                File::delete(public_path('images')."/".str_replace(".", ".338x196.", $oldImageName));
+            }
             foreach($post->reasons as $reason){
                 $reason->delete();
             }
@@ -414,8 +381,6 @@ class ProfileController extends AdminController
 
             return redirect()->route('profile.blog');
         }
-
-
 
         return redirect()->route('profile.blog');
     }
@@ -442,8 +407,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
-
     public function expertUpdate(Request $request){
 
         $currentUser = Auth::user();
@@ -455,6 +418,12 @@ class ProfileController extends AdminController
         }
         if($request->consulting_themes){
             $currentUser->consulting_themes = $request->consulting_themes;
+        }
+        if($request->post){
+            $currentUser->post = $request->post;
+        }
+        if($request->exp){
+            $currentUser->exp = $request->exp;
         }
 
         if($currentUser->save()){
@@ -536,8 +505,6 @@ class ProfileController extends AdminController
 
         return view('profile.messages')->with($data);
     }
-
-
     public function getMessages(Request $request){
         $chat = Chat::where("id", $request->chatid)->first();
 
@@ -551,7 +518,6 @@ class ProfileController extends AdminController
             return [];
         }
     }
-
     public function sendMessage(Request $request){
         $message = Message::create($request->all());
         $currentUser = Auth::user();
@@ -573,7 +539,6 @@ class ProfileController extends AdminController
             "unread_chats" => User::where("id", $message->to_id)->first()->unreadChats()
         ]);
     }
-
     public function readMessages(Request $request){
         $messagesReadedIDs = explode(",", $request->messagesReadedIDs);
         foreach($messagesReadedIDs as $id){
@@ -583,8 +548,8 @@ class ProfileController extends AdminController
         }
         return 1;
     }
-
-
+    
+    
 
     public function sendGroupMessage(Request $request){
         $currentUser = Auth::user();
@@ -644,7 +609,6 @@ class ProfileController extends AdminController
         ];
         return view('profile.balance')->with($data);
     }
-
     public function updateBalance(Request $request){
 
 
@@ -668,7 +632,6 @@ class ProfileController extends AdminController
             ]);
         }
     }
-
     public function pay(Request $request){
         $currentUser = Auth::user();
 
@@ -682,14 +645,37 @@ class ProfileController extends AdminController
             $currentUser->groups_messages += 3;
             $currentUser->save();
             return Redirect::back();
+        }else if($request->action == "buyService"){
+            $data = $request->all();
+            $service = Service::where("id", $data['service_id'])->first();
+            $expert = User::where("id", $service->expert_id)->first();
+            $serviceOrder = ServiceOrder::create([
+                'user_id' => $currentUser->id,
+                'expert_id' => $service->expert_id,
+                'service_id' => $service->id,
+                'quantity_type' => "0",
+                'quantity' => "1"
+            ]);
+            if($serviceOrder){
+                $currentUser->balance = (int)$currentUser->balance - (int)$service->price;
+                $currentUser->save();
+                $expert->balance = (int)$expert->balance + $serviceOrder->expertPrice();
+                $expert->save();
+                return json_encode(["Вы успешно оплатили услугу. Ожидайте, с Вами скоро свяжется эксперт и уточнит все детали.", $currentUser->prettyBalance()]);
+            }else{
+                return json_encode(["Ошибка оплаты, попробуйте пожалуйста позже"]);
+            }
         }
     }
+    
+    
 
     public function services(){
+        $services = Service::where("expert_id",Auth::user()->id)->get();
         $data = [
             'pageTitle' => "Мои услуги",
             'currentUser' => Auth::user(),
-            'posts' => Auth::user()->services,
+            'posts' => $services,
             'breadcrumbs' => [
                 [
                     "url" => "/",
@@ -706,8 +692,34 @@ class ProfileController extends AdminController
         ];
         return view('profile.services')->with($data);
     }
-
-
+    public function serviceshow($id){
+        $post = Service::where('id', $id)->first();
+        if($post->expert_id != Auth::user()->id){
+            return response('Unauthorized.', 401);
+        }
+        return view("profile.serviceshow")->with([
+            'post' => $post,
+            'categories' => ServiceCategory::where("parent_id", 0)->get(),
+            'currentUser' => Auth::user(),
+            'breadcrumbs' => [
+                [
+                    "url" => "/",
+                    "title" => "HMH.EXPERT"
+                ],
+                [
+                    "url" => "/profile",
+                    "title" => "Аккаунт"
+                ],
+                [
+                    "title" => "Мои услуги",
+                    "url" => "/profile/blog"
+                ],
+                [
+                    "title" => $post->title
+                ]
+            ]
+        ]);
+    }
     public function serviceCreate(){
         return view("profile.serviceCreate")->with([
             'pageTitle' => "Создать услугу",
@@ -732,8 +744,6 @@ class ProfileController extends AdminController
             ]
         ]);
     }
-
-
     public function serviceStore(Request $request){
         $attributes = request()->validate(Service::$rules);
         $photo = $this->uploadImage($attributes['image'], Service::$IMAGE_SIZE);
@@ -753,10 +763,8 @@ class ProfileController extends AdminController
 
         return redirect()->route('profile.services');
     }
-
-
     public function serviceUpdate(Request $request){
-        $post = Service::where('id', $request->expert_id)->first();
+        $post = Service::where('id', $request->service_id)->first();
         if($post->expert_id != Auth::user()->id){
             return response('Unauthorized.', 401);
         }
@@ -772,7 +780,8 @@ class ProfileController extends AdminController
                 $attributes['image'] = $photo;
             }
         }
-        $attributes['new'] = 1;
+        $attributes['new'] = "1";
+        
 
         $post->update($attributes);
 
@@ -788,6 +797,28 @@ class ProfileController extends AdminController
         $request->session()->flash('success', 'Пост успешно изменен');
 
         return redirect()->route('profile.services');
+    }
+    
+    
+    public function orders(){
+        return view("profile.orders")->with([
+            'pageTitle' => "Мои заказы",
+            'currentUser' => Auth::user(),
+            'breadcrumbs' => [
+                [
+                    "url" => "/",
+                    "title" => "HMH.EXPERT"
+                ],
+                [
+                    "url" => "/profile",
+                    "title" => "Аккаунт"
+                ],
+                [
+                    "title" => "Мои покупки"
+                ]
+            ],
+            'orders' => ServiceOrder::where("user_id", Auth::user()->id)->paginate(10) 
+        ]);
     }
 
 }

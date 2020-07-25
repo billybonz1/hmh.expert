@@ -1,12 +1,12 @@
 <div class="blogs-post">
      <div>
          <a href="{{ $post->url() }}">
-             <div class="blogs-post-img" style="background-image: url({{ $post->img }})"></div>
+             <div class="blogs-post-img" style="background-image: url({{ $post->thumb() }})"></div>
          </a>   
          <div class="blogs-post-content">
              <h4><a href="{{ $post->url() }}">{{ $post->title }}</a></h4>
              <p>
-                 {{ $post->short_desc() }}
+                 {!! $post->short_desc() !!}
              </p>
              <div class="blogs-props">
                  <div>

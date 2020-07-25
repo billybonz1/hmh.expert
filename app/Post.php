@@ -52,6 +52,10 @@ class Post extends Model
     
     
     
+    public function thumb(){
+        return str_replace(".",".338x196.",$this->img);
+    }
+    
     
     
     

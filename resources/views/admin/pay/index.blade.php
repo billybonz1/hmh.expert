@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h2>Статистика оплат</h2>
-            <table class="table table-dark">
+            <table class="table">
 			  <thead>
 			    <tr>
 			      <th scope="col">#</th>
@@ -57,6 +57,9 @@
 			    @endforeach
 			  </tbody>
 			</table>
+			<div class="pagination">
+				{{ $orders->links() }}
+			</div>
         </div>
     </div>
 </div>

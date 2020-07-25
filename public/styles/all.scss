@@ -378,3 +378,12 @@ div.mt-user-dropdown{
     font-size: 13px;
 }
 
+.total-popup{
+    .main-form{
+        margin-top: 10vh;
+    }
+}
+
+.media-controls, .volume-control{
+    z-index: 10;
+}

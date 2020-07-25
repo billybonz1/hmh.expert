@@ -17,11 +17,11 @@
         visibility: hidden;
         opacity: 0;
         transition: .2s all;
-        min-width: 248px;
+        min-width: 224px;
         &>li{
-            position: relative;
             margin-right: 0;
             height: auto;
+            width: 100%;
             &:last-child{
                 a{
                     border-radius: 0 0 10px 10px;
@@ -41,7 +41,7 @@
             }
             a{
                 border-bottom: 0px solid #ff4c4c !important;
-                padding: 5px 33px 5px 20px;
+                padding: 14px 33px 13px 20px;
             }
             ul{
                 position: absolute;
@@ -50,12 +50,14 @@
                 transition: .2s all;
                 height: auto;
                 background: #fe4c4c;
-                left: 99%;
+                left: 100%;
                 top: 0;
                 border-radius: 0 0 10px 10px;
+                min-width: 224px;
                 li{
                     margin-right: 0;
                     height: auto;
+                    width: 100%;
                     &:last-child{
                         a{
                             border-radius: 0 0 10px 10px;
@@ -63,18 +65,19 @@
                     }
                     &:hover{
                         a{
-                            background: lighten(#fe4c4c, 6);
+                            background: lighten(#febd4c, 6);
                         }
                     }
                 }
             }
             &:hover{
                 &>a{
-                    background: lighten(#fe4c4c, 6);
+                    background: lighten(#febd4c, 6);
                 }
                 ul{
                     opacity: 1;
                     visibility: visible;
+                    // box-shadow: 0px 5px 6px 0px #0000006b;
                 }
             }
             
@@ -1086,4 +1089,23 @@ footer .mt-social-block a>div>div{
         padding-right: 7px;
     }
 }
+
+
+
+
+
+.menu-block ul li a  {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0px solid #ffffff;
+    transition: 0.6s all;
+    letter-spacing: 1.3pt;
+
+   
+}
+
+
 

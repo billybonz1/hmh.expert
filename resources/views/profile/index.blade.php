@@ -52,6 +52,32 @@
                 <form action="/profile" method="post" class="main-form">
                     @csrf
                     <label>
+                        <div>Имя:</div>
+                        <span style="position: relative;">
+                            <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ $currentUser->firstname }}" required  autofocus  />
+                            <div></div>
+                            @error('firstname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </span>
+                    </label>
+                    
+                    <label>
+                        <div>Фамилия:</div>
+                        <span style="position: relative;">
+                            <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ $currentUser->lastname }}" required  autofocus  />
+                            <div></div>
+                            @error('lastname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </span>
+                    </label>
+                    
+                    <label>
                         <div>E-mail:</div>
                         <span style="position: relative;">
                             <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $currentUser->email }}" required autocomplete="email" autofocus  />

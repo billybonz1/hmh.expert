@@ -40,6 +40,7 @@
 }
 
 .profile-menu{
+    margin-top: 65px;
     min-width: 300px;
     ul{
         width: 100%;
@@ -277,4 +278,27 @@
 
 .profile-experts-cont{ 
     margin-bottom: 35px;
+}
+
+.orders-table{
+    color: #fff;
+    width: 100%;
+    margin-bottom: 35px;
+    th{
+        padding: 15px 0;
+    }
+    td{
+        padding: 10px 8px;
+        text-align: center;
+        &:last-child{
+            min-width: 170px;
+        }
+        &:nth-child(2){
+            max-width: 300px;
+            text-align: left;
+        }
+    }
+    a{
+        color: #ad77e0;
+    }
 }

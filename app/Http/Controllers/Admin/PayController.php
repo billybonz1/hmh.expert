@@ -9,7 +9,7 @@ class PayController extends AdminController
 {
 	public function index(){
 		return $this->view("pay.index")->with([
-			'orders' => ServiceOrder::all()
+			'orders' => ServiceOrder::paginate(15)
 		]);
 	}
 }

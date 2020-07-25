@@ -75,17 +75,17 @@
                                             @endif
                                         @endif
                                     </div> 
-                                    <a href="/admin/moderate-services/{{ $post->id }}" class="moderate-post-img" style="background-image: url({{ $post->getOriginalUrlAttribute() }})"></a>
-                                    <a href="/admin/moderate-services/{{ $post->id }}"><h4>{{ $post->name }}</h4></a>
-                                    <a href="/admin/moderate-services/{{ $post->id }}">
+                                    <div class="moderate-post-img" style="background-image: url({{ $post->getOriginalUrlAttribute() }})"></div>
+                                    <h4>{{ $post->name }}</h4>
+                                    <p>
                                         {{ $post->shortdesc }}
-                                    </a>
+                                    </p>
                                     @if($post->author())
                                         <h5>Автор: {{ $post->author()->namef() }}</h5>
                                     @endif
                                     <span class="post-date">{{ $post->created_at }}</span>
 
-                                    <a href="/admin/moderate-services/{{ $post->id }}/edit" class="moderate-post-edit">
+                                    <a href="/admin/moderate-services/{{ $post->id }}/editall" class="moderate-post-edit">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </div>

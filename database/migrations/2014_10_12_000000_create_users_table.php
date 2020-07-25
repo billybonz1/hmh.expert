@@ -35,6 +35,9 @@ class CreateUsersTable extends Migration
             $table->bigInteger('groups_messages')->default('3');
             $table->text('about')->nullable();
             $table->text('consulting_themes')->nullable();
+            $table->string('post')->nullable();
+            $table->string('exp')->nullable();
+            $table->string('status')->default('offline');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,7 +25,24 @@
                                  @include('profile._categories')
                             </div>
                         </div>
-
+                        
+                        <label>
+                            <div>Должность:</div>
+                            <span style="position: relative;">
+                                <input type="text" id="post" class="form-control" name="post" value="{{ $currentUser->post }}"/>
+                                <div></div>
+                            </span>
+                        </label>
+                        
+                        <label>
+                            <div>Опыт работы:</div>
+                            <span style="position: relative;">
+                                <input type="text" id="exp" class="form-control" name="exp" value="{{ $currentUser->exp }}"/>
+                                <div></div>
+                            </span>
+                        </label>
+                        
+                        
                         <label>
                             <div>Обо мне:</div>
                             <span style="position: relative;">

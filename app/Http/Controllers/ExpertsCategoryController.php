@@ -70,8 +70,28 @@ class ExpertsCategoryController extends Controller
         // skip(10)
         $data = $request->all();
         $user = User::where("id", $data['expert_id'])->first();
-        return json_encode($user->services()->skip($data["services"])->take(3)->get());
+        $services = $user->services()->skip($data["servicesCount"])->take(3)->get();
+        foreach($services as $key=>$service){
+            $services[$key]->url = $service->url();
+            $services[$key]->thumb = $service->getThumbUrlAttribute();
+            $services[$key]->prettyprice = $service->getPrice();
+        }
+        return json_encode($services);
     }
+    
+    
+    public function getReviews(Request $request){
+        $data = $request->all();
+        $user = User::where("id", $data['expert_id'])->first();
+        $reviews = $user->reviews()->skip($data["reviewsCount"])->take(4)->get();
+        foreach($reviews as $key=>$review){
+            $reviews[$key]->ratingProcent = $review->ratingProcent();
+            $reviews[$key]->username = $review->getUserName();
+        }
+        return json_encode($reviews);
+    }
+    
+    
 
     public function index(){
 

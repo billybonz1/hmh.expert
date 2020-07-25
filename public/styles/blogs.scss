@@ -104,6 +104,8 @@
         color: #fff;
         font-weight: 400;
         font-size: 14px;
+        line-height: normal;
+        letter-spacing: 0.4px;
     }
     .blogs-post-date{
         text-align: left;
@@ -154,6 +156,17 @@ p.blogs-post-price{
 }
 
 
+.blogs-service{
+    h4{
+        &+p{
+            min-height: 102px;
+        }
+    }
+    h4 a{
+        min-height: 48px;
+    }
+}
+
 .no-posts{
     padding: 30px;
     text-align: center;
@@ -163,6 +176,9 @@ p.blogs-post-price{
 
 
 .blog-content{
+    font-size: 16px;
+    color: #fff;
+    line-height: 20px;
     img:first-child{
         float: left;
         margin-right: 30px;
@@ -171,15 +187,16 @@ p.blogs-post-price{
         max-width: 100%;
     }
     p{
-        font-size: 14px;
+        font-size: 18px;
         color: #fff;
-        margin-bottom: 15px;
-        line-height: 18px;
+        margin-bottom: 25px;
+        line-height: 24px;
     }
     h2{
         font-size: 24px;
         color: #fff;
         margin-bottom: 15px;
+        margin-top: 30px;
     }
     a{
         color: #fff;
@@ -328,6 +345,7 @@ p.blogs-post-price{
 }
 
 .blogs-post-bottom{
+    padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -348,4 +366,120 @@ p.blogs-post-price{
 }
 .commment-need-auth{
     margin-top: 20px;
+}
+
+
+.service-top{
+    display: flex;
+    flex-wrap: wrap;
+    &>div{
+        flex: 1;
+        padding-left: 30px;
+    }
+    h1{
+        text-align: left;
+    }
+}
+
+.service-top-expert{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    &>div{
+        flex: 1;
+        padding-left: 15px;
+        color: #fff;
+    }
+    &>a{
+        border-radius: 100%;
+        overflow: hidden;
+        img{
+            max-width: 75px;
+        }
+    }
+    h3{
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        a{
+            color: #fff;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+        *{
+            margin-right: 10px;
+        }
+        span{
+            font-weight: 700;
+        }
+        .user-status.st-grey {
+            color: #efbe35;
+            &:before{
+                background: #efbe35;
+            }
+        }
+    }
+    p{
+        font-size: 13px;
+        line-height: 17px;
+    }
+}
+
+
+.service-content{
+    padding-top: 35px;
+}
+
+
+.blogs.services{
+    .inner{
+        align-items: flex-start;
+        &>div:first-child{
+            flex: 1;
+            padding-right: 30px;
+        }
+    }
+}
+
+.service-buy{
+    width: 345px;
+    padding: 20px;
+    background-color: #8459ad;
+    color: #fff;
+    h3{
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    p{
+        font-size: 35px;
+    }
+    .btn{
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+        padding: 20px 15px;
+        font-size: 28px;
+    }
+    pre{
+        line-height: 24px;
+        margin-top: 20px;
+        display: block;
+    }
+}
+
+
+.service-buy-popup{
+    h2{
+        color: #fff;
+        line-height: 30px;
+        text-align: center;
+        margin-bottom: 25px;
+        strong{
+            font-weight: 700;
+            color: #b473f3;
+            margin: 5px 0;
+            display: block;
+        }
+    }
 }

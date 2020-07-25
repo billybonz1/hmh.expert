@@ -46,7 +46,7 @@
                                 <div class="profile-post-content">
                                     <h3>{{ $post->title }}</h3>
                                     <p>
-                                        {{ $post->short_desc() }}
+                                        {!! $post->short_desc() !!}
                                     </p>
                                     <p class="time">{{ $post->created_at }}</p>
                                 </div>

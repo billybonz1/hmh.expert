@@ -251,21 +251,36 @@
         <div class="total-popup-close">X</div>
     </div>
 </div>
+
+<div id="userNotOnline" class="total-popup videocall-popup">
+    <div class="videocall-popup-inner" style="min-height: unset;max-width: 500px;">
+        <div class="main-form">
+            <h1 style="padding: 0 15px; font-size: 30px;">
+                К сожалению эксперт не онлайн, Вы можете узнать его расписание <a>здесь</a>
+            </h1>
+        </div>
+        <div class="total-popup-close">X</div>
+    </div>
+</div>
+
 @endisset
 
 
-<script src="/js/socket.js"></script>
-<script src="https://secret-savannah-83467.herokuapp.com/bundle.js"></script>
-<script src="https://still-escarpment-05954.herokuapp.com/dist/RTCMultiConnection.js"></script>
+<!--<script src="/js/socket.js"></script>-->
+<!--<script src="https://secret-savannah-83467.herokuapp.com/bundle.js"></script>-->
+<script src="https://vast-plateau-40039.herokuapp.com/dist/RTCMultiConnection.js"></script>
 
-<script src="https://still-escarpment-05954.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js"></script>
-<script src="https://still-escarpment-05954.herokuapp.com/socket.io/socket.io.js"></script>
-<link rel="stylesheet" href="https://still-escarpment-05954.herokuapp.com/dev/getHTMLMediaElement.css">
-<script src="https://still-escarpment-05954.herokuapp.com/dev/getHTMLMediaElement.js"></script>
+<script src="https://vast-plateau-40039.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js"></script>
+<script src="https://vast-plateau-40039.herokuapp.com/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.css">
+<script src="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.js"></script>
 <script>
+    var socket1 = io.connect('https://vast-plateau-40039.herokuapp.com/', {
+        'sync disconnect on unload': true
+    });
     if(document.querySelector(".broadcast-video")){
         var connection = new RTCMultiConnection();
-            connection.socketURL = 'https://still-escarpment-05954.herokuapp.com:443/';
+            connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
             connection.session = {
             audio: true,
             video: true,
@@ -398,24 +413,29 @@
         
         var expert = document.querySelector("[data-expert-id]");
         if(expert){
-            document.querySelector(".play-broadcast").addEventListener("click", function(){
-                connection.sdpConstraints.mandatory = {
-                    OfferToReceiveAudio: true,
-                    OfferToReceiveVideo: true
-                };
-                connection.join("expertRoom" + expert.getAttribute("data-expert-id"));
-                
-                document.querySelector(".play-broadcast").remove();
-            });
+            var playBroadcast = document.querySelector(".play-broadcast");
+            if(playBroadcast){
+                playBroadcast.addEventListener("click", function(){
+                    connection.sdpConstraints.mandatory = {
+                        OfferToReceiveAudio: true,
+                        OfferToReceiveVideo: true
+                    };
+                    connection.join("expertRoom" + expert.getAttribute("data-expert-id"));
+                    
+                    document.querySelector(".play-broadcast").remove();
+                });
+            }
             
             function checkRoom(){
+                var noBroadcast = document.querySelector(".no-broadcast");
+                var playBroadcast = document.querySelector(".play-broadcast");
                 connection.checkPresence("expertRoom" + expert.getAttribute("data-expert-id"), function(isRoomExist, roomid, error) {
                     if (isRoomExist === true) {
-                        document.querySelector(".no-broadcast").classList.remove("active");
-                        document.querySelector(".play-broadcast").classList.add("active");
+                        if(noBroadcast) noBroadcast.classList.remove("active");
+                        if(playBroadcast) playBroadcast.classList.add("active");
                     }else{
-                        document.querySelector(".no-broadcast").classList.add("active");
-                        document.querySelector(".play-broadcast").classList.remove("active");
+                        if(noBroadcast) noBroadcast.classList.add("active");
+                        if(playBroadcast) playBroadcast.classList.remove("active");
                     }
             
                     setTimeout(checkRoom, 1000); // recheck after every 3 seconds
@@ -427,9 +447,272 @@
         
         
         
+    }else if(document.querySelectorAll("[data-id-to-call]").length > 0){
+        // ......................................................
+        // ..................RTCMultiConnection Code.............
+        // ......................................................
+        
+        var connection = new RTCMultiConnection();
+        
+        // by default, socket.io server is assumed to be deployed on your own URL
+        connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
+        
+        // comment-out below line if you do not have your own socket.io server
+        // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+        
+        connection.socketMessageEvent = 'video-conference';
+        
+        connection.session = {
+            audio: true,
+            video: true
+        };
+        
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        // STAR_FIX_VIDEO_AUTO_PAUSE_ISSUES
+        // via: https://github.com/muaz-khan/RTCMultiConnection/issues/778#issuecomment-524853468
+        var bitrates = 512;
+        var resolutions = 'Ultra-HD';
+        var videoConstraints = {};
+        
+        if (resolutions == 'HD') {
+            videoConstraints = {
+                width: {
+                    ideal: 1280
+                },
+                height: {
+                    ideal: 720
+                },
+                frameRate: 30
+            };
+        }
+        
+        if (resolutions == 'Ultra-HD') {
+            videoConstraints = {
+                width: {
+                    ideal: 1920
+                },
+                height: {
+                    ideal: 1080
+                },
+                frameRate: 30
+            };
+        }
+        
+        connection.mediaConstraints = {
+            video: videoConstraints,
+            audio: true
+        };
+        
+        var CodecsHandler = connection.CodecsHandler;
+        
+        connection.processSdp = function(sdp) {
+            var codecs = 'vp8';
+            
+            if (codecs.length) {
+                sdp = CodecsHandler.preferCodec(sdp, codecs.toLowerCase());
+            }
+        
+            if (resolutions == 'HD') {
+                sdp = CodecsHandler.setApplicationSpecificBandwidth(sdp, {
+                    audio: 128,
+                    video: bitrates,
+                    screen: bitrates
+                });
+        
+                sdp = CodecsHandler.setVideoBitrates(sdp, {
+                    min: bitrates * 8 * 1024,
+                    max: bitrates * 8 * 1024,
+                });
+            }
+        
+            if (resolutions == 'Ultra-HD') {
+                sdp = CodecsHandler.setApplicationSpecificBandwidth(sdp, {
+                    audio: 128,
+                    video: bitrates,
+                    screen: bitrates
+                });
+        
+                sdp = CodecsHandler.setVideoBitrates(sdp, {
+                    min: bitrates * 8 * 1024,
+                    max: bitrates * 8 * 1024,
+                });
+            }
+        
+            return sdp;
+        };
+        // END_FIX_VIDEO_AUTO_PAUSE_ISSUES
+        
+        // https://www.rtcmulticonnection.org/docs/iceServers/
+        // use your own TURN-server here!
+        connection.iceServers = [{
+            'urls': [
+                'stun:stun.l.google.com:19302',
+                'stun:stun1.l.google.com:19302',
+                'stun:stun2.l.google.com:19302',
+                'stun:stun.l.google.com:19302?transport=udp',
+            ]
+        }];
+        
+        
+        connection.videosContainer = document.querySelector('.second-screen');
+        console.log(connection.videosContainer);
+        connection.onstream = function(event) {
+            var existing = document.getElementById(event.streamid);
+            if(existing && existing.parentNode) {
+              existing.parentNode.removeChild(existing);
+            }
+        
+            event.mediaElement.removeAttribute('src');
+            event.mediaElement.removeAttribute('srcObject');
+            event.mediaElement.muted = true;
+            event.mediaElement.volume = 0;
+        
+            var video = document.createElement('video');
+        
+            try {
+                video.setAttributeNode(document.createAttribute('autoplay'));
+                video.setAttributeNode(document.createAttribute('playsinline'));
+            } catch (e) {
+                video.setAttribute('autoplay', true);
+                video.setAttribute('playsinline', true);
+            }
+        
+            if(event.type === 'local') {
+              video.volume = 0;
+              try {
+                  video.setAttributeNode(document.createAttribute('muted'));
+              } catch (e) {
+                  video.setAttribute('muted', true);
+              }
+            }
+            video.srcObject = event.stream;
+        
+            var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+            var mediaElement = getHTMLMediaElement(video, {
+                title: event.userid,
+                buttons: ['full-screen'],
+                width: width,
+                showOnMouseEnter: false
+            });
+        
+            connection.videosContainer.appendChild(mediaElement);
+        
+            setTimeout(function() {
+                mediaElement.media.play();
+            }, 5000);
+        
+            mediaElement.id = event.streamid;
+        
+            // to keep room-id in cache
+            localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
+        
+            chkRecordConference.parentNode.style.display = 'none';
+        
+            if(chkRecordConference.checked === true) {
+              btnStopRecording.style.display = 'inline-block';
+              recordingStatus.style.display = 'inline-block';
+        
+              var recorder = connection.recorder;
+              if(!recorder) {
+                recorder = RecordRTC([event.stream], {
+                  type: 'video'
+                });
+                recorder.startRecording();
+                connection.recorder = recorder;
+              }
+              else {
+                recorder.getInternalRecorder().addStreams([event.stream]);
+              }
+        
+              if(!connection.recorder.streams) {
+                connection.recorder.streams = [];
+              }
+        
+              connection.recorder.streams.push(event.stream);
+              recordingStatus.innerHTML = 'Recording ' + connection.recorder.streams.length + ' streams';
+            }
+        
+            if(event.type === 'local') {
+              connection.socket.on('disconnect', function() {
+                if(!connection.getAllParticipants().length) {
+                  location.reload();
+                }
+              });
+            }
+        };
+        connection.onMediaError = function(e) {
+            console.log(e.message);
+            if (e.message === 'Concurrent mic process limit.') {
+                if (DetectRTC.audioInputDevices.length <= 1) {
+                    alert('Please select external microphone. Check github issue number 483.');
+                    return;
+                }
+        
+                var secondaryMic = DetectRTC.audioInputDevices[1].deviceId;
+                connection.mediaConstraints.audio = {
+                    deviceId: secondaryMic
+                };
+        
+                connection.join(connection.sessionid);
+            }
+        };
+        
+        var userIDel = document.querySelector("[data-user-id]");
+        
+        if(userIDel){
+            var roomID = "roomUser" + userIDel.getAttribute("data-user-id");
+            document.querySelectorAll('[data-id-to-call]').forEach(function(el){
+                el.addEventListener("click", function(e){
+                    e.preventDefault();
+                    var idToCall = el.getAttribute("data-id-to-call");
+                    var service = el.getAttribute("data-service");
+                    var data = {
+                        id: idToCall,
+                        service: service
+                    };
+                    socket1.emit('checkUserOnline', data);
+                    
+                    // connection.open(roomID, function(isRoomOpened, roomid, error) {
+              
+                    //     if(isRoomOpened === true) {
+                    //     //   showRoomURL(connection.sessionid);
+                    //         console.log("room opened");
+                    //     }
+                    //     else {
+                    //     //   disableInputButtons(true);
+                    //       if(error === 'Room not available') {
+                    //         alert('Someone already created this room. Please either join or create a separate room.');
+                    //         return;
+                    //       }
+                    //       alert(error);
+                    //     }
+                    // });
+                });
+            });
+            
+            socket1.on("checkedUserOnline", function(data){
+                if(data.result == 0){
+                    document.querySelector("#userNotOnline h1 a").setAttribute("href", "/experts/"+data.id);
+                    openPopup("#userNotOnline");
+                }else{
+                    if(data.service == "videoCall"){
+                        console.log(data);
+                    }
+                }
+            });
+        }else{
+            document.querySelectorAll('[data-id-to-call]').forEach(function(el){
+                el.addEventListener("click", function(e){
+                    e.preventDefault();
+                    openPopup("#notLoggedInPopup");
+                });
+            });
+        }
+        
     }
-    
-
 </script>
 
 <script type="text/javascript" src="/js/glide.min.js" defer></script>

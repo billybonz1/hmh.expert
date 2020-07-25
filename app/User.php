@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'session_token',
         'logged_in_at',
         'disabled_at',
+        'status'
     ];
 
     /**
@@ -211,10 +212,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function services(){
-        return $this->hasMany('App\Models\Service', 'expert_id','id');
+        return $this->hasMany('App\Models\Service', 'expert_id','id')->where("visible", "1");
     }
 
     public function servicesCount(){
         return $this->services()->count();
+    }
+    
+    public function status(){
+        if($this->status == "offline"){
+            return '<div class="user-status st-grey active">Нет в сети</div>';
+        }else{
+            return "";
+        }
     }
 }

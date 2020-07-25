@@ -92,7 +92,10 @@
             </ul>
         </li>
         <li class="mb-has-children">
-            <a href="#">Услуги</a>
+            <a href="/services">Услуги</a>
+            <ul>
+                @include('layouts._menuServices')
+            </ul>
         </li>
         <li class="mb-has-children">
             <a href="#">Акции</a>
@@ -109,16 +112,18 @@
         <a href="#" class="ms-icon-shop">
             <div><div>Магазин</div></div>
         </a>
-        <a href="#" class="ms-icon-favourite">
+        <a href="/favourite" class="ms-icon-favourite">
             <div><div>Избранное</div></div>
         </a>
-        <a href="#" class="ms-icon-coins">
-            <div><div>Пополнить сейчас</div></div>
-        </a>
+        @isset($currentUser)
+            <a href="/profile/balance" class="ms-icon-coins">
+                <div><div>Пополнить сейчас</div></div>
+            </a>
+        @endisset
         <a href="#" class="ms-icon-forum">
             <div><div>Форум</div></div>
         </a>
-        <a href="#" class="ms-icon-blog">
+        <a href="/blogs" class="ms-icon-blog">
             <div><div>Блог</div></div>
         </a>
         <a href="/faq" class="ms-icon-faq">

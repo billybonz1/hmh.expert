@@ -17,7 +17,7 @@
                         </div>
                         <ul class="pe-info">
                             <li class="pei-item"> 49 рублей/мин. </li>
-                            <li class="pei-item"> 10 лет опыта </li>
+                            <li class="pei-item"> {{ $user->exp }} опыта </li>
                             <li class="pei-item">
                                 рейтинг эксперта
                                 <div class="tec-rating-block">
@@ -216,9 +216,11 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="services-bottom">
-                        <a href="#" class="show-more-services" data-services="{{ count($services) }}" data-services-count="{{ $user->servicesCount() }}" data-user-id="{{ $user->id }}">Загрузить ещё</a>
-                    </div>
+                    @if(count($services) != $user->servicesCount())
+                        <div class="services-bottom">
+                            <a href="#" class="show-more-services" data-services-now="" data-services-all="{{ $user->servicesCount() }}" data-expert-id="{{ $user->id }}">Загрузить ещё</a>
+                        </div>
+                    @endif
                 </div>
                 <div class="expert-detail-services-cont">
                     <h3>Об эксперте</h3>
@@ -275,7 +277,9 @@
 
 
                 <div class="expert-detail-reviews-btns">
-                    <a href="#sendReview" class="show-more-reviews">Показать еще</a>
+                    @if(count($reviews) != $user->reviews()->count())
+                    <a href="#" class="show-more-reviews" data-reviews-now="" data-reviews-all="{{ $user->reviews()->count() }}" data-expert-id="{{ $user->id }}">Показать еще</a>
+                    @endif
                     @isset($currentUser)
                         <a href="#sendReview" class="send-review open-popup">Оставить отзыв</a>
                     @else

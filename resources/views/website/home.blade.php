@@ -200,10 +200,10 @@
                                       <img src="/img/review.png" alt="">
                                   </div>
                                   <div>
-                                      <h4>Елизавета</h4>
+                                      <h4>Екатерина</h4>
                                       <p>
-                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                                      </p>
+                                         Радмира очень позитивный человек и сильный эксперт! За короткий срок помогла мне выйти из состояния напряжения и стресса, дала позитивные установки и сейчас моя сложная ситуация начала разрешаться! Я очень довольна и буду продолжать следовать ее советам! Спасибо) 
+                                     </p>
                                   </div>
                               </div>
                           </li>
@@ -213,10 +213,10 @@
                                       <img src="/img/review.png" alt="">
                                   </div>
                                   <div>
-                                      <h4>Елизавета</h4>
+                                      <h4>Елена</h4>
                                       <p>
-                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                                      </p>
+                                         Я очень благодарна HMH.EXPERT, специалистам! Все четко и правдиво! Лучше горькая правда, чтобы жить стало легче!)
+                                                 </p>
                                   </div>
                               </div>
                           </li>
@@ -226,10 +226,10 @@
                                       <img src="/img/review.png" alt="">
                                   </div>
                                   <div>
-                                      <h4>Елизавета</h4>
+                                      <h4>Наталья</h4>
                                       <p>
-                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                                      </p>
+                                           Благодарю Зинаиду за благоприятный прогноз. Буду ждать результат. 
+                                     </p>
                                   </div>
                               </div>
                           </li>

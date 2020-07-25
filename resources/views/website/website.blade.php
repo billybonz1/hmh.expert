@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/styles/profile-messages.css" />
     <link rel="stylesheet" href="/styles/faqs.css" />
     <link rel="stylesheet" href="/styles/pages.css" />
+    @yield('head')
 </head>
 <body class="@isset($currentUser)logged-in @if($currentUser->hasRole('expert'))is-expert @endif @endisset">
     
@@ -41,6 +42,8 @@
     @if(config('app.env') != 'local')
         @include('partials.analytics')
     @endif
+    
+    @yield('scripts')
 </body>
 </html>
 

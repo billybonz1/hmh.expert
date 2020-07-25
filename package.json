@@ -38,6 +38,7 @@
         "datatables.net-responsive-bs4": "^2.2.3",
         "daterangepicker": "^3.0.5",
         "dropzone": "^5.5.1",
+        "fullcalendar": "^5.1.0",
         "jquery-cropper": "^1.0.1",
         "lightbox2": "^2.11.1",
         "moment": "^2.24.0",

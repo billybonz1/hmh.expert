@@ -190,9 +190,11 @@ body{
 .inner{
     max-width: 1500px;
     margin: 0 auto;
+    display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
 }
+
 .menu-top{
     box-shadow: 0 10px 46px rgba(0, 0, 0, 0.35);
     background-color: $bgmenu;
@@ -206,8 +208,8 @@ body{
         justify-content: space-between;
         align-items: center;
     }
-}
-
+} 
+ 
 .logo{
     min-width: 187px;
 }
@@ -797,7 +799,7 @@ footer{
     display: block;
     width: 100%;
     max-width: 500px;
-    margin: 20px auto 70px;
+    margin: 0px auto 85px;
     padding: 20px;
     h1{
         text-align: center;
@@ -805,6 +807,12 @@ footer{
         font-weight: 500;
         margin-bottom: 30px;
         font-size: 35px;
+        a{
+            color: #ff8b00;
+            &:hover{
+                text-decoration: none;
+            }
+        }
     }
     p{
         text-align: center;

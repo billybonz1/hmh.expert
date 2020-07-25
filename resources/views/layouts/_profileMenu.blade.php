@@ -6,6 +6,6 @@
         <li><a href="{{ route("profile.services") }}" class="btn">Мои услуги</a></li>
         @endcan
         <li><a href="/profile" class="btn">Аккаунт</a></li>
-
+        <li><a href="/profile/orders" class="btn">Мои покупки</a></li>
     </ul>
 </div>

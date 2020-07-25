@@ -234,6 +234,7 @@ Route::group(['middleware' => ['auth', 'auth.admin'], 'prefix' => 'admin', 'name
     Route::post('/moderate-services/post', 'ModerateServiceController@post')->name("moderateservices.post");
     Route::post('/moderate-services/postaccept', 'ModerateServiceController@postaccept')->name("moderateservices.postaccept");
     Route::get('/moderate-services/{id}/edit', 'ModerateServiceController@edit')->name("moderateservices.edit");
+    Route::get('/moderate-services/{id}/editall', 'ModerateServiceController@editall')->name("moderateservices.editall");
     Route::post('/moderate-services/{id}/update', 'ModerateServiceController@update')->name("moderateservices.update");
     Route::post('/moderate-services/store', 'ModerateServiceController@store')->name("moderateservices.store");
 

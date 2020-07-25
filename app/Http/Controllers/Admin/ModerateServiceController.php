@@ -73,6 +73,20 @@ class ModerateServiceController extends AdminController
             'categories' => ServiceCategory::where("parent_id", 0)->get(),
         ]);
     }
+    
+    
+    public function editall($id, Request $request){
+        $post = Service::where("id", $id)->first();
+        return $this->view("moderateService.editall")->with([
+            "post" => $post,
+            "experts" => User::whereHas('roles', function($q){
+                $q->where('name', '=', 'Expert');
+            })->get(),
+            'categories' => ServiceCategory::where("parent_id", 0)->get(),
+        ]);
+    }
+    
+    
 
     public function create(){
         return $this->view("moderateService.create")->with([
