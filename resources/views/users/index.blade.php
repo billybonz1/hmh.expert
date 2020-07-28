@@ -981,7 +981,7 @@
 		
 					<div class="ui-block">
 						<div class="ui-block-title">
-							<h6 class="title">Ваши фотографии профиля</h6>
+							<h6 class="title">Ваши фотографии</h6>
 						</div>
 						<div class="ui-block-content">
 		
