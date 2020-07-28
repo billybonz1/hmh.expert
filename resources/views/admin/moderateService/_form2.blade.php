@@ -63,17 +63,6 @@
 
 
 <div class="form-group row">
-    <label for="procent" class="col-md-2 col-form-label text-md-right">Процент выплаты (%)</label>
-    <input type="text" class="col-md-6 form-control" name="procent" value="{{ $post->procent ?? old('procent') }}" placeholder="Процент выплаты" />
-    
-    @error('procent')
-        <div class="alert alert-danger" role="alert">
-            <strong>{{ $message }}</strong>
-        </div>
-    @enderror
-</div>
-
-<div class="form-group row">
     <label for="saleinfo" class="col-md-2 col-form-label text-md-right">Информация для покупателя</label>
     <textarea class="col-md-6 form-control" name="saleinfo" placeholder="Информация для покупателя" />{{ $post->saleinfo ?? old('saleinfo') }}</textarea>
     @error('saleinfo')
@@ -132,19 +121,51 @@
 <input type="hidden" name="expert_id" value="{{ $post->expert_id ?? "" }}" />
 
 <div class="form-group row">
-    @foreach($experts as $expert)
-        <div class="col-md-6">
-            {{ $expert->namef() }}
+    <label class="col-md-2 col-form-label text-md-right">Цены услуги для экспертов</label>
+    <div class="col-md-6">
+        <div class="form-group row" style="margin-bottom: 10px;">
+            <div class="col-md-3">
+                <strong>Имя эксперта</strong>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Цена</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Процент</strong>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" class="col-md-6 form-control" name="price" value="" placeholder="Цена за услугу" />
+        @foreach($experts as $expert)
+        <div class="form-group row" style="margin-bottom: 10px;">
+            <input type="hidden" name="experts[]" value="{{ $expert->id }}" />
+            <div class="col-md-3">
+                {{ $expert->namef() }}
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="price[]" @isset($expert->price)value="{{ $expert->price }}"@endisset placeholder="Цена за услугу (в клеверах)" />
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="procent[]" @isset($expert->procent)value="{{ $expert->procent }}"@endisset placeholder="Процент выплаты" />
+                    </div>
+                </div>
+            </div>
         </div>
-    @endforeach
+        @endforeach
+    </div>
 </div>
 
 <hr>
                         
 <button type="submit" class="btn btn-primary">Сохранить</button>
+
+<input type="hidden" name="editall" value="1" />
+
+
 
 @include('admin.partials.summernote.document', ['summernote' => '#content-content'])
 @section('scripts')

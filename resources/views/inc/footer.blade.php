@@ -53,7 +53,7 @@
                 <i class="tcp-video-icon"></i>
                 <span>Виктория</span>
             </div>
-            <video id="fromMe" muted></video>
+            <div id="fromMe"></div>
             <div class="tcp-live"></div>
         </div>
         <div class="tcp-chat">
@@ -262,8 +262,37 @@
         <div class="total-popup-close">X</div>
     </div>
 </div>
-
 @endisset
+
+
+
+
+
+<div id="payForVideoChat" class="total-popup videocall-popup">
+    <div class="videocall-popup-inner" style="min-height: unset;max-width: 500px;">
+        <form action="/profile/pay" class="main-form" method="post" style="margin-bottom: 0;">
+            @csrf
+          
+          
+            <h1 style="padding: 0 15px; font-size: 30px;">
+                Введите пожалуйста сколько минут Вы хотите поговрить
+            </h1>
+            <label>
+                <input type="text" name="minutes_q" placeholder="Количество минут"/>
+            </label>
+            <div style="text-align: center;">
+                <button>Оплатить</button>
+            </div>
+            
+      
+            <input type="hidden" name="expert_id" />
+            <input type="hidden" name="price" value="100" />
+        </form>
+        <div class="total-popup-close">X</div>
+    </div>
+</div>
+
+
 
 
 <!--<script src="/js/socket.js"></script>-->
@@ -294,14 +323,31 @@
         
         // https://www.rtcmulticonnection.org/docs/iceServers/
         // use your own TURN-server here!
-        connection.iceServers = [{
-            'urls': [
-                'stun:stun.l.google.com:19302',
-                'stun:stun1.l.google.com:19302',
-                'stun:stun2.l.google.com:19302',
-                'stun:stun.l.google.com:19302?transport=udp',
-            ]
-        }];
+        connection.iceServers = [
+            {
+                'urls': [
+                    'stun:stun.l.google.com:19302',
+                    'stun:stun1.l.google.com:19302',
+                    'stun:stun2.l.google.com:19302',
+                    'stun:stun.l.google.com:19302?transport=udp',
+                ]
+            },
+            {
+                urls: 'turn:numb.viagenie.ca',
+                credential: 'muazkh',
+                username: 'webrtc@live.com'
+            },
+            {
+                urls: 'turn:192.158.29.39:3478?transport=udp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            },
+            {
+                urls: 'turn:192.158.29.39:3478?transport=tcp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            }
+        ];
         
         connection.videosContainer = document.getElementById('videos-container');
         connection.onstream = function(event) {
@@ -338,7 +384,7 @@
             var width = parseInt(connection.videosContainer.clientWidth);
             var mediaElement = getHTMLMediaElement(video, {
                 title: event.userid,
-                buttons: ['full-screen'],
+                // buttons: ['full-screen'],
                 width: width,
                 showOnMouseEnter: false
             });
@@ -547,18 +593,34 @@
         
         // https://www.rtcmulticonnection.org/docs/iceServers/
         // use your own TURN-server here!
-        connection.iceServers = [{
-            'urls': [
-                'stun:stun.l.google.com:19302',
-                'stun:stun1.l.google.com:19302',
-                'stun:stun2.l.google.com:19302',
-                'stun:stun.l.google.com:19302?transport=udp',
-            ]
-        }];
+        connection.iceServers = [
+            {
+                'urls': [
+                    'stun:stun.l.google.com:19302',
+                    'stun:stun1.l.google.com:19302',
+                    'stun:stun2.l.google.com:19302',
+                    'stun:stun.l.google.com:19302?transport=udp',
+                ]
+            },
+            {
+                urls: 'turn:numb.viagenie.ca',
+                credential: 'muazkh',
+                username: 'webrtc@live.com'
+            },
+            {
+                urls: 'turn:192.158.29.39:3478?transport=udp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            },
+            {
+                urls: 'turn:192.158.29.39:3478?transport=tcp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            }
+        ];
         
         
-        connection.videosContainer = document.querySelector('.second-screen');
-        console.log(connection.videosContainer);
+        connection.videosContainer = document.querySelector('#fromMe');
         connection.onstream = function(event) {
             var existing = document.getElementById(event.streamid);
             if(existing && existing.parentNode) {
@@ -590,13 +652,24 @@
             }
             video.srcObject = event.stream;
         
-            var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
-            var mediaElement = getHTMLMediaElement(video, {
+            var width = connection.videosContainer.clientWidth;
+            
+            var mediaElementSettings = {
                 title: event.userid,
                 buttons: ['full-screen'],
                 width: width,
                 showOnMouseEnter: false
-            });
+            };
+            if(connection.isInitiator === true){
+                mediaElementSettings = {
+                    title: event.userid,
+                    width: width,
+                    showOnMouseEnter: false,
+                    buttons: [],
+                }
+            }
+            
+            var mediaElement = getHTMLMediaElement(video, mediaElementSettings);
         
             connection.videosContainer.appendChild(mediaElement);
         
@@ -671,25 +744,11 @@
                     var service = el.getAttribute("data-service");
                     var data = {
                         id: idToCall,
-                        service: service
+                        service: service,
+                        roomID: roomID
                     };
                     socket1.emit('checkUserOnline', data);
-                    
-                    // connection.open(roomID, function(isRoomOpened, roomid, error) {
-              
-                    //     if(isRoomOpened === true) {
-                    //     //   showRoomURL(connection.sessionid);
-                    //         console.log("room opened");
-                    //     }
-                    //     else {
-                    //     //   disableInputButtons(true);
-                    //       if(error === 'Room not available') {
-                    //         alert('Someone already created this room. Please either join or create a separate room.');
-                    //         return;
-                    //       }
-                    //       alert(error);
-                    //     }
-                    // });
+
                 });
             });
             
@@ -699,6 +758,22 @@
                     openPopup("#userNotOnline");
                 }else{
                     if(data.service == "videoCall"){
+                        openPopup("#videocall");
+                        
+                        connection.open(data.roomID, function(isRoomOpened, roomid, error) {
+                            if(isRoomOpened === true) {
+                                console.log(connection.sessionid);
+                            }
+                            else {
+                                if(error === 'Room not available') {
+                                  alert('Someone already created this room. Please either join or create a separate room.');
+                                  return;
+                                }
+                                alert(error);
+                            }
+                        });
+                        console.log(data);
+                    } else if(data.service == "audioCall"){
                         console.log(data);
                     }
                 }

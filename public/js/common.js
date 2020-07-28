@@ -24,7 +24,7 @@ function openPopup(id){
 
 
 
-document.querySelectorAll(".total-popup-close,[data-dismiss=modal]").forEach(function(el){
+document.querySelectorAll(".total-popup-close,[data-dismiss=modal],.videocall-popup-close").forEach(function(el){
     el.addEventListener("click", function(){
         closePopup();
     });

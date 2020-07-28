@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\UploadImageHelper;
 use File;
+use Illuminate\Support\Facades\DB;
 
 class ModerateServiceController extends AdminController
 {
@@ -77,11 +78,22 @@ class ModerateServiceController extends AdminController
     
     public function editall($id, Request $request){
         $post = Service::where("id", $id)->first();
+        $experts = User::whereHas('roles', function($q){
+            $q->where('name', '=', 'Expert');
+        })->get();
+        
+        
+        foreach($experts as $index=>$expert){
+            $expert_price = DB::table('experts_services_prices')->where("service_id", $post->id)->where("expert_id", $expert->id)->first();
+            if($expert_price){
+                $experts[$index]->price = $expert_price->price;
+                $experts[$index]->procent = $expert_price->procent;
+            }
+        }
+        
         return $this->view("moderateService.editall")->with([
             "post" => $post,
-            "experts" => User::whereHas('roles', function($q){
-                $q->where('name', '=', 'Expert');
-            })->get(),
+            "experts" => $experts,
             'categories' => ServiceCategory::where("parent_id", 0)->get(),
         ]);
     }
@@ -102,7 +114,41 @@ class ModerateServiceController extends AdminController
         $post = Service::where("id", $id)->first();
         $rules = Service::$rules;
         $rules['image'] = 'image|max:6000|mimes:jpg,jpeg,png,bmp';
-        $rules['procent'] = "required|max:100|numeric";
+        
+        
+        if(isset($request->editall)){
+            unset($rules['price']);
+            unset($rules['procent']);
+            
+            
+            foreach($request->experts as $index=>$expert_id){
+                $expert_price = DB::table('experts_services_prices')->where("service_id", $id)->where("expert_id", $expert_id)->first();
+                if($expert_price){
+                    if($request->price[$index] !== null && $request->procent[$index] !== null){
+                        DB::table('experts_services_prices')->where("service_id", $id)->where("expert_id", $expert_id)->update([
+                            "price" => $request->price[$index],
+                            "procent" => $request->procent[$index]
+                        ]);
+                    }
+                }else{
+                    if($request->price[$index] !== null && $request->procent[$index] !== null){
+                        DB::table('experts_services_prices')->insert([
+                            "expert_id" => $expert_id,
+                            "service_id" => $id,
+                            "price" => $request->price[$index],
+                            "procent" => $request->procent[$index]
+                        ]);
+                    }
+                    
+                }
+            }
+            
+            
+            
+        }else{
+            $rules['procent'] = "required|max:100|numeric";
+        }
+        
         $attributes = request()->validate($rules);
         if(isset($attributes['image'])){
             File::delete(public_path("uploads/images")."/".$post->getThumbAttribute());
@@ -119,8 +165,14 @@ class ModerateServiceController extends AdminController
         $post->update($attributes);
 
         $category = $request->category;
-        $cat = ServiceCategory::where("id", $category)->first();
-        $post->categories()->sync(array_merge([$cat->id], $cat->parents()));
+        if(!empty($category)){
+            $cat = ServiceCategory::where("id", $category)->first();
+            $post->categories()->sync(array_merge([$cat->id], $cat->parents()));
+        }
+        
+        
+        
+        
 
         $request->session()->flash('success', 'Услуга успешно изменена');
 
