@@ -11,7 +11,7 @@ document.querySelectorAll(".tec-hover-icons a").forEach(function(a){
 
 
 function closePopup(){
-    document.querySelectorAll(".total-popup").forEach(function(popup){
+    document.querySelectorAll(".total-popup,.videocall-popup").forEach(function(popup){
         popup.classList.remove("active");
     });
 }
@@ -24,7 +24,7 @@ function openPopup(id){
 
 
 
-document.querySelectorAll(".total-popup-close,[data-dismiss=modal],.videocall-popup-close").forEach(function(el){
+document.querySelectorAll(".total-popup-close,[data-dismiss=modal]").forEach(function(el){
     el.addEventListener("click", function(){
         closePopup();
     });

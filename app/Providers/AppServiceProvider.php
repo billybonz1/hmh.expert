@@ -17,6 +17,9 @@ use App\Review;
 use App\Models\Service;
 use App\ServiceCategory;
 
+use Illuminate\Support\Facades\SocialIntegration;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        dd("1");
         View::composer('website.website', function($view){
             $view->with('categories', ExpertsCategory::with('children')->where('parent_id', 0)->get());
             $view->with('serviceCategories', ServiceCategory::with('children')->where('parent_id', 0)->get());

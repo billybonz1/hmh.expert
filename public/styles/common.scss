@@ -887,3 +887,44 @@ footer{
 .total-popup>div{
     background: $bgcolor;
 }
+
+
+
+
+
+.tcp-video-live{
+    position: relative;
+}
+.tcp-video-live-message{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: 31px;
+    &.green{
+        color: green;
+    }
+    &.active{
+        display: block;
+    }
+}
+
+
+.media-box{
+    h2{
+        display: none !important;
+    }
+}
+
+
+
+.timer{
+    position: absolute;
+    right: 17px;
+    bottom: 20px;
+    z-index: 10;
+    color: #ffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+}

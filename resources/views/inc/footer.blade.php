@@ -55,6 +55,8 @@
             </div>
             <div id="fromMe"></div>
             <div class="tcp-live"></div>
+            <div class="tcp-video-live-message green">Звоним ...</div>
+            <div class="timer"></div>
         </div>
         <div class="tcp-chat">
             <div class="tcp-chat-title">Чат</div>
@@ -275,7 +277,7 @@
           
           
             <h1 style="padding: 0 15px; font-size: 30px;">
-                Введите пожалуйста сколько минут Вы хотите поговрить
+                Введите пожалуйста сколько минут Вы хотите поговорить
             </h1>
             <label>
                 <input type="text" name="minutes_q" placeholder="Количество минут"/>
@@ -303,7 +305,126 @@
 <script src="https://vast-plateau-40039.herokuapp.com/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.css">
 <script src="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.js"></script>
+<script src="https://vast-plateau-40039.herokuapp.com/node_modules/recordrtc/RecordRTC.js"></script>
+
+
+
 <script>
+
+    var base = 60;
+    var clocktimer, dateObj, dh, dm, ds, ms;
+    var readout = '';
+    var h = 1,
+      m = 1,
+      tm = 1,
+      s = 0,
+      ts = 0,
+      ms = 0,
+      init = 0;
+    
+    //функция для очистки поля
+    function ClearСlock() {
+        clearTimeout(clocktimer);
+        h = 1;
+        m = 1;
+        tm = 1;
+        s = 0;
+        ts = 0;
+        ms = 0;
+        init = 0;
+        readout = '00:00:00';
+        document.querySelector(".videocall-popup.active .timer").innerHTML = readout;
+    }
+    
+    //функция для старта секундомера
+    function StartTIME() {
+        console.log("time started");
+        var cdateObj = new Date();
+        var t = (cdateObj.getTime() - dateObj.getTime()) - (s * 1000);
+        if (t > 999) {
+          s++;
+        }
+        if (s >= (m * base)) {
+          ts = 0;
+          m++;
+        } else {
+          ts = parseInt((ms / 100) + s);
+          if (ts >= base) {
+            ts = ts - ((m - 1) * base);
+          }
+        }
+        if (m > (h * base)) {
+          tm = 1;
+          h++;
+        } else {
+          tm = parseInt((ms / 100) + m);
+          if (tm >= base) {
+            tm = tm - ((h - 1) * base);
+          }
+        }
+        ms = Math.round(t / 10);
+        if (ms > 99) {
+          ms = 0;
+        }
+        if (ms == 0) {
+          ms = '00';
+        }
+        if (ms > 0 && ms <= 9) {
+          ms = '0' + ms;
+        }
+        if (ts > 0) {
+          ds = ts;
+          if (ts < 10) {
+            ds = '0' + ts;
+          }
+        } else {
+          ds = '00';
+        }
+        dm = tm - 1;
+        if (dm > 0) {
+          if (dm < 10) {
+            dm = '0' + dm;
+          }
+        } else {
+          dm = '00';
+        }
+        dh = h - 1;
+        if (dh > 0) {
+          if (dh < 10) {
+            dh = '0' + dh;
+          }
+        } else {
+          dh = '00';
+        }
+        readout = dh + ':' + dm + ':' + ds;
+        
+        
+        document.querySelector(".videocall-popup.active .timer").innerHTML = readout;
+        clocktimer = setTimeout("StartTIME()", 1000);
+    }
+    
+    //Функция запуска и остановки
+    function StartStop() {
+        
+        setTimeout(function(){
+            if (init == 0) {
+                ClearСlock();
+                dateObj = new Date();
+                StartTIME();
+                init = 1;
+            } else {
+                clearTimeout(clocktimer);
+                init = 0;
+            }
+        }, 2000);
+        
+        
+    }
+
+
+
+
+
     var socket1 = io.connect('https://vast-plateau-40039.herokuapp.com/', {
         'sync disconnect on unload': true
     });
@@ -311,10 +432,10 @@
         var connection = new RTCMultiConnection();
             connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
             connection.session = {
-            audio: true,
-            video: true,
-            oneway: true
-        };
+                audio: true,
+                video: true,
+                oneway: true
+            };
         
         connection.sdpConstraints.mandatory = {
             OfferToReceiveAudio: false,
@@ -493,7 +614,7 @@
         
         
         
-    }else if(document.querySelectorAll("[data-id-to-call]").length > 0){
+    }else if(document.querySelectorAll("[data-id-to-call]").length > 0 || document.querySelector(".is-expert")){
         // ......................................................
         // ..................RTCMultiConnection Code.............
         // ......................................................
@@ -620,11 +741,15 @@
         ];
         
         
+    
+        
+        
         connection.videosContainer = document.querySelector('#fromMe');
+        connection.videosContainer1 = document.querySelector('#peerDiv');
         connection.onstream = function(event) {
             var existing = document.getElementById(event.streamid);
             if(existing && existing.parentNode) {
-              existing.parentNode.removeChild(existing);
+                existing.parentNode.removeChild(existing);
             }
         
             event.mediaElement.removeAttribute('src');
@@ -653,29 +778,50 @@
             video.srcObject = event.stream;
         
             var width = connection.videosContainer.clientWidth;
+            var width1 = connection.videosContainer1.clientWidth;
             
-            var mediaElementSettings = {
-                title: event.userid,
-                buttons: ['full-screen'],
-                width: width,
-                showOnMouseEnter: false
-            };
-            if(connection.isInitiator === true){
+            var mediaElementSettings = {}
+            
+            if(event.type === "local"){
                 mediaElementSettings = {
                     title: event.userid,
                     width: width,
                     showOnMouseEnter: false,
                     buttons: [],
                 }
+            }else{
+                mediaElementSettings = {
+                    title: event.userid,
+                    buttons: [],
+                    width: width1,
+                    showOnMouseEnter: false
+                }
             }
             
             var mediaElement = getHTMLMediaElement(video, mediaElementSettings);
-        
-            connection.videosContainer.appendChild(mediaElement);
+            if(event.type === "local"){
+                connection.videosContainer.appendChild(mediaElement);
+            }else{
+                connection.videosContainer1.appendChild(mediaElement);
+                document.querySelector(".tcp-video-live-message.green").classList.remove("active");
+            }
         
             setTimeout(function() {
                 mediaElement.media.play();
             }, 5000);
+            
+            
+            
+            var numberOfUsersInTheRoom = connection.getAllParticipants().length;
+            console.log("Users Number: " + numberOfUsersInTheRoom);
+            
+            //Создатель комнаты не учитывается
+            if(numberOfUsersInTheRoom == 1){
+                StartStop();
+            }
+            
+            
+            
         
             mediaElement.id = event.streamid;
         
@@ -709,13 +855,14 @@
             }
         
             if(event.type === 'local') {
-              connection.socket.on('disconnect', function() {
-                if(!connection.getAllParticipants().length) {
-                  location.reload();
-                }
-              });
+                connection.socket.on('disconnect', function() {
+                    if(!connection.getAllParticipants().length) {
+                        location.reload();
+                    }
+                });
             }
-        };
+            
+        }
         connection.onMediaError = function(e) {
             console.log(e.message);
             if (e.message === 'Concurrent mic process limit.') {
@@ -762,7 +909,8 @@
                         
                         connection.open(data.roomID, function(isRoomOpened, roomid, error) {
                             if(isRoomOpened === true) {
-                                console.log(connection.sessionid);
+                                document.querySelector(".tcp-video-live-message.green").classList.add("active");
+                                socket1.emit('userCall', data);
                             }
                             else {
                                 if(error === 'Room not available') {
@@ -788,6 +936,53 @@
         }
         
     }
+    
+    
+    document.querySelectorAll(".videocall-popup-close").forEach(function(el){
+        el.addEventListener("click", function(e){
+            e.preventDefault();
+            document.querySelectorAll(".videocall-popup").forEach(function(popup){
+                popup.classList.remove("active");
+            });
+            
+            document.querySelector("#fromMe").innerHTML = "";
+            // disconnect with all users
+            connection.getAllParticipants().forEach(function(pid) {
+                connection.disconnectWith(pid);
+            });
+        
+            // stop all local cameras
+            connection.attachStreams.forEach(function(localStream) {
+                localStream.stop();
+            });
+        
+            // close socket.io connection
+            connection.closeSocket();
+        });
+    });
+    
+    
+    
+    socket1.on("userCall", function(data){
+        console.log(data);
+        openPopup("#videocallAccept");
+        
+        
+        document.querySelector("#acceptCall").addEventListener("click", function(e){
+            e.preventDefault();
+            closePopup();
+            openPopup("#videocall");
+            connection.join(data.roomID);
+        });
+        
+        document.querySelector("#cancelCall").addEventListener("click", function(e){
+            e.preventDefault();
+            
+        });
+        
+        
+        
+    });
 </script>
 
 <script type="text/javascript" src="/js/glide.min.js" defer></script>
