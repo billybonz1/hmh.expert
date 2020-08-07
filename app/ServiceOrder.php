@@ -31,7 +31,7 @@ class ServiceOrder extends Model
 
     public function quantity(){
     	if($this->quantity_type == "1"){
-    		return $this->quantity/60;
+    		return $this->quantity;
     	}else{
     		return $this->quantity;
     	}

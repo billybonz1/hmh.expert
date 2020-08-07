@@ -481,7 +481,6 @@ socket1.on("readMessages", function(data){
     });
 });
 
-
 if(messageSendForm){
     messageSendForm.querySelector('[name="message"]').addEventListener("focus", function(){
         var token = document.querySelector("#getMessagesForm [name='_token']").value;
@@ -556,6 +555,54 @@ if(groupMessageSendForm){
 document.querySelectorAll(".tcp-chat-messages").forEach(function(chat){
     var simpleBarGroup = new SimpleBar(chat);
     simpleBarGroup.getScrollElement().scrollTop = 10000;
-    
 });
 
+
+
+
+
+//SERVICES MESSGES
+
+document.querySelectorAll(".videocall-popup .top-chat-block form").forEach(function(el){
+    el.addEventListener("submit", function(e){
+        e.preventDefault();
+        
+        
+        
+        if(document.querySelector("[data-user-id]")){
+            if(groupMessageSendForm.querySelector('[name="message"]').value != ""){
+                var formData = new FormData(el);
+                // var xhr = new XMLHttpRequest();
+                // xhr.open('POST', '/profile/groupmessages');
+                // xhr.onload = function() {
+                //     if (xhr.status === 200) {
+                //         if(xhr.responseText != 0){
+                            
+                //             var message = JSON.parse(xhr.responseText);
+                        
+                //             var messagesBlock =  document.querySelector(".group-chat-" + message.chat_id);
+                //             if(messagesBlock.querySelector(".simplebar-content")){
+                //                 messagesBlock = messagesBlock.querySelector(".simplebar-content");
+                //             }
+                //             appendGroupMessage(message, messagesBlock);
+                //             activeMessageAreaToBottom(".group-chat-" + message.chat_id);
+                //             groupMessageSendForm.querySelector('[name="message"]').value = "";
+                            
+                //             socket1.emit("message", message);
+                //         }else{
+                //             openPopup("#payForMessage");
+                //         }
+                        
+                //     }
+                //     else {
+                //         console.log('Request failed.  Returned status of ' + xhr.status);
+                //     }
+                // };
+                // xhr.send(formData);
+            }
+        } else {
+            openPopup("#notLoggedInPopup");
+        }
+        
+    });
+});

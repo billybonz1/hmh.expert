@@ -7,10 +7,13 @@ use App\Models\Role;
 use App\User;
 use App\Chat;
 use App\Review;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class ExpertsCategoryController extends Controller
 {
@@ -116,8 +119,6 @@ class ExpertsCategoryController extends Controller
 
     }
 
-
-
     public function addReview(Request $request){
         $data = $request->all();
         $data['status'] = 0;
@@ -135,5 +136,32 @@ class ExpertsCategoryController extends Controller
         }
     }
 
-
+    
+    public function getServicePrice(Request $request){
+        
+        if($request->service == "videoCall"){
+            $service_id = 5;
+        }else if($request->service == "audioCall"){
+            $service_id = 6;
+        }
+        
+        
+        $expert_price = DB::table('experts_services_prices')->where("service_id", $service_id)->where("expert_id", $request->id)->first();
+        
+        
+        return $this->plural_form(
+        	$expert_price->price,
+        	/* варианты написания для количества 1, 2 и 5 */
+        	array('клевер','клевера','клеверов')
+        );
+    }
+    
+    protected function plural_form($number, $after) {
+    	$cases = array (2, 0, 1, 1, 1, 2);
+    	return "<span>".$number.'</span> '.$after[ ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)] ];
+    }
+    
+    
+    
+    
 }

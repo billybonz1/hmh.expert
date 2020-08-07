@@ -140,6 +140,9 @@ Route::post('/profile/services/add', 'ProfileController@serviceStore')->middlewa
 Route::post('/profile/services/update', 'ProfileController@serviceUpdate');
 Route::get('/profile/service/{id}', 'ProfileController@serviceshow');
 
+Route::post('/profile/likepost', 'ProfileController@likePost');
+
+
 
 
 Route::get('/profile/orders', 'ProfileController@orders')->name("orders");
@@ -159,6 +162,10 @@ Route::post('/profile/expert', 'ProfileController@expertUpdate')->middleware("ca
 
 Route::get('/get-services', 'ExpertsCategoryController@getServices')->name('get_services');
 Route::get('/get-reviews', 'ExpertsCategoryController@getReviews')->name('get_reviews');
+
+Route::post('/get-service-price', 'ExpertsCategoryController@getServicePrice')->name('get_service_price');
+
+
 
 
 

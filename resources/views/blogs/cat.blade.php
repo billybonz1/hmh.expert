@@ -34,3 +34,7 @@
         </div>
     
 @endsection
+
+@section('scripts')
+    <script src="/js/blogs.js" defer></script>
+@endsection

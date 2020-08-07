@@ -253,7 +253,7 @@ class ProfileController extends AdminController
                     "title" => "Аккаунт"
                 ],
                 [
-                    "title" => "Мой блог",
+                    "title" => "Мой бло��",
                     "url" => "/profile/blog"
                 ],
                 [
@@ -548,8 +548,6 @@ class ProfileController extends AdminController
         }
         return 1;
     }
-    
-    
 
     public function sendGroupMessage(Request $request){
         $currentUser = Auth::user();
@@ -587,7 +585,13 @@ class ProfileController extends AdminController
         }
 
     }
-
+    
+    public function sendServiceMessage(Request $request){
+        
+    }
+    
+    
+    
 
     public function balance(){
         $data = [
@@ -665,6 +669,50 @@ class ProfileController extends AdminController
             }else{
                 return json_encode(["Ошибка оплаты, попробуйте пожалуйста позже"]);
             }
+        } else if($request->service){
+            $data = $request->all();
+            
+            if($request->service == "videoCall"){
+                $service_id = 5;
+            }else if($request->service == "audioCall"){
+                $service_id = 6;
+            }
+            $expert_price = DB::table('experts_services_prices')->where("service_id", $service_id)->where("expert_id", $request->id)->first();
+            
+            
+            $data['price'] = (int)$expert_price->price*(int)$request->minutes_q;
+            if($currentUser->balance>=$data['price']){
+                $serviceOrder = ServiceOrder::create([
+                    'user_id' => $currentUser->id,
+                    'expert_id' => $request->id,
+                    'service_id' => $service_id,
+                    'quantity_type' => "1",
+                    'quantity' => (int)$request->minutes_q
+                ]);
+                $currentUser->balance -= $data['price'];
+                $currentUser->save();
+                $data['balance'] = $currentUser->prettyBalance();
+                
+                $chat = Chat::where("name", $request->service.$currentUser->id."-".$request->id)->first();
+                
+                if($chat){
+                    $data['messages'] = $chat->messages()->orderBy("created_at", "desc")->take(15)->get();
+                } else {
+                    $chat = Chat::create([
+                        "name" => $request->service.$currentUser->id."-".$request->id,
+                        "type" => "service"
+                    ]);
+                }
+                
+                $data["chat_id"] = $chat->id;
+                
+                
+                return json_encode($data);
+            }else{
+                return "На Вашем балансе недостаточно средств для оплаты услуги. Перейдите на <a href='/profile/balance'>страницу баланса</a>";
+            }
+            
+            
         }
     }
     
@@ -817,8 +865,14 @@ class ProfileController extends AdminController
                     "title" => "Мои покупки"
                 ]
             ],
-            'orders' => ServiceOrder::where("user_id", Auth::user()->id)->paginate(10) 
+            'orders' => ServiceOrder::where("user_id", Auth::user()->id)->orderBy("created_at", "desc")->paginate(10) 
         ]);
+    }
+    
+    public function likePost(Request $request){
+        $post = Post::where("id", $request->postid)->first();
+        $post->like();
+        return $post->likeCount;
     }
 
 }

@@ -186,6 +186,7 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'C' => 
         array (
             'Cron\\' => 5,
+            'Conner\\Likeable\\' => 16,
             'Composer\\XdebugHandler\\' => 23,
             'Composer\\Spdx\\' => 14,
             'Composer\\Semver\\' => 16,
@@ -571,6 +572,10 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
+        'Conner\\Likeable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rtconner/laravel-likeable/src',
+        ),
         'Composer\\XdebugHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/xdebug-handler/src',
@@ -780,7 +785,9 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'App\\Http\\Controllers\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ExpertsCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpertsCategoryController.php',
+        'App\\Http\\Controllers\\FavouriteController' => __DIR__ . '/../..' . '/app/Http/Controllers/FavouriteController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
+        'App\\Http\\Controllers\\ServicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicesController.php',
         'App\\Http\\Controllers\\Traits\\CRUDNotify' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/CRUDNotify.php',
         'App\\Http\\Controllers\\Traits\\DataTableHelpers' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/DataTableHelpers.php',
         'App\\Http\\Controllers\\Traits\\GoogleAnalyticsHelper' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/GoogleAnalyticsHelper.php',
@@ -789,6 +796,7 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'App\\Http\\Controllers\\Traits\\ReportChartTable' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/ReportChartTable.php',
         'App\\Http\\Controllers\\Traits\\SearchShopHelper' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/SearchShopHelper.php',
         'App\\Http\\Controllers\\Traits\\UploadImageHelper' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/UploadImageHelper.php',
+        'App\\Http\\Controllers\\UsersCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersCategoryController.php',
         'App\\Http\\Controllers\\Website\\Account\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/Website/Account/AccountController.php',
         'App\\Http\\Controllers\\Website\\Account\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Website/Account/ProfileController.php',
         'App\\Http\\Controllers\\Website\\Account\\ShippingAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/Website/Account/ShippingAddressController.php',
@@ -1280,6 +1288,10 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'Composer\\XdebugHandler\\Process' => __DIR__ . '/..' . '/composer/xdebug-handler/src/Process.php',
         'Composer\\XdebugHandler\\Status' => __DIR__ . '/..' . '/composer/xdebug-handler/src/Status.php',
         'Composer\\XdebugHandler\\XdebugHandler' => __DIR__ . '/..' . '/composer/xdebug-handler/src/XdebugHandler.php',
+        'Conner\\Likeable\\Like' => __DIR__ . '/..' . '/rtconner/laravel-likeable/src/Like.php',
+        'Conner\\Likeable\\LikeCounter' => __DIR__ . '/..' . '/rtconner/laravel-likeable/src/LikeCounter.php',
+        'Conner\\Likeable\\Likeable' => __DIR__ . '/..' . '/rtconner/laravel-likeable/src/Likeable.php',
+        'Conner\\Likeable\\LikeableServiceProvider' => __DIR__ . '/..' . '/rtconner/laravel-likeable/src/LikeableServiceProvider.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',

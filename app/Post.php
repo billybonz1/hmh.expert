@@ -10,6 +10,7 @@ use Laravelista\Comments\Commentable;
 class Post extends Model
 {
     use Commentable;
+    use \Conner\Likeable\Likeable;
     protected $guarded = [];
     protected $dates = ['created_at'];
    

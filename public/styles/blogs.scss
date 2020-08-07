@@ -94,6 +94,10 @@
     h4{
         text-align: center;
         font-size: 16px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         a{
             min-height: 32px;
             display: block;
@@ -115,6 +119,9 @@
         a{
             color: #f54949;
         }
+    }
+    .like-attr{
+        font-size: 12px;
     }
 }
 
@@ -331,16 +338,29 @@ p.blogs-post-price{
 .blogs-props{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     font-size: 13px;
     font-weight: 400;
     &>div{
-        margin-right: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        div{
+            margin-right: 10px;
+        }
         a{
             color: #fff;
             &:hover{
                 text-decoration: none;
             }
         }
+    }
+    
+    .like-attr{
+        margin-right: 0;
+    }
+    
+    .like-post{
+        width: 15px;
     }
 }
 
@@ -482,4 +502,30 @@ p.blogs-post-price{
             display: block;
         }
     }
+}
+.like-post{
+    width: 21px;
+    path:first-child{
+        fill: transparent;
+    }
+    path:last-child{
+        fill: #fd4b4b;
+    }
+    &.liked{
+        path:first-child{
+            fill: #fd4b4b;
+        }
+    }
+}
+
+
+.like-attr{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+    svg{
+        margin-right: 5px;
+    }
+    font-size: 13px;
 }

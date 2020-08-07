@@ -116,9 +116,14 @@
             <!--    </ul>-->
             <!--@endif-->
             
-            <form class="tcp-input" method="post" action="">
+            <form class="tcp-input" method="post">
                 @csrf
-                
+                <input type="hidden" name="_method" value="PUT" />
+                <input type="hidden" name="chat_id" value="" />
+                <input type="hidden" name="to_id" value="" />
+                @isset($currentUser)
+                <input type="hidden" name="from_id" value="{{ $currentUser->id }}">
+                @endisset
                 <input type="text" name="message" placeholder="Введите сообщение" />
                 <button class="tcp-send-icon"></button>
             </form>
@@ -279,21 +284,38 @@
             <h1 style="padding: 0 15px; font-size: 30px;">
                 Введите пожалуйста сколько минут Вы хотите поговорить
             </h1>
+            <p>
+                Стимость - <span class="current-service-price"></span>
+            </p>
             <label>
-                <input type="text" name="minutes_q" placeholder="Количество минут"/>
+                <input type="number" name="minutes_q" placeholder="Количество минут" required />
             </label>
             <div style="text-align: center;">
                 <button>Оплатить</button>
             </div>
-            
-      
-            <input type="hidden" name="expert_id" />
-            <input type="hidden" name="price" value="100" />
         </form>
         <div class="total-popup-close">X</div>
     </div>
 </div>
 
+<div id="loading" class="total-popup videocall-popup loading">
+    <div class="lds-ellipsis">
+        <div></div><div></div><div></div><div></div>
+    </div> 
+</div>
+
+
+
+<div id="error" class="total-popup videocall-popup">
+    <div class="videocall-popup-inner" style="min-height: unset;max-width: 500px;">
+        <div class="main-form">
+            <h1 style="padding: 0 15px; font-size: 30px;">
+                К сожалению эксперт не онлайн, Вы можете узнать его расписание <a>здесь</a>
+            </h1>
+        </div>
+        <div class="total-popup-close">X</div>
+    </div>
+</div>
 
 
 
@@ -321,6 +343,18 @@
       ts = 0,
       ms = 0,
       init = 0;
+      
+      
+    var serialize = function(obj) {
+        var str = [];
+        for (var p in obj)
+          if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+        return str.join("&");
+    }  
+      
+      
     
     //функция для очистки поля
     function ClearСlock() {
@@ -421,7 +455,14 @@
         
     }
 
-
+    function IsJsonString(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
 
 
 
@@ -883,6 +924,9 @@
         var userIDel = document.querySelector("[data-user-id]");
         
         if(userIDel){
+            
+            var returnData;
+            // Клик на кнопку вызова
             var roomID = "roomUser" + userIDel.getAttribute("data-user-id");
             document.querySelectorAll('[data-id-to-call]').forEach(function(el){
                 el.addEventListener("click", function(e){
@@ -894,38 +938,113 @@
                         service: service,
                         roomID: roomID
                     };
+                    openPopup("#loading");
                     socket1.emit('checkUserOnline', data);
-
+                
                 });
             });
             
+            
+            // Проверка пользовтаеля онлайн
             socket1.on("checkedUserOnline", function(data){
                 if(data.result == 0){
                     document.querySelector("#userNotOnline h1 a").setAttribute("href", "/experts/"+data.id);
                     openPopup("#userNotOnline");
                 }else{
-                    if(data.service == "videoCall"){
-                        openPopup("#videocall");
-                        
-                        connection.open(data.roomID, function(isRoomOpened, roomid, error) {
-                            if(isRoomOpened === true) {
-                                document.querySelector(".tcp-video-live-message.green").classList.add("active");
-                                socket1.emit('userCall', data);
-                            }
-                            else {
-                                if(error === 'Room not available') {
-                                  alert('Someone already created this room. Please either join or create a separate room.');
-                                  return;
-                                }
-                                alert(error);
-                            }
-                        });
-                        console.log(data);
-                    } else if(data.service == "audioCall"){
-                        console.log(data);
-                    }
+                    data._token = document.querySelector("[name='_token']").value;
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', "/get-service-price?"+serialize(data));
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            data.price = parseInt(xhr.responseText.replace(/\D/g, ""));
+                            console.log(xhr.responseText);
+                            document.querySelector("#payForVideoChat .current-service-price").innerHTML = xhr.responseText + "/минута";
+                            
+                            returnData = data;
+                            openPopup("#payForVideoChat");
+                        }
+                        else {
+                            console.log('Request failed.  Returned status of ' + xhr.status);
+                        }
+                    };
+                    xhr.send();
                 }
             });
+            
+            
+            //Обработка формы оплаты
+            document.querySelector("#payForVideoChat form").addEventListener("submit", function(e){
+                e.preventDefault();
+                var form = this;
+                var formData = new FormData(form);
+                
+                
+                for (var prop in returnData) {
+                    formData.append(prop, returnData[prop]);
+                }
+                
+                
+                var minutes_q = parseInt(form.querySelector("[name='minutes_q']").value);
+                var amount = minutes_q*parseInt(returnData.price);
+            
+                openPopup("#loading");
+                
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.getAttribute("action"));
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        if(IsJsonString(xhr.responseText)){
+                            var data = JSON.parse(xhr.responseText);
+                            
+                            
+                            document.querySelector(".top-balance").innerHTML = data.balance;
+                            console.log(data);
+                            
+                            if(data.service == "videoCall"){
+                                openPopup("#videocall");
+                                
+                                document.querySelector("#videocall [name='chat_id']").value = data.chat_id;
+                                
+                                document.querySelector("#videocall [name='to_id']").value = data.id;
+                                
+                                
+                                
+                                connection.open(data.roomID, function(isRoomOpened, roomid, error) {
+                                    if(isRoomOpened === true) {
+                                        document.querySelector(".tcp-video-live-message.green").classList.add("active");
+                                        socket1.emit('userCall', data);
+                                    }
+                                    else {
+                                        if(error === 'Room not available') {
+                                          alert('Someone already created this room. Please either join or create a separate room.');
+                                          return;
+                                        }
+                                        alert(error);
+                                    }
+                                });
+                                
+                            } else if(data.service == "audioCall"){
+                                
+                            }
+                        } else {
+                            document.querySelector("#error h1").innerHTML = xhr.responseText;
+                            openPopup("#error");
+                        }
+                        
+                    }
+                    else {
+                        console.log('Request failed.  Returned status of ' + xhr.status);
+                    }
+                }
+                xhr.send(formData);
+                
+                
+                
+            });
+            
+            
+            
         }else{
             document.querySelectorAll('[data-id-to-call]').forEach(function(el){
                 el.addEventListener("click", function(e){
