@@ -1,11 +1,20 @@
 <div class="profile-content-menu">
     <ul>
+        
+        
+        
+        <li>
+            <a href="{{ route('profile') }}" @if(Route::current()->getName() == 'profile') class="active" @endif>Общие настройки</a>
+        </li>
+        
+        <li>
+            <a href="{{ route('profile.personal') }}" @if(Route::current()->getName() == 'profile.personal') class="active" @endif>Личные данные</a>
+        </li>
+        
         <li>
             <a href="{{ route('profile.password') }}" @if(Route::current()->getName() == 'profile.password') class="active" @endif>Сменить пароль</a>
         </li>
-        <li>
-            <a href="{{ route('profile') }}" @if(Route::current()->getName() == 'profile') class="active" @endif>Личные данные</a>
-        </li>
+        
         
         @can('edit-expert')
             <li>

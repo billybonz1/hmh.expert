@@ -45,3 +45,51 @@ document.querySelectorAll(".tec-hover-icon-message").forEach(function(item){
         document.querySelector("[name='expert_id']").value = id;
     });
 });
+
+
+
+document.querySelectorAll(".logged-in .add-to-favourite").forEach(function(el){
+    el.addEventListener("click", function(e){
+        e.preventDefault();
+        var likePost = el.querySelector(".like-post");
+        var userID = likePost.getAttribute("data-favourite-user-id");
+        if(likePost.classList.contains("liked")){
+            el.setAttribute("data-tooltip", "Добавить в избранное");
+        }else{
+            el.setAttribute("data-tooltip", "Убрать из избранного");
+        }
+        likePost.classList.toggle("liked");
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "/profile/add-to-favourite?userid="+userID+"&_token="+document.querySelector("[name='_token']").value);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+            else {
+                console.log('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+    });
+});
+
+
+document.querySelectorAll(".logged-in .remove-favourite").forEach(function(el){
+    el.addEventListener("click", function(e){
+        e.preventDefault();
+        // el.parentElement.parentElement.remove();
+        var id = el.getAttribute("data-id")
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "/profile/remove-favourite?id="+id+"&_token="+document.querySelector("[name='_token']").value);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                window.location.reload();
+                console.log(xhr.responseText);
+            }
+            else {
+                console.log('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+    });
+});

@@ -132,7 +132,7 @@
         <div class="videocall-popup-close">X</div>
     </div>
     
-</div>
+</div> 
 
 
 <div id="videocallAccept" class="videocall-popup">

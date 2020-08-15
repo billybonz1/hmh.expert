@@ -8,6 +8,12 @@ use App\User;
 class FavouriteController extends Controller
 {
     public function index(){
+        $experts = [];
+        $data = Auth::user()->allFavorites()->paginate(8);
+        foreach($data as $expert){
+            $experts[] = $expert->favoriteable()->first();
+        }
+        
         return view("favourite.index")->with([
             'pageTitle' => "Избранное",
             'currentUser' => Auth::user(),
@@ -20,9 +26,8 @@ class FavouriteController extends Controller
                     "title" => "Избранное"
                 ]
             ],
-            'experts' => User::whereHas('roles', function($q){
-                            $q->where('name', '=', 'Expert');
-                        })->get()
+            'experts' => $experts,
+            'pagination' => $data->links()
         ]);
     }
     

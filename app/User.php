@@ -15,9 +15,14 @@ use App\Field;
 use App\Review;
 use App\Models\Service;
 
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
+use ChristianKuri\LaravelFavorite\Models\Favorite;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes, UserHelper, UserRoles, UserAdmin;
+    use Favoriteable;
+    
 
     protected $appends = ['fullname'];
     /**
@@ -29,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'firstname',
         'lastname',
+        'nickname',
         'email',
         'gender',
         'cellphone',
@@ -99,10 +105,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'password'  => 'nullable|min:4|confirmed',
         'photo'     => 'required|image|max:6000|mimes:jpg,jpeg,png,bmp',
     ];
-
+    
+    
     /**
      * Get the shippingAddress
      */
+    public function allFavorites()
+    {
+        return $this->hasMany(Favorite::class, 'user_id');
+    }
+    
     public function shippingAddress()
     {
         return $this->hasOne(ShippingAddress::class, 'user_id', 'id')->whereNull('transaction_id');
@@ -187,7 +199,9 @@ class User extends Authenticatable implements MustVerifyEmail
         foreach($this->reviews as $review){
             $procent += (int)$review->ratingProcent();
         }
-        $procent = $procent/count($this->reviews);
+        if(count($this->reviews) != 0){
+            $procent = $procent/count($this->reviews);
+        }
         return $procent."%";
     }
 
@@ -200,11 +214,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function rating(){
         $rating = 0;
-        foreach($this->reviews as $review){
-            $rating+=(float)$review->rating;
+        if(count($this->reviews) != 0){
+            foreach($this->reviews as $review){
+                $rating+=(float)$review->rating;
+            }
+            $rating = $rating/count($this->reviews);
         }
-        $rating = $rating/count($this->reviews);
-        return round($rating, 2);
+        return round($rating, 2); 
     }
 
     public function posts(){

@@ -36,6 +36,11 @@
         color: #fff;
         font-size: 24px;
         margin-bottom: 15px;
+        user-select: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        cursor: pointer;
     }
 
 }
@@ -50,4 +55,22 @@
     span{
         color: #fff;
     }
+}
+
+.faqs-toggle{
+    cursor: pointer;
+}
+.faqs-toggled{
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
+.faqs-category{
+    flex: 0 0 100%;
+}
+
+.faqs-answer-footer{
+    color: #fff;
 }

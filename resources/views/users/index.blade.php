@@ -111,8 +111,7 @@
 												<img src="/img/wall/img/author-page.jpg" alt="author">
 											</div>
 											<div class="form-group with-icon label-floating is-empty">
-												<label class="control-label">Написать, сообщение...</label>
-												<textarea class="form-control" placeholder=""></textarea>
+												<textarea class="form-control" placeholder="Написать, сообщение..."></textarea>
 											<span class="material-input"></span></div>
 											<div class="add-options-message">
 												<a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">

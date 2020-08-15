@@ -23,8 +23,5 @@ document.querySelectorAll(".logged-in .like-attr").forEach(function(el){
             };
             xhr.send();
         }
-        
-        
-        
     });
 });

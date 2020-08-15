@@ -38,7 +38,27 @@ class ProfileController extends AdminController
 
     public function index(){
         return view('profile.index')->with([
-            'pageTitle' => "Аккаунт",
+            'pageTitle' => "Общие настройки",
+            'currentUser' => Auth::user(),
+            'breadcrumbs' => [
+                [
+                    "url" => "/",
+                    "title" => "HMH.EXPERT"
+                ],
+                [
+                    "url" => "/profile",
+                    "title" => "Аккаунт"
+                ],
+                [
+                    "title" => "Общие настройки"
+                ]
+            ]
+        ]);
+    }
+    
+    public function personal(){
+        return view('profile.personal')->with([
+            'pageTitle' => "Личные данные",
             'currentUser' => Auth::user(),
             'breadcrumbs' => [
                 [
@@ -53,25 +73,28 @@ class ProfileController extends AdminController
                     "title" => "Личные данные"
                 ]
             ]
-        ]);
+        ]);    
     }
+    
+    
+    
+    
     public function update(Request $request){
 
         $data = $request->all();
         $currentUser = Auth::user();
 
-
-        if(isset($data['email']) && $currentUser->email == $data['email']){
-            $rules = [
-                'born_at' => ['required', 'date'],
-                'country' => ['required']
-            ];
-        }else{
-            $rules = [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'born_at' => ['required', 'date'],
-                'country' => ['required']
-            ];
+        $rules = [
+            'firstname' => ['required'],
+            'lastname' => ['required']
+        ];
+        
+        if(isset($data['email']) && !empty($data['email']) && $currentUser->email != $data['email']){
+            $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users'];
+        }
+        
+        if(isset($data['nickname']) && !empty($data['nickname']) && $currentUser->nickname != $data['nickname']){
+            $rules['nickname'] = ['required', 'string', 'max:255', 'unique:users'];
         }
 
 
@@ -82,15 +105,46 @@ class ProfileController extends AdminController
                         ->withErrors($validator)
                         ->withInput();
         }else{
-            if(isset($data['firstname'])){
+            if(isset($data['firstname']) && !empty($data['firstname'])){
                 $currentUser->firstname = $data['firstname'];
             }
-            if(isset($data['firstname'])){
+            if(isset($data['lastname']) && !empty($data['lastname'])){
                 $currentUser->lastname = $data['lastname'];
             }
-            if(isset($data['email'])){
+            if(isset($data['email']) && !empty($data['email'])){
                 $currentUser->email = $data['email'];
             }
+            if(isset($data['nickname']) && !empty($data['nickname'])){
+                $currentUser->nickname = $data['nickname'];
+            }
+ 
+            $currentUser->save();
+
+            return redirect("profile")->with([
+                'success' => 'Данные успешно обновлены'
+            ]);
+        }
+
+    }
+    
+    
+    public function personalUpdate(Request $request){
+        $data = $request->all();
+        $currentUser = Auth::user();
+        
+        
+        $rules = [
+            'born_at' => ['required', 'date'],
+            'country' => ['required']
+        ];
+        
+        $validator = Validator::make($data, $rules);
+        
+        if ($validator->fails()) {
+            return redirect('profile')
+                        ->withErrors($validator)
+                        ->withInput();
+        }else{
             if(isset($data['born_at'])){
                 $currentUser->born_at = $data['born_at'];
             }
@@ -129,12 +183,13 @@ class ProfileController extends AdminController
                 $fieldObj = Field::where("slug", $key)->first();
                 $fieldObj->setValue($field, $currentUser->id);
             }
-            return redirect("profile")->with([
+            return redirect("profile/personal")->with([
                 'success' => 'Данные успешно обновлены'
             ]);
         }
-
+        
     }
+    
     public function password(){
         return view('profile.password')->with([
             'pageTitle' => "Сменить пароль",
@@ -874,5 +929,20 @@ class ProfileController extends AdminController
         $post->like();
         return $post->likeCount;
     }
-
+    
+    public function addToFavourite(Request $request){
+        $user = User::where("id", $request->userid)->first();
+        if($user->isFavorited()){
+            $user->removeFavorite();
+        }else{
+            $user->addFavorite();
+        }
+        
+    }
+    
+    
+    public function removeFavourite(Request $request){
+        $user = User::where("id", $request->id)->first();
+        $user->removeFavorite();
+    }
 }

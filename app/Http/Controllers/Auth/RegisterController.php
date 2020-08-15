@@ -54,6 +54,9 @@ class RegisterController extends AuthController
         User::$rules['country'] = ['required'];
         User::$rules['captcha'] = ['required', 'captcha'];
         User::$rules['cellphone'] = [];
+        User::$rules['nickname'] = ['required', 'string', 'unique:users'];
+        
+        
         
         $attributes = request()->validate(User::$rules);
 
@@ -79,6 +82,7 @@ class RegisterController extends AuthController
         $user = User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
+            'nickname' => $data['nickname'],
             // 'cellphone' => $data['cellphone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -87,7 +91,9 @@ class RegisterController extends AuthController
         
         $user->lastname = $data['lastname'];
         $user->country = $data['country'];
-        $user->city = $data['city'];
+        if(isset($data['city'])){
+            $user->city = $data['city'];
+        }
         $user->born_at = $data['born_at'];
         $user->save();
         $user->attachRole("user");

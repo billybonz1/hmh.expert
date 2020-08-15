@@ -38,21 +38,27 @@
     flex-wrap: wrap;
     align-items: center;
     margin-top: 8px;
+    .like-post path:last-child{
+        fill: #fff;
+    }
+    svg{
+        display: block;
+        margin: 0 auto;
+    }
 }
 
 .pei-item{
     margin-right: 20px;
     color: #fff;
+    .tec-rating-block{
+        margin-top: 0;
+    }
 }
 .pei-item:last-child{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     line-height: 15px;
-    .tec-rating-block{
-        margin-top: 0;
-        margin-left: 15px;
-    }
 }
 
 .open-raspisanie{
@@ -252,4 +258,18 @@ label.popup-rating-label{
 
 .show-more-services{
     color: #fff;
+}
+
+
+.no-experts{
+    color: #fff;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.favourite-block{
+    margin-bottom: 25px;
 }

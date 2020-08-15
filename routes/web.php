@@ -57,7 +57,7 @@ Route::group(['namespace' => 'Website'], function () {
     Route::namespace('FAQ')->group(function () {
         Route::get('/faq', 'FAQController@index');
         Route::post('/faq/question/{faq}/{type?}', 'FAQController@incrementClick');
-    });
+    }); 
 
     // shop
     Route::group(['namespace' => 'Shop'], function () {
@@ -126,6 +126,10 @@ Route::post('/profile/avatar', 'ProfileController@avatarUpdate');
 Route::get('/profile/balance', 'ProfileController@balance')->name("profile.balance");
 Route::post('/profile/balance', 'ProfileController@updateBalance');
 Route::post('/profile/pay', 'ProfileController@pay');
+Route::get('/profile/personal', 'ProfileController@personal')->name("profile.personal");
+Route::post('/profile/personal', 'ProfileController@personalUpdate');
+
+
 
 Route::get('/profile/blog/create', 'ProfileController@postCreate')->name("profile.postCreate");
 Route::post('/profile/blog/create', 'ProfileController@postStore');
@@ -141,8 +145,8 @@ Route::post('/profile/services/update', 'ProfileController@serviceUpdate');
 Route::get('/profile/service/{id}', 'ProfileController@serviceshow');
 
 Route::post('/profile/likepost', 'ProfileController@likePost');
-
-
+Route::post('/profile/add-to-favourite', 'ProfileController@addToFavourite');
+Route::post('/profile/remove-favourite', 'ProfileController@removeFavourite');
 
 
 Route::get('/profile/orders', 'ProfileController@orders')->name("orders");
@@ -182,7 +186,7 @@ Route::get('/experts', 'ExpertsCategoryController@index');
 Route::get('/experts/{slug}', 'ExpertsCategoryController@category');
 Route::get('/experts/{slug2}/{slug}', 'ExpertsCategoryController@category');
 Route::post('/experts/addreview', 'ExpertsCategoryController@addReview')->middleware("auth");
-Route::get('/users/{slug}', 'UsersCategoryController@index');
+Route::get('/users/{nickname}', 'UsersCategoryController@index');
 Route::get('/favourite', 'FavouriteController@index')->name("favourite");
 
 

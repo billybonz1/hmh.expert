@@ -192,6 +192,7 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
             'Composer\\Semver\\' => 16,
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
+            'ChristianKuri\\LaravelFavorite\\' => 30,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -595,6 +596,10 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'Composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
+        ),
+        'ChristianKuri\\LaravelFavorite\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/christiankuri/laravel-favorite/src',
         ),
         'Carbon\\' => 
         array (
@@ -1028,6 +1033,10 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'ChristianKuri\\LaravelFavorite\\FavoriteServiceProvider' => __DIR__ . '/..' . '/christiankuri/laravel-favorite/src/FavoriteServiceProvider.php',
+        'ChristianKuri\\LaravelFavorite\\Models\\Favorite' => __DIR__ . '/..' . '/christiankuri/laravel-favorite/src/Models/Favorite.php',
+        'ChristianKuri\\LaravelFavorite\\Traits\\Favoriteability' => __DIR__ . '/..' . '/christiankuri/laravel-favorite/src/Traits/Favoriteability.php',
+        'ChristianKuri\\LaravelFavorite\\Traits\\Favoriteable' => __DIR__ . '/..' . '/christiankuri/laravel-favorite/src/Traits/Favoriteable.php',
         'Composer\\Autoload\\AutoloadGenerator' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/AutoloadGenerator.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/ClassLoader.php',
         'Composer\\Autoload\\ClassMapGenerator' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/ClassMapGenerator.php',

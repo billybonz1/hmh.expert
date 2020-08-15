@@ -49,6 +49,20 @@
             
             
             <label>
+                <div>Никнейм:</div>
+                <span style="position: relative;">
+                    <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}" required autofocus>
+                    <div></div>
+                    @error('nickname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </span>
+            </label>
+            
+            
+            <label>
                 <div>Дата рождения:</div>
                 <span style="position: relative;">
                     <input id="born_at" type="date" class="form-control @error('born_at') is-invalid @enderror" name="born_at" value="{{ old('born_at') }}" required autofocus>

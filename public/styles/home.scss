@@ -232,17 +232,25 @@ $bgmenu: #3c3c51;
     padding-bottom: 24px;
     padding-left: 25px;
     padding-right: 25px;
+    .pagination{
+        margin-top: 20px;
+    }
 }
 
 .top-experts-child{
     width: 50%;
     padding: 0 5px;
     margin-top: 10px;
+    position: relative;
+    &:hover{
+        z-index: 3;
+    }
 }
 
 .top-expert{
     display: flex;
     flex-wrap: wrap;
+    position: relative;
     &:hover{
         .tec-hover{
             opacity: 1;
@@ -372,6 +380,7 @@ $bgmenu: #3c3c51;
         font-weight: 300;
         line-height: 16px;
         margin-top: 16px;
+        min-height: 46px;
         max-height: 46px;
         overflow: hidden;
     }
@@ -449,6 +458,7 @@ $bgmenu: #3c3c51;
     line-height: 11px;
     letter-spacing: 0.25px;
     margin-top: 7px;
+        min-height: 11px;
 }
 
 

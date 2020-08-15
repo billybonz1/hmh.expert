@@ -503,29 +503,3 @@ p.blogs-post-price{
         }
     }
 }
-.like-post{
-    width: 21px;
-    path:first-child{
-        fill: transparent;
-    }
-    path:last-child{
-        fill: #fd4b4b;
-    }
-    &.liked{
-        path:first-child{
-            fill: #fd4b4b;
-        }
-    }
-}
-
-
-.like-attr{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    cursor: pointer;
-    svg{
-        margin-right: 5px;
-    }
-    font-size: 13px;
-}
