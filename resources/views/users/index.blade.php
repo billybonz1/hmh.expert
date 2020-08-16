@@ -1,8 +1,8 @@
 @extends('website.website')
 
 @section('content')
-    <div>
-		<div class="container">
+    <div class="inner">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="ui-block">
@@ -77,12 +77,12 @@
 								</div>
 							</div>
 							<div class="top-header-author">
-								<a href="02-ProfilePage.html" class="author-thumb">
-									<img src="/img/wall/img/author-main1.jpg" alt="author">
+								<a href="/users/{{ $user->nickname }}" class="author-thumb">
+									<img src="{{ $user->avatar() }}" alt="author">
 								</a>
 								<div class="author-content">
-									<a href="02-ProfilePage.html" class="h4 author-name">Екатерина Мэйри</a>
-									<div class="country">Санкт-Петербург, РФ</div>
+									<a href="/users/{{ $user->nickname }}" class="h4 author-name">Екатерина Мэйри</a>
+									<!--<div class="country">Санкт-Петербург, РФ</div>-->
 								</div>
 							</div>
 						</div>
@@ -92,7 +92,7 @@
 		</div>
 		
 		<!-- ... end Top Header-Profile -->
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 		
 				<!-- Main Content -->
@@ -106,27 +106,25 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
-										<form>
+										<form action="/users/addpost" method="post">
+											@csrf
 											<div class="author-thumb">
-												<img src="/img/wall/img/author-page.jpg" alt="author">
+												<img src="{{ $user->avatar() }}" alt="author">
 											</div>
 											<div class="form-group with-icon label-floating is-empty">
 												<textarea class="form-control" placeholder="Написать, сообщение..."></textarea>
 											<span class="material-input"></span></div>
 											<div class="add-options-message">
-												<a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+												<input accept="image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska" multiple="" type="file" />
+												<a href="#" class="options-message wall-post-add-photo" data-tooltip="Добавить фото" data-placement="top">
 													<svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="#olymp-camera-icon"></use></svg>
 												</a>
-												<a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="TAG YOUR FRIENDS">
-													<svg class="olymp-computer-icon"><use xlink:href="#olymp-computer-icon"></use></svg>
-												</a>
 							
-												<a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD LOCATION">
-													<svg class="olymp-small-pin-icon"><use xlink:href="#olymp-small-pin-icon"></use></svg>
-												</a>
+												<!--<a href="#" class="options-message" data-tooltip="tooltip" data-placement="top" data-original-title="ADD LOCATION">-->
+												<!--	<svg class="olymp-small-pin-icon"><use xlink:href="#olymp-small-pin-icon"></use></svg>-->
+												<!--</a>-->
 							
 												<button class="btn btn-primary btn-md-2">Отправить сообщение</button>
-												<button class="btn btn-md-2 btn-border-think btn-transparent c-grey">Предпросмотр</button>
 							
 											</div>
 							
@@ -1562,6 +1560,38 @@
 
 @section('head')
     <link rel="stylesheet" href="/styles/users.css" />
+    <style>
+    	.container-fluid{
+    		width: 100%;
+    	}
+    	
+    </style>
+@endsection
+
+
+@section('scripts')
+	<script>
+		document.querySelector(".wall-post-add-photo").addEventListener("click", function(e){
+			e.preventDefault();
+			this.previousElementSibling.click();
+		});
+		
+		document.querySelector("#newsfeed-items-grid form").addEventListener("submit", function(e){
+			e.preventDefault();
+			var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.getAttribute("action"));
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+                else {
+                    console.log('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send(formData); 
+		});
+	</script>
 @endsection
 
 

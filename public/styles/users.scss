@@ -1992,14 +1992,16 @@ h3 {
     border: 6px solid #fff;
     margin: 0 auto;
     overflow: hidden;
-    width: 132px;
-    height: 132px;
-    background-color: #fdfbee
+    width: 112px;
+    height: 112px;
+    background-color: #fdfbee;
 }
 
 .top-header-author .author-thumb img {
-    border-radius: 0;
-    display: block
+    border-radius: 100%;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .top-header-author .author-name {
@@ -2766,7 +2768,7 @@ img {
     background-color: #fff;
     border-radius: 5px;
     border: 1px solid #e6ecf5;
-    margin-bottom: 15px
+    margin-bottom: 30px;
 }
 
 .ui-block .ui-block-title:last-child {
@@ -3938,8 +3940,11 @@ select.form-control {
 
 .add-options-message {
     padding: 20px 25px;
-    float: left;
-    width: 100%
+    // float: left;
+    width: 100%;
+    input{
+        display: none;
+    }
 }
 
 .add-options-message button {
@@ -5013,10 +5018,6 @@ body:before {
     .video-thumb {
         float: none
     }
-}
-
-.news-feed-form {
-    overflow: hidden
 }
 
 .news-feed-form .form-group.with-icon::after {
@@ -6342,7 +6343,8 @@ body:before {
     border-radius: 100%;
     overflow: hidden;
     max-width: unset;
-    display: block
+    display: block;
+    width: 40px;
 }
 
 .author-thumb .icon-status {
@@ -6590,3 +6592,5 @@ body:before {
 .ml-auto, .mx-auto {
     margin-left: auto!important;
 }
+
+

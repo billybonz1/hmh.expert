@@ -112,10 +112,11 @@
         <a href="#" class="ms-icon-shop">
             <div><div>Магазин</div></div>
         </a>
-        <a href="/favourite" class="ms-icon-favourite">
-            <div><div>Избранное</div></div>
-        </a>
         @isset($currentUser)
+            <a href="/favourite" class="ms-icon-favourite">
+                <div><div>Избранное</div></div>
+            </a>
+        
             <a href="/profile/balance" class="ms-icon-coins">
                 <div><div>Пополнить сейчас</div></div>
             </a>

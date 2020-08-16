@@ -187,6 +187,8 @@ Route::get('/experts/{slug}', 'ExpertsCategoryController@category');
 Route::get('/experts/{slug2}/{slug}', 'ExpertsCategoryController@category');
 Route::post('/experts/addreview', 'ExpertsCategoryController@addReview')->middleware("auth");
 Route::get('/users/{nickname}', 'UsersCategoryController@index');
+Route::post('/users/addpost', 'UsersCategoryController@addPost');
+
 Route::get('/favourite', 'FavouriteController@index')->name("favourite");
 
 

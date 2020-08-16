@@ -886,6 +886,7 @@ class ComposerStaticInit4f61e24eea28ba5ce7db57899d1db51f
         'App\\ServiceOrder' => __DIR__ . '/../..' . '/app/ServiceOrder.php',
         'App\\ServiceReason' => __DIR__ . '/../..' . '/app/ServiceReason.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\WallPost' => __DIR__ . '/../..' . '/app/WallPost.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'BannersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/BannersTableSeeder.php',

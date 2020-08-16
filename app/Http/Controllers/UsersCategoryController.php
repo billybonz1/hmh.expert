@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\Validator;
 
 use App\User;
 
+use Illuminate\Http\Request;
+
 class UsersCategoryController extends Controller
 {
-
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    
     public function index($nickname){
         $user = User::where("nickname", $nickname)->first();
         if($user){
@@ -21,5 +29,10 @@ class UsersCategoryController extends Controller
             abort(404);
         }
     }
-
+    
+    
+    public function addPost(Request $request){
+        return 4;
+    }
+    
 }
