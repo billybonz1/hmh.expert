@@ -112,7 +112,7 @@
         <a href="#" class="ms-icon-shop">
             <div><div>Магазин</div></div>
         </a>
-        @isset($currentUser) 
+        @isset($currentUser)
             <a href="/favourite" class="ms-icon-favourite">
                 <div><div>Избранное</div></div>
             </a>
