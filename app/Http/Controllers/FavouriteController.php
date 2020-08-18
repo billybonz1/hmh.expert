@@ -7,6 +7,10 @@ use App\User;
 
 class FavouriteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $experts = [];
         $data = Auth::user()->allFavorites()->paginate(8);

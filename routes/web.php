@@ -182,7 +182,7 @@ Route::get('/calendar', 'CalendarController@index')->name('calendar');
 | Dynamic Pages - up to 3 slugs
 |------------------------------------------
 */
-Route::get('/experts', 'ExpertsCategoryController@index');
+Route::get('/experts', 'ExpertsCategoryController@index')->name("experts");
 Route::get('/experts/{slug}', 'ExpertsCategoryController@category');
 Route::get('/experts/{slug2}/{slug}', 'ExpertsCategoryController@category');
 Route::post('/experts/addreview', 'ExpertsCategoryController@addReview')->middleware("auth");

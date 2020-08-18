@@ -158,7 +158,7 @@
         <a href="#" class="ms-icon-support">
             <div><div>Центр поддержки клиентов</div></div>
         </a>
-        <a href="#" class="ms-icon-how">
+        <a href="/beexpert" class="ms-icon-how">
             <div><div>Как стать экспертом</div></div>
         </a>
         

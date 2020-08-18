@@ -27,8 +27,11 @@
     h1{
         font-size: 30px;
         font-weight: 500;
-        color: #fff;
         margin-right: 25px;
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
     }
 }
 

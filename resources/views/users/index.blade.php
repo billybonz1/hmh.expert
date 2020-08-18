@@ -81,7 +81,7 @@
 									<img src="{{ $user->avatar() }}" alt="author">
 								</a>
 								<div class="author-content">
-									<a href="/users/{{ $user->nickname }}" class="h4 author-name">Екатерина Мэйри</a>
+									<a href="/users/{{ $user->nickname }}" class="h4 author-name">{{ $user->namef() }}</a>
 									<!--<div class="country">Санкт-Петербург, РФ</div>-->
 								</div>
 							</div>
@@ -112,7 +112,7 @@
 												<img src="{{ $user->avatar() }}" alt="author">
 											</div>
 											<div class="form-group with-icon label-floating is-empty">
-												<textarea class="form-control" placeholder="Написать, сообщение..."></textarea>
+												<textarea class="form-control" name="text" placeholder="Написать, сообщение..."></textarea>
 											<span class="material-input"></span></div>
 											<div class="add-options-message">
 												<input accept="image/*,image/heif,image/heic,video/*,video/mp4,video/x-m4v,video/x-matroska" multiple="" type="file" />
@@ -127,7 +127,7 @@
 												<button class="btn btn-primary btn-md-2">Отправить сообщение</button>
 							
 											</div>
-							
+											<input type="hidden" name="type" value="1" />
 										</form>
 									</div>
 							
@@ -135,147 +135,11 @@
 							</div>
 							
 						</div>
-						<div class="ui-block">
-							<!-- Post -->
-							
-							<article class="hentry post">
-							
-									<div class="post__author author vcard inline-items">
-										<img src="/img/wall/img/author-page.jpg" alt="author">
-							
-										<div class="author-date">
-											<a class="h6 post__author-name fn" href="02-ProfilePage.html">Екатерина Мейри</a>
-											<div class="post__date">
-												<time class="published" datetime="2020-03-24T18:18">
-													19 часов спустя
-												</time>
-											</div>
-										</div>
-							
-										<div class="more">
-											<svg class="olymp-three-dots-icon">
-												<use xlink:href="#olymp-three-dots-icon"></use>
-											</svg>
-											<ul class="more-dropdown">
-												<li>
-													<a href="#">Редактировать профиль</a>
-												</li>
-												<li>
-													<a href="#">Удалить сообщение</a>
-												</li>
-												<li>
-													<a href="#">Выключить все уведомления</a>
-												</li>
-												<li>
-													<a href="#">Сохранить в закладки</a>
-												</li>
-											</ul>
-										</div>
-							
-									</div>
-							
-									<p> Желание быть болью в руках купидона было подвергнуто критике в удовольствие от Duis et dolore magna не избежать!
-										производители. Excepteur не исключены cupidatat, чернокожие виноваты в том, что эти службы потерпели неудачу
-										успокаивает душу, то есть от ваших неприятностей. Но я должен объяснить вам, как все это ошибочное представление о удовольствии
-										прокуратура и боль.
-									</p>
-							
-									<div class="post-additional-info inline-items">
-							
-										<a href="#" class="post-add-icon inline-items">
-											<svg class="olymp-heart-icon">
-												<use xlink:href="#olymp-heart-icon"></use>
-											</svg>
-											<span>8</span>
-										</a>
-							
-										<ul class="friends-harmonic">
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic7.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic8.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic9.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic10.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic11.jpg" alt="friend">
-												</a>
-											</li>
-										</ul>
-							
-										<div class="names-people-likes">
-											<a href="#">Ирина</a>, <a href="#">Роберт</a> также
-											<br>6 и более, понравилось это
-										</div>
-							
-							
-										<div class="comments-shared">
-											<a href="#" class="post-add-icon inline-items">
-												<svg class="olymp-speech-balloon-icon">
-													<use xlink:href="#olymp-speech-balloon-icon"></use>
-												</svg>
-												<span>17</span>
-											</a>
-							
-											<a href="#" class="post-add-icon inline-items">
-												<svg class="olymp-share-icon">
-													<use xlink:href="#olymp-share-icon"></use>
-												</svg>
-												<span>24</span>
-											</a>
-										</div>
-							
-							
-									</div>
-							
-									<div class="control-block-button post-control-button">
-							
-										<a href="#" class="btn btn-control featured-post">
-											<svg class="olymp-trophy-icon">
-												<use xlink:href="#olymp-trophy-icon"></use>
-											</svg>
-										<div class="ripple-container"></div></a>
-							
-										<a href="#" class="btn btn-control">
-											<svg class="olymp-like-post-icon">
-												<use xlink:href="#olymp-like-post-icon"></use>
-											</svg>
-										</a>
-							
-										<a href="#" class="btn btn-control">
-											<svg class="olymp-comments-post-icon">
-												<use xlink:href="#olymp-comments-post-icon"></use>
-											</svg>
-										</a>
-							
-										<a href="#" class="btn btn-control">
-											<svg class="olymp-share-icon">
-												<use xlink:href="#olymp-share-icon"></use>
-											</svg>
-										</a>
-							
-									</div>
-							
-								</article>
-							
-						</div>
+						
+						<?php /*
 						<div class="ui-block">
 							
-							<!-- Post -->
+							 Post 
 							
 							<article class="hentry post video">
 							
@@ -418,9 +282,9 @@
 							
 								</article>
 							
-							<!-- .. end Post -->				</div>
+						</div>
 						<div class="ui-block">
-							<!-- Post -->
+							 Post 
 							
 							<article class="hentry post">
 							
@@ -547,8 +411,8 @@
 							
 							</article>
 							
-							<!-- .. end Post -->					
-							<!-- Comments -->
+							 .. end Post 
+							 Comments 
 							
 							<ul class="comments-list">
 								<li class="comment-item">
@@ -718,10 +582,10 @@
 								</li>
 							</ul>
 							
-							<!-- ... end Comments -->
+							 ... end Comments 
 							<a href="#" class="more-comments">Просмотреть больше коментариев <span>+</span></a>
 							
-							<!-- Comment Form  -->
+							 Comment Form  
 							
 							<form class="comment-form inline-items">
 							
@@ -746,9 +610,9 @@
 							
 							</form>
 							
-							<!-- ... end Comment Form  -->				</div>
+							 ... end Comment Form  -->				</div>
 						<div class="ui-block">
-							<!-- Post -->
+							 Post 
 							
 							<article class="hentry post has-post-thumbnail shared-photo">
 							
@@ -895,7 +759,8 @@
 							
 								</article>
 							
-							<!-- .. end Post -->				</div>
+							 .. end Post -->				</div>
+						*/ ?>
 					</div>
 		
 					<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
@@ -1583,13 +1448,131 @@
             xhr.open('POST', this.getAttribute("action"));
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText);
+                    var data = JSON.parse(xhr.responseText);
+                    document.querySelector("#newsfeed-items-grid").innerHTML += `
+                    	<div class="ui-block">
+				
+							<article class="hentry post">
+							
+									<div class="post__author author vcard inline-items">
+										<img src="`+document.querySelector(".author-thumb img").getAttribute("src")+`" alt="author">
+							
+										<div class="author-date">
+											<a class="h6 post__author-name fn" href="`+document.querySelector(".author-name").getAttribute("href")+`">`+document.querySelector(".author-name").innerHTML+`</a>
+											<div class="post__date">
+												<time class="published" datetime="2020-03-24T18:18">
+													Только что
+												</time>
+											</div>
+										</div>
+							
+										<div class="more">
+											<svg class="olymp-three-dots-icon">
+												<use xlink:href="#olymp-three-dots-icon"></use>
+											</svg>
+											<ul class="more-dropdown">
+												<li>
+													<a href="#">Редактировать профиль</a>
+												</li>
+												<li>
+													<a href="#">Удалить сообщение</a>
+												</li>
+												<li>
+													<a href="#">Выключить все уведомления</a>
+												</li>
+												<li>
+													<a href="#">Сохранить в закладки</a>
+												</li>
+											</ul>
+										</div>
+							
+									</div>
+							
+									<p>`+data.text+`</p>
+							
+									<div class="post-additional-info inline-items">
+							
+										<a href="#" class="post-add-icon inline-items like-wall-post">
+											<svg class="olymp-heart-icon">
+												<use xlink:href="#olymp-heart-icon"></use>
+											</svg>
+											<span>0</span>
+										</a>
+							
+										<ul class="friends-harmonic">
+											<li>
+												<a href="#">
+													<img src="/img/wall/img/friend-harmonic7.jpg" alt="friend">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="/img/wall/img/friend-harmonic8.jpg" alt="friend">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="/img/wall/img/friend-harmonic9.jpg" alt="friend">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="/img/wall/img/friend-harmonic10.jpg" alt="friend">
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<img src="/img/wall/img/friend-harmonic11.jpg" alt="friend">
+												</a>
+											</li>
+										</ul>
+							
+										<div class="names-people-likes">
+											<a href="#">Ирина</a>, <a href="#">Роберт</a> также
+											<br>6 и более, понравилось это
+										</div>
+							
+							
+										<div class="comments-shared">
+											<a href="#" class="post-add-icon inline-items">
+												<svg class="olymp-speech-balloon-icon">
+													<use xlink:href="#olymp-speech-balloon-icon"></use>
+												</svg>
+												<span>0</span>
+											</a>
+							
+											<a href="#" class="post-add-icon inline-items">
+												<svg class="olymp-share-icon">
+													<use xlink:href="#olymp-share-icon"></use>
+												</svg>
+												<span>0</span>
+											</a>
+										</div>
+							
+							
+									</div>
+							
+				
+								</article>
+							
+						</div>
+                    `;
                 }
                 else {
                     console.log('Request failed.  Returned status of ' + xhr.status);
                 }
             };
             xhr.send(formData); 
+		});
+		
+		
+		document.addEventListener("click", function(e){
+			e.path.forEach(function(el){
+				if(el.classList && el.classList.contains('like-wall-post')){
+					e.preventDefault();
+					el.querySelector("span").innerHTML = 1;
+				}
+			});
 		});
 	</script>
 @endsection

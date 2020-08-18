@@ -32,7 +32,7 @@ class UsersCategoryController extends Controller
     
     
     public function addPost(Request $request){
-        return 4;
+        return json_encode($request->all());
     }
     
 }

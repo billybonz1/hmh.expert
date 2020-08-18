@@ -6,11 +6,13 @@
 
             <div class="top-chat-block">
                 <div class="tcp-detail-info">
-                    <div class="tcp-detail-info-img" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
+                    <a href="/users/{{$user->nickname}}" class="tcp-detail-info-img" style="background-image: url(/public/img/expert-photo-mini.png);"></a>
                     <div>
                         <div class="pe-author">
                             <h1>
-                                {{ $user->namef() }}
+                                <a href="/users/{{$user->nickname}}">
+                                    {{ $user->namef() }}
+                                </a>
                             </h1>
                             <div class="user-status st-grey active">Нет в&nbsp;сети</div>
                             <div class="user-status now-online">В&nbsp;сети</div>
@@ -189,12 +191,7 @@
     <!--            </div>-->
     <!--        </div>-->
 
-    <!--        @if($currentUser && $currentUser->hasRole('expert'))-->
-    <!--            <div class="broadcast-users-online">-->
-    <!--                <h3>Пользователей онлайн: <span>0</span></h3>-->
-    <!--                <div></div>-->
-    <!--            </div>-->
-    <!--        @endif-->
+    <!--        
     <!--    </div>-->
     <!--</div>-->
     <div class="expert-detail-second">
@@ -349,7 +346,16 @@
                         </div>
                     </div>
                 @endif
+                
+                
+                
             </div>
+            @if($currentUser && $currentUser->hasRole('expert'))
+                <div class="broadcast-users-online">
+                    <h3>Пользователей онлайн: <span>0</span></h3>
+                    <div></div>
+                </div>
+            @endif
         </div>
     </div>
 

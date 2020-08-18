@@ -4,23 +4,23 @@
 <footer>
     <div class="inner">
         <div class="mt-social-block">
-            <a href="#">
+            <a href="/terms_of_use">
                 <span>ПС</span>
                 <div><div>Пользовательское соглашение</div></div>
             </a>
-            <a href="#">
+            <a href="/privacy-policy">
                 <span>ПК</span>
                 <div><div>
                     Политика конфиденциальности
                 </div></div>
             </a>
-            <a href="#">
+            <a href="/become_a_partner">
                 <span>СП</span>
                 <div><div>
                     Стать партнером
                 </div></div>
             </a>
-            <a href="#">
+            <a href="/quality_assurance">
                 <span>ГК</span>
                 <div><div>
                     Гарантия качества
@@ -546,7 +546,7 @@
             var width = parseInt(connection.videosContainer.clientWidth);
             var mediaElement = getHTMLMediaElement(video, {
                 title: event.userid,
-                // buttons: ['full-screen'],
+                buttons: ['full-screen'],
                 width: width,
                 showOnMouseEnter: false
             });

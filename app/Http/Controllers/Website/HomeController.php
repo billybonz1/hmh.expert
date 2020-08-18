@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Website;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\ProductCategory;
+// use App\User;
+use App\Models\Role;
 
 class HomeController extends WebsiteController
 {
@@ -15,9 +17,13 @@ class HomeController extends WebsiteController
     {
         $this->showPageBanner = true;
 
-        $news = News::whereHas('photos')->with('photos')->isActiveDates()->orderBy('active_from', 'DESC')->get();
-
-        return $this->view('home')
-            ->with('news', $news);
+        // $news = News::whereHas('photos')->with('photos')->isActiveDates()->orderBy('active_from', 'DESC')->get();
+        
+        $role = Role::where("slug", "expert")->first();
+        $experts = $role->users()->get();
+        
+        return $this->view('home')->with([
+            "experts" => $experts  
+        ]);
     }
 }
