@@ -226,6 +226,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function posts(){
         return $this->hasMany('App\Post', 'author_id','id');
     }
+    
+    
+    public function wallposts(){
+        return $this->hasMany('App\WallPost', 'author_id','id');
+    }
+    
+    
 
     public function services(){
         return $this->hasMany('App\Models\Service', 'expert_id','id')->where("visible", "1");

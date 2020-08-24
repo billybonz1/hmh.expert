@@ -3142,7 +3142,7 @@ button:hover {
     stroke: inherit;
     transition: all .3s ease;
     bottom: 10px;
-    right: 85px;
+    right: 111px;
     cursor: pointer;
     box-shadow: 0 0 10px 0 rgba(63, 66, 87, .4);
     border-radius: 100%;
@@ -4596,6 +4596,14 @@ body:before {
 
 .post-add-icon:hover span {
     color: #ff5e3a
+}
+
+.post-add-icon.liked{
+    fill: #ff5e3a;
+    color: #ff5e3a;
+    span{
+        color: #ff5e3a;
+    }
 }
 
 .post-add-icon:active,

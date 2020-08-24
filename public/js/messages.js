@@ -551,12 +551,13 @@ if(groupMessageSendForm){
 }
 
 
-
-document.querySelectorAll(".tcp-chat-messages").forEach(function(chat){
-    var simpleBarGroup = new SimpleBar(chat);
-    simpleBarGroup.getScrollElement().scrollTop = 10000;
-});
-
+var tcpChatMsgs = document.querySelectorAll(".tcp-chat-messages");
+if(tcpChatMsgs){
+    tcpChatMsgs.forEach(function(chat){
+        var simpleBarGroup = new SimpleBar(chat);
+        simpleBarGroup.getScrollElement().scrollTop = 10000;
+    });
+}
 
 
 

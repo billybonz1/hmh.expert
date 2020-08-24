@@ -17,6 +17,7 @@ class CreateWallPostsTable extends Migration
             $table->id();
             $table->string("type");
             $table->string("text");
+            $table->string("author_id");
             $table->timestamps();
         });
     }

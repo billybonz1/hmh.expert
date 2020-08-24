@@ -182,12 +182,20 @@ Route::get('/calendar', 'CalendarController@index')->name('calendar');
 | Dynamic Pages - up to 3 slugs
 |------------------------------------------
 */
-Route::get('/experts', 'ExpertsCategoryController@index')->name("experts");
+Route::get('/experts', 'ExpertsCategoryController@index')->name("");
 Route::get('/experts/{slug}', 'ExpertsCategoryController@category');
 Route::get('/experts/{slug2}/{slug}', 'ExpertsCategoryController@category');
 Route::post('/experts/addreview', 'ExpertsCategoryController@addReview')->middleware("auth");
-Route::get('/users/{nickname}', 'UsersCategoryController@index');
-Route::post('/users/addpost', 'UsersCategoryController@addPost');
+Route::get('/users/{nickname}', 'UsersCategoryController@index')->name("users_wall");
+Route::post('/users/addpost', 'UsersCategoryController@addPost')->middleware("auth");
+Route::get('/users/{nickname}/photos', 'UsersCategoryController@photos');
+Route::get('/users/{nickname}/videos', 'UsersCategoryController@videos');
+    
+Route::post('/users/{nickname}/{wallpost}/like', 'UsersCategoryController@likePost')->middleware("auth")->name("like_wall_post");
+
+
+
+
 
 Route::get('/favourite', 'FavouriteController@index')->name("favourite");
 

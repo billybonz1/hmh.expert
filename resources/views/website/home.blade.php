@@ -12,7 +12,7 @@
                 <div class="top-experts">
                     <div class="top-experts-child top-experts-title">
                         <h3>Топ эксперты</h3>
-                        <a href="{{ route('experts') }}">Все эксперты</a>
+                        <a href="/experts">Все эксперты</a>
                     </div>
                     
                     @foreach($experts as $expert)

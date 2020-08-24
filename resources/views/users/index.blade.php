@@ -2,94 +2,7 @@
 
 @section('content')
     <div class="inner">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<div class="ui-block">
-						<div class="top-header">
-							<div class="top-header-thumb">
-								<img src="/img/wall/img/top-header1.jpg" alt="nature">
-							</div>
-							<div class="profile-section">
-								<div class="row">
-									<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
-										<ul class="profile-menu">
-											<li>
-												<a href="02-ProfilePage.html" class="active">Моя линия жизни</a>
-											</li>
-											<li>
-												<a href="05-ProfilePage-About.html">Мой гороскоп</a>
-											</li>
-											<li>
-												<a href="06-ProfilePage.html">Мои Эксперты</a>
-											</li>
-										</ul>
-									</div>
-									<div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
-										<ul class="profile-menu">
-											<li>
-												<a href="07-ProfilePage-Photos.html">Фото</a>
-											</li>
-											<li>
-												<a href="09-ProfilePage-Videos.html">Видео</a>
-											</li>
-											<li>
-												<div class="more">
-													<svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
-													<ul class="more-dropdown more-with-triangle">
-														<li>
-															<a href="#">Сообщить о профиле</a>
-														</li>
-														<li>
-															<a href="#">Заблокировать профиль</a>
-														</li>
-													</ul>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-		
-								<div class="control-block-button">
-									<a href="35-YourAccount-FriendsRequests.html" class="btn btn-control bg-blue">
-										<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-									</a>
-		
-									<a href="#" class="btn btn-control bg-purple">
-										<svg class="olymp-chat---messages-icon"><use xlink:href="#olymp-chat---messages-icon"></use></svg>
-									</a>
-		
-									<div class="btn btn-control bg-primary more">
-										<svg class="olymp-settings-icon"><use xlink:href="#olymp-settings-icon"></use></svg>
-		
-										<ul class="more-dropdown more-with-triangle triangle-bottom-right">
-											<li>
-												<a href="#" data-toggle="modal" data-target="#update-header-photo">Обновить Фото Профиля</a>
-											</li>
-											<li>
-												<a href="#" data-toggle="modal" data-target="#update-header-photo">Обновить Обложку страницы</a>
-											</li>
-											<li>
-												<a href="29-YourAccount-AccountSettings.html">Настройки аккаунта</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="top-header-author">
-								<a href="/users/{{ $user->nickname }}" class="author-thumb">
-									<img src="{{ $user->avatar() }}" alt="author">
-								</a>
-								<div class="author-content">
-									<a href="/users/{{ $user->nickname }}" class="h4 author-name">{{ $user->namef() }}</a>
-									<!--<div class="country">Санкт-Петербург, РФ</div>-->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		@include('inc.users-menu')
 		
 		<!-- ... end Top Header-Profile -->
 		<div class="container-fluid">
@@ -99,14 +12,14 @@
 		
 				<div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 					<div id="newsfeed-items-grid">
+						@if(isset($currentUser) && $currentUser->id == $user->id)
 						<div class="ui-block">
 							
 							<div class="news-feed-form">
-							
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
-										<form action="/users/addpost" method="post">
+									<div class="tab-pane active" role="tabpanel" aria-expanded="true">
+										<form action="/users/addpost" method="post" id="newsfeed-items-grid-form">
 											@csrf
 											<div class="author-thumb">
 												<img src="{{ $user->avatar() }}" alt="author">
@@ -127,19 +40,114 @@
 												<button class="btn btn-primary btn-md-2">Отправить сообщение</button>
 							
 											</div>
-											<input type="hidden" name="type" value="1" />
+											<input type="hidden" name="type" value="text" />
+											<input type="hidden" name="author_id" value="{{ $user->id }}">
 										</form>
 									</div>
-							
 								</div>
 							</div>
 							
 						</div>
+						@endif
+						
+						
+						
+						@if(count($user->wallposts) > 0)
+							@foreach($wallposts as $wallpost)
+								
+								<div class="ui-block">
+							
+									 <!--Post -->
+									<article class="hentry post video">
+									
+											<div class="post__author author vcard inline-items">
+												<img src="{{ $wallpost->author->avatar() }}" alt="author">
+									
+												<div class="author-date">
+													<a class="h6 post__author-name fn" href="02-ProfilePage.html">{{ $wallpost->author->namef() }}</a>
+													<div class="post__date">
+														<time class="published" datetime="2020-03-24T18:18">
+															7 часов спустя
+														</time>
+													</div>
+												</div>
+									
+												<div class="more">
+													<svg class="olymp-three-dots-icon">
+														<use xlink:href="#olymp-three-dots-icon"></use>
+													</svg>
+													<ul class="more-dropdown">
+														<li>
+															<a href="#">Редактировать новость</a>
+														</li>
+														<li>
+															<a href="#">Удалить новость</a>
+														</li>
+													</ul>
+												</div>
+									
+											</div>
+									
+											<p>{{ $wallpost->text }}</p>
+									
+									
+											<div class="post-additional-info inline-items">
+												
+												<a href="{{ route('like_wall_post', ['nickname'=>$wallpost->author->nickname, 'wallpost' => $wallpost->id]) }}" class="post-add-icon inline-items like-wall-post @if($wallpost->liked()) liked @endif">
+													<svg class="olymp-heart-icon">
+														<use xlink:href="#olymp-heart-icon"></use>
+													</svg>
+													<span>{{ $wallpost->likeCount }}</span>
+												</a>
+												@if(!empty($wallpost->likeCount))
+												
+													
+													{!! $wallpost->likeHTML() !!}
+													
+													
+												@endif
+									
+												<div class="comments-shared">
+													<a href="#" class="post-add-icon inline-items">
+														<svg class="olymp-speech-balloon-icon">
+															<use xlink:href="#olymp-speech-balloon-icon"></use>
+														</svg>
+														<span>1</span>
+													</a>
+									
+													<a href="#" class="post-add-icon inline-items">
+														<svg class="olymp-share-icon">
+															<use xlink:href="#olymp-share-icon"></use>
+														</svg>
+														<span>16</span>
+													</a>
+												</div>
+									
+									
+											</div>
+									
+										</article>
+									
+								</div>
+							@endforeach
+						@else
+							@if(isset($currentUser) && $currentUser->id == $user->id)
+								<div class="ui-block no-wall-posts">
+									<div style="padding: 20px 0; text-align: center;">У вас пока нет записей на стене</div>
+								</div>
+							@else
+								<div class="ui-block no-wall-posts">
+									<div style="padding: 20px 0; text-align: center;">У пользователя пока нет записей на стене</div>
+								</div>
+							@endif
+						@endif
+						
 						
 						<?php /*
+					
 						<div class="ui-block">
 							
-							 Post 
+							 <!--Post -->
 							
 							<article class="hentry post video">
 							
@@ -284,7 +292,7 @@
 							
 						</div>
 						<div class="ui-block">
-							 Post 
+							 <!--Post -->
 							
 							<article class="hentry post">
 							
@@ -411,8 +419,8 @@
 							
 							</article>
 							
-							 .. end Post 
-							 Comments 
+							 <!--.. end Post -->
+							 <!--Comments -->
 							
 							<ul class="comments-list">
 								<li class="comment-item">
@@ -582,10 +590,10 @@
 								</li>
 							</ul>
 							
-							 ... end Comments 
+							 <!--... end Comments -->
 							<a href="#" class="more-comments">Просмотреть больше коментариев <span>+</span></a>
 							
-							 Comment Form  
+							 <!--Comment Form  -->
 							
 							<form class="comment-form inline-items">
 							
@@ -610,9 +618,10 @@
 							
 							</form>
 							
-							 ... end Comment Form  -->				</div>
+							 <!--... end Comment Form		-->
+						</div>
 						<div class="ui-block">
-							 Post 
+							 <!--Post -->
 							
 							<article class="hentry post has-post-thumbnail shared-photo">
 							
@@ -759,15 +768,16 @@
 							
 								</article>
 							
-							 .. end Post -->				</div>
-						*/ ?>
+							 <!--.. end Post				-->
+							 </div>
+						*/	 ?>
 					</div>
 		
-					<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">
-						<svg class="olymp-three-dots-icon">
-							<use xlink:href="#olymp-three-dots-icon"></use>
-						</svg>
-					</a>
+					<!--<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid">-->
+					<!--	<svg class="olymp-three-dots-icon">-->
+					<!--		<use xlink:href="#olymp-three-dots-icon"></use>-->
+					<!--	</svg>-->
+					<!--</a>-->
 				</div>
 		
 				<!-- ... end Main Content -->
@@ -1435,146 +1445,7 @@
 
 
 @section('scripts')
-	<script>
-		document.querySelector(".wall-post-add-photo").addEventListener("click", function(e){
-			e.preventDefault();
-			this.previousElementSibling.click();
-		});
-		
-		document.querySelector("#newsfeed-items-grid form").addEventListener("submit", function(e){
-			e.preventDefault();
-			var formData = new FormData(this);
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', this.getAttribute("action"));
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var data = JSON.parse(xhr.responseText);
-                    document.querySelector("#newsfeed-items-grid").innerHTML += `
-                    	<div class="ui-block">
-				
-							<article class="hentry post">
-							
-									<div class="post__author author vcard inline-items">
-										<img src="`+document.querySelector(".author-thumb img").getAttribute("src")+`" alt="author">
-							
-										<div class="author-date">
-											<a class="h6 post__author-name fn" href="`+document.querySelector(".author-name").getAttribute("href")+`">`+document.querySelector(".author-name").innerHTML+`</a>
-											<div class="post__date">
-												<time class="published" datetime="2020-03-24T18:18">
-													Только что
-												</time>
-											</div>
-										</div>
-							
-										<div class="more">
-											<svg class="olymp-three-dots-icon">
-												<use xlink:href="#olymp-three-dots-icon"></use>
-											</svg>
-											<ul class="more-dropdown">
-												<li>
-													<a href="#">Редактировать профиль</a>
-												</li>
-												<li>
-													<a href="#">Удалить сообщение</a>
-												</li>
-												<li>
-													<a href="#">Выключить все уведомления</a>
-												</li>
-												<li>
-													<a href="#">Сохранить в закладки</a>
-												</li>
-											</ul>
-										</div>
-							
-									</div>
-							
-									<p>`+data.text+`</p>
-							
-									<div class="post-additional-info inline-items">
-							
-										<a href="#" class="post-add-icon inline-items like-wall-post">
-											<svg class="olymp-heart-icon">
-												<use xlink:href="#olymp-heart-icon"></use>
-											</svg>
-											<span>0</span>
-										</a>
-							
-										<ul class="friends-harmonic">
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic7.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic8.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic9.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic10.jpg" alt="friend">
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<img src="/img/wall/img/friend-harmonic11.jpg" alt="friend">
-												</a>
-											</li>
-										</ul>
-							
-										<div class="names-people-likes">
-											<a href="#">Ирина</a>, <a href="#">Роберт</a> также
-											<br>6 и более, понравилось это
-										</div>
-							
-							
-										<div class="comments-shared">
-											<a href="#" class="post-add-icon inline-items">
-												<svg class="olymp-speech-balloon-icon">
-													<use xlink:href="#olymp-speech-balloon-icon"></use>
-												</svg>
-												<span>0</span>
-											</a>
-							
-											<a href="#" class="post-add-icon inline-items">
-												<svg class="olymp-share-icon">
-													<use xlink:href="#olymp-share-icon"></use>
-												</svg>
-												<span>0</span>
-											</a>
-										</div>
-							
-							
-									</div>
-							
-				
-								</article>
-							
-						</div>
-                    `;
-                }
-                else {
-                    console.log('Request failed.  Returned status of ' + xhr.status);
-                }
-            };
-            xhr.send(formData); 
-		});
-		
-		
-		document.addEventListener("click", function(e){
-			e.path.forEach(function(el){
-				if(el.classList && el.classList.contains('like-wall-post')){
-					e.preventDefault();
-					el.querySelector("span").innerHTML = 1;
-				}
-			});
-		});
-	</script>
+	<script src="/alljs/wall.js" defer></script>
 @endsection
 
 
