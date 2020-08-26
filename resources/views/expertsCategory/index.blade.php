@@ -13,6 +13,8 @@
                         <h3>{{ $pageTitle }}</h3>
                         <a href="/experts">Все эксперты</a>
                     </div>
+                    
+                    
                     @foreach($experts as $expert)
                         @include('inc.expert')
                     @endforeach

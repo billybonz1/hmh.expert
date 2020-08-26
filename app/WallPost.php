@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravelista\Comments\Commentable;
+
+
 
 class WallPost extends Model
 {
+    use Commentable;
     use \Conner\Likeable\Likeable;
     
     protected $fillable = [
@@ -54,7 +58,7 @@ class WallPost extends Model
 			    }else{
 			        $name = $user->nickname;
 			    }
-			    $usersArr[] = '<a href="'.route('users_wall', $name).'">'.$name.'</a>';
+			    $usersArr[] = '<a href="'.route('users_wall', $user->nickname).'">'.$name.'</a>';
 			}
         }
         $html .= '</ul>';

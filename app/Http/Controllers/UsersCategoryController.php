@@ -21,7 +21,7 @@ class UsersCategoryController extends Controller
             return view("users.index")->with([
                 "pageTitle" => $user->namef() . " - Стена",
                 "user" => $user,
-                "wallposts" => WallPost::take(8)->get(),
+                "wallposts" => WallPost::take(8)->orderBy('created_at', 'DESC')->get(),
                 "currentUser" => Auth::user()
             ]);
         }else{
@@ -57,7 +57,7 @@ class UsersCategoryController extends Controller
             return view("users.videos")->with([
                 "pageTitle" => $user->namef() . " - стена",
                 "user" => $user,
-                "wallposts" => WallPost::take(8)->get(),
+                "wallposts" => WallPost::take(8)->orderBy('created_at', 'ASC')->get(),
                 "currentUser" => Auth::user()
             ]);
         }else{
@@ -67,7 +67,12 @@ class UsersCategoryController extends Controller
     
     
     public function likePost($nickname, WallPost $wallpost){
-        $wallpost->like();
+        if($wallpost->liked()){
+            $wallpost->unlike();
+        } else {
+            $wallpost->like();
+        }
+        
     }
     
 }
