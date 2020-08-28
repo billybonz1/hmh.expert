@@ -248,6 +248,7 @@ class ProfileController extends AdminController
         $destinationPath = public_path('images/avatars');
         $image->move($destinationPath, $imageName);
         $crop_image = Image::make($destinationPath."/".$imageName);
+        $resize_image226x196 = $crop_image;
         $crop_image->crop($data['width'], $data['height'], $data['x'], $data['y'])->encode('png', 100)->trim()->save($destinationPath."/".$imageName);
 
         $resize_image = Image::make($destinationPath."/".$imageName);
@@ -256,8 +257,12 @@ class ProfileController extends AdminController
             $constraint->aspectRatio();
         })->save($destinationPath."/".$imageName);
 
-
-
+        
+        $imageName226x196 = $time.'.226x196.'.$image->getClientOriginalExtension();
+        $resize_image226x196->resize(226, 196, function($constraint){
+            $constraint->aspectRatio(); 
+        })->save($destinationPath."/".$imageName226x196);
+        
         $avatar = $currentUser->avatar;
         if(!empty($avatar)){
             unlink($destinationPath."/".$avatar);

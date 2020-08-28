@@ -46,19 +46,33 @@
         @include('inc.users-menu')
     
         <!-- ... end Top Header-Profile -->
-    
+        
+        @auth
+            <form id="uploadPhotos" action="{{ route('users_add_photo', $user->nickname) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                
+                
+            </form>
+        @endauth
+        
+        
         <div class="container-fluid">
         	<div class="row">
         		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         			<div class="ui-block responsive-flex">
         				<div class="ui-block-title">
-        					<div class="h6 title">James’s Photo Gallery</div>
-        
-        					<div class="block-btn align-right">
-        						<a href="#" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2">Create Album  +</a>
-        
-        						<a href="#" data-toggle="modal" data-target="#update-header-photo" class="btn btn-md-2 btn-border-think custom-color c-grey">Add Photos</a>
-        					</div>
+        					<div class="h6 title">{{ $user->namef() }} - Фотогалерея</div>
+                            
+            				<div class="block-btn align-right">
+            				    @auth
+                					<a href="#" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2">Создать альбом +</a>
+                
+                					<a href="#" data-toggle="modal" data-target="#update-header-photo" class="btn btn-md-2 btn-border-think custom-color c-grey">Добавить фотографии</a>
+            					@else
+            					    <a href="#" data-toggle="modal" data-target="" class="btn btn-md-2 btn-border-think custom-color c-grey">Кнопка</a>
+            				    @endauth
+            				</div>
+        					
         
         					<ul class="nav nav-tabs photo-gallery" role="tablist">
         						<li class="nav-item">
@@ -82,743 +96,744 @@
         </div>
     
         <div class="container-fluid">
-    	<div class="row">
-    		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    			<!-- Tab panes -->
-    			<div class="tab-content">
-    				<div class="tab-pane" id="photo-page" role="tabpanel">
-    
-    					<div class="photo-album-wrapper">
-    
-    						
-    						
-    						<div class="photo-item half-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item1.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item2.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item3.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item4.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item5.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item6.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item7.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item8.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item9.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item10.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    
-    						
-    						<div class="photo-item col-4-width">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item11.jpg" alt="photo">
-    							<div class="overlay overlay-dark"></div>
-    							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    							<a href="#" class="post-add-icon inline-items">
-    								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    								<span>15</span>
-    							</a>
-    							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    							<div class="content">
-    								<a href="#" class="h6 title">Header Photos</a>
-    								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
-    							</div>
-    						</div>
-    						
-    
-    						<a href="#" class="btn btn-control btn-more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    
-    					</div>
-    
-    				</div>
-    
-    				<div class="tab-pane active" id="album-page" role="tabpanel">
-    
-    					<div class="photo-album-wrapper">
-    
-    						<div class="photo-album-item-wrap col-4-width" >
-    							
-    							<div class="photo-album-item create-album">
-    							
-    								<a href="#" data-toggle="modal" data-target="#create-photo-album" class="  full-block"></a>
-    							
-    								<div class="content">
-    							
-    									<a href="#" class="btn btn-control bg-primary" data-toggle="modal" data-target="#create-photo-album">
-    										<svg class="olymp-plus-icon"><use xlink:href="#olymp-plus-icon"></use></svg>
-    									</a>
-    							
-    									<a href="#" class="title h5" data-toggle="modal" data-target="#create-photo-album">Create an Album</a>
-    									<span class="sub-title">It only takes a few minutes!</span>
-    							
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item2.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">South America Vacations</a>
-    									<span class="sub-title">Last Added: 2 hours ago</span>
-    							
-    									<div class="swiper-container">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album1.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">Photoshoot Summer 2016</a>
-    									<span class="sub-title">Last Added: 5 weeks ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album2.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">Amazing Street Food</a>
-    									<span class="sub-title">Last Added: 6 mins ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album3.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">Graffiti & Street Art</a>
-    									<span class="sub-title">Last Added: 16 hours ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    							
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album4.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">Amazing Landscapes</a>
-    									<span class="sub-title">Last Added: 13 mins ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar30-sm.jpg" alt="author">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar29-sm.jpg" alt="user">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar28-sm.jpg" alt="user">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar27-sm.jpg" alt="user">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#" class="all-users">+3</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item6.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">The Majestic Canyon</a>
-    									<span class="sub-title">Last Added: 57 mins ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    						<div class="photo-album-item-wrap col-4-width">
-    							
-    							
-    							<div class="photo-album-item">
-    								<div class="photo-item">
-    									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album5.jpg" alt="photo">
-    									<div class="overlay overlay-dark"></div>
-    									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
-    									<a href="#" class="post-add-icon">
-    										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
-    										<span>324</span>
-    									</a>
-    							
-    									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
-    								</div>
-    							
-    								<div class="content">
-    									<a href="#" class="title h5">Winter 2015 Portraits</a>
-    									<span class="sub-title">Last Added: 1 year ago</span>
-    							
-    									<div class="swiper-container" data-slide="fade">
-    										<div class="swiper-wrapper">
-    											<div class="swiper-slide">
-    												<ul class="friends-harmonic">
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar30-sm.jpg" alt="author">
-    														</a>
-    													</li>
-    													<li>
-    														<a href="#">
-    															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar29-sm.jpg" alt="user">
-    														</a>
-    													</li>
-    												</ul>
-    											</div>
-    							
-    											<div class="swiper-slide">
-    												<div class="friend-count" data-swiper-parallax="-500">
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">24</div>
-    														<div class="title">Photos</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">86</div>
-    														<div class="title">Comments</div>
-    													</a>
-    													<a href="#" class="friend-count-item">
-    														<div class="h6">16</div>
-    														<div class="title">Share</div>
-    													</a>
-    												</div>
-    											</div>
-    										</div>
-    							
-    										<!-- If we need pagination -->
-    										<div class="swiper-pagination"></div>
-    									</div>
-    								</div>
-    							
-    							</div>
-    						</div>
-    
-    					</div>
-    
-    				</div>
-    			</div>
-    
-    		</div>
-    	</div>
-    </div>
+        	<div class="row">
+        		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        			<!-- Tab panes -->
+        			<div class="tab-content">
+        				<div class="tab-pane" id="photo-page" role="tabpanel">
+        
+        					<div class="photo-album-wrapper">
+        
+        						
+        						
+        						<div class="photo-item half-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item1.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item2.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item3.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item4.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item5.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item6.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item7.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item8.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item9.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item10.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        
+        						
+        						<div class="photo-item col-4-width">
+        							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item11.jpg" alt="photo">
+        							<div class="overlay overlay-dark"></div>
+        							<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        							<a href="#" class="post-add-icon inline-items">
+        								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        								<span>15</span>
+        							</a>
+        							<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        							<div class="content">
+        								<a href="#" class="h6 title">Header Photos</a>
+        								<time class="published" datetime="2017-03-24T18:18">1 week ago</time>
+        							</div>
+        						</div>
+        						
+        
+        						<a href="#" class="btn btn-control btn-more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        
+        					</div>
+        
+        				</div>
+        
+        				<div class="tab-pane active" id="album-page" role="tabpanel">
+        
+        					<div class="photo-album-wrapper">
+                                @auth
+            						<div class="photo-album-item-wrap col-4-width" >
+            							
+            							<div class="photo-album-item create-album">
+            							
+            								<a href="#" data-toggle="modal" data-target="#create-photo-album" class="  full-block"></a>
+            							
+            								<div class="content">
+            							
+            									<a href="#" class="btn btn-control bg-primary" data-toggle="modal" data-target="#create-photo-album">
+            										<svg class="olymp-plus-icon"><use xlink:href="#olymp-plus-icon"></use></svg>
+            									</a>
+            							
+            									<a href="#" class="title h5" data-toggle="modal" data-target="#create-photo-album">Создать альбом</a>
+            									<span class="sub-title">Это займет вего несколько минут!</span>
+            							
+            								</div>
+            							
+            							</div>
+            						</div>
+        						@endauth
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item2.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v2" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">South America Vacations</a>
+        									<span class="sub-title">Last Added: 2 hours ago</span>
+        							
+        									<div class="swiper-container">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album1.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">Photoshoot Summer 2016</a>
+        									<span class="sub-title">Last Added: 5 weeks ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album2.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">Amazing Street Food</a>
+        									<span class="sub-title">Last Added: 6 mins ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album3.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">Graffiti & Street Art</a>
+        									<span class="sub-title">Last Added: 16 hours ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        							
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album4.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">Amazing Landscapes</a>
+        									<span class="sub-title">Last Added: 13 mins ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic5.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic7.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic8.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic2.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar30-sm.jpg" alt="author">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar29-sm.jpg" alt="user">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar28-sm.jpg" alt="user">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar27-sm.jpg" alt="user">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#" class="all-users">+3</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-item6.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">The Majestic Canyon</a>
+        									<span class="sub-title">Last Added: 57 mins ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        						<div class="photo-album-item-wrap col-4-width">
+        							
+        							
+        							<div class="photo-album-item">
+        								<div class="photo-item">
+        									<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album5.jpg" alt="photo">
+        									<div class="overlay overlay-dark"></div>
+        									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        									<a href="#" class="post-add-icon">
+        										<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+        										<span>324</span>
+        									</a>
+        							
+        									<a href="#" data-toggle="modal" data-target="#open-photo-popup-v1" class="  full-block"></a>
+        								</div>
+        							
+        								<div class="content">
+        									<a href="#" class="title h5">Winter 2015 Portraits</a>
+        									<span class="sub-title">Last Added: 1 year ago</span>
+        							
+        									<div class="swiper-container" data-slide="fade">
+        										<div class="swiper-wrapper">
+        											<div class="swiper-slide">
+        												<ul class="friends-harmonic">
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/friend-harmonic10.jpg" alt="friend">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar30-sm.jpg" alt="author">
+        														</a>
+        													</li>
+        													<li>
+        														<a href="#">
+        															<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar29-sm.jpg" alt="user">
+        														</a>
+        													</li>
+        												</ul>
+        											</div>
+        							
+        											<div class="swiper-slide">
+        												<div class="friend-count" data-swiper-parallax="-500">
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">24</div>
+        														<div class="title">Photos</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">86</div>
+        														<div class="title">Comments</div>
+        													</a>
+        													<a href="#" class="friend-count-item">
+        														<div class="h6">16</div>
+        														<div class="title">Share</div>
+        													</a>
+        												</div>
+        											</div>
+        										</div>
+        							
+        										<!-- If we need pagination -->
+        										<div class="swiper-pagination"></div>
+        									</div>
+        								</div>
+        							
+        							</div>
+        						</div>
+        
+        					</div>
+        
+        				</div>
+        			</div>
+        
+        		</div>
+        	</div>
+        </div>
     </div>
     
     
@@ -1490,14 +1505,14 @@
     			</a>
     
     			<div class="modal-header">
-    				<h6 class="title">Create Photo Album</h6>
+    				<h6 class="title">Создать фото-альбом</h6>
     			</div>
     
     			<div class="modal-body">
     
     			<form class="form-group label-floating">
-    				<label class="control-label">Album Name</label>
-    				<input class="form-control" placeholder="" type="text" value="Rock Garden Festival - Day 4">
+    				<label class="control-label">Имя альбома</label>
+    				<input class="form-control" placeholder="" type="text" value="">
     			</form>
     
     			<div class="photo-album-wrapper">
@@ -1508,7 +1523,7 @@
     								<svg class="olymp-plus-icon"><use xlink:href="#olymp-plus-icon"></use></svg>
     							</a>
     
-    							<a href="#" class="title h5">Add More Photos...</a>
+    							<a href="#" class="title h5">Добавить больше фотографий...</a>
     						</div>
     					</div>
     				</div>

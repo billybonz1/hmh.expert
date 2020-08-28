@@ -74,6 +74,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define("moderate", function($user){
             return $user->hasAnyRoles(["admin", "moderator"]);
         });
+        
         //
     }
 }

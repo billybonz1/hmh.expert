@@ -1,6 +1,6 @@
 <div class="top-experts-child">
     <div class="top-expert top-expert-{{ $expert->id }}">
-        <div class="top-expert-img" style="background-image: url({{ $expert->avatar() }});">
+        <div class="top-expert-img" style="background-image: url({{ $expert->avatar('226x196') }});">
             <div class="top-expert-post">Эксперт</div>
             <div class="top-expert-live now-live">
                 <div>Live</div>

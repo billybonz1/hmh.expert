@@ -180,6 +180,8 @@ return array(
     'App\\ServiceOrder' => $baseDir . '/app/ServiceOrder.php',
     'App\\ServiceReason' => $baseDir . '/app/ServiceReason.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\WallAlbum' => $baseDir . '/app/WallAlbum.php',
+    'App\\WallPhoto' => $baseDir . '/app/WallPhoto.php',
     'App\\WallPost' => $baseDir . '/app/WallPost.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
     'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
