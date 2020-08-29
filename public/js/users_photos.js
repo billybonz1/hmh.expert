@@ -2,7 +2,7 @@ var uploadPhotos = document.querySelector("#uploadPhotos");
 var uploadPhotosFile = uploadPhotos.querySelector("input[type='file']");
 
 uploadPhotosFile.addEventListener("change", function(e){
-    uploadPhotosFile.files.forEach(function(file){
+    uploadPhotosFile.files.forEach(function(file, i){
         var reader = new FileReader();
         reader.onload = function (e) {
             document.querySelector("#create-photo-album .photo-album-wrapper").innerHTML += `
@@ -12,7 +12,7 @@ uploadPhotosFile.addEventListener("change", function(e){
         					<img loading="lazy" src="${e.target.result}" alt="photo">
         					<textarea class="form-control" name="desc[]" placeholder="Напишите что-нибудь об этом фото..."></textarea>
         					
-        					<a href="#" class="close icon-close">
+        					<a href="#" data-index="${i}" class="close icon-close remove-album-photo">
                 				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
                 			</a>
         				</div>
@@ -31,6 +31,15 @@ document.addEventListener("click", function(e){
 	    if(el.classList && el.classList.contains("photo-album-add-photos")){
 	        e.preventDefault();
 		    uploadPhotosFile.click();
+	    } else if(el.classList && el.classList.contains("remove-album-photo")){
+	        e.preventDefault();
+	        
+	        el.parentElement.parentElement.parentElement.remove();
+	        let i = el.getAttribute("data-index");
+	        
+	        delete uploadPhotosFile.files[i];
+	        
+	        console.log(uploadPhotosFile.files);
 	    }
 	});
 });
@@ -54,7 +63,7 @@ uploadPhotos.addEventListener("submit", function(e){
     xhr.open('POST', uploadPhotos.action, true);
     xhr.onload = function() {
         if (xhr.status === 200) {
-
+            
             console.log(xhr.responseText);
         }
         else {
