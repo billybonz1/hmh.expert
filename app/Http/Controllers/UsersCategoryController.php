@@ -12,6 +12,8 @@ use App\WallPost;
 
 use App\WallPhoto;
 
+use App\WallAlbum;
+
 use Illuminate\Http\Request;
 
 class UsersCategoryController extends Controller
@@ -61,6 +63,25 @@ class UsersCategoryController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         
+    }
+    
+    
+    public function addAlbum(Request $request){
+        $data = $request->all();
+        $files = $request->file('files');
+        $arr = [];
+       
+        // foreach ($files as $file) {
+        //     $arr[] = $file->getClientOriginalExtension();
+        // }
+        
+        
+        $album = WallAlbum::create([
+            'user_id' => Auth::user()->id,
+            "name" => $data['album-name']
+        ]);
+        
+        // return $album->name;
     }
     
     public function videos($nickname){

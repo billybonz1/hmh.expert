@@ -5016,7 +5016,7 @@ body:before {
     display: -ms-flexbox;
     display: flex;
     top: 0;
-    right: 65px;
+    right: 0px;
     height: 100%;
     position: absolute;
     border-bottom: 0
@@ -6504,4 +6504,34 @@ body:before {
 
 .like-wall-post{
     text-decoration: none;
+}
+
+
+#uploadPhotos{
+    input[type=file]{
+        display: none;
+    }
+}
+
+.create-photo-album {
+    .btn-secondary{
+        border: 2px solid #9a9fbf;
+        color: #9a9fbf;
+        &:hover,&:active{
+            color: #fff;
+        }
+    }
+    .btn-primary{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+.photo-album-item-wrap{
+    .close{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
 }

@@ -38,6 +38,7 @@
     <!-- SVG icons loader -->
     <script src="https://html.crumina.net/html-olympus/js/svg-loader.js"></script>
     <!-- /SVG icons loader -->
+    <script src="/alljs/users_photos.js"></script>
 @endsection
 
 @section('content')
@@ -46,14 +47,6 @@
         @include('inc.users-menu')
     
         <!-- ... end Top Header-Profile -->
-        
-        @auth
-            <form id="uploadPhotos" action="{{ route('users_add_photo', $user->nickname) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                
-                
-            </form>
-        @endauth
         
         
         <div class="container-fluid">
@@ -69,7 +62,7 @@
                 
                 					<a href="#" data-toggle="modal" data-target="#update-header-photo" class="btn btn-md-2 btn-border-think custom-color c-grey">Добавить фотографии</a>
             					@else
-            					    <a href="#" data-toggle="modal" data-target="" class="btn btn-md-2 btn-border-think custom-color c-grey">Кнопка</a>
+            					    <a href="#" data-toggle="modal" data-target="" class="btn btn-md-2 btn-border-think custom-color c-grey" style="visibility:hidden;">Кнопка</a>
             				    @endauth
             				</div>
         					
@@ -88,7 +81,9 @@
         						</li>
         
         					</ul>
+        					<?php /*
         					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+        					*/?>
         				</div>
         			</div>
         		</div>
@@ -1508,315 +1503,36 @@
     				<h6 class="title">Создать фото-альбом</h6>
     			</div>
     
-    			<div class="modal-body">
-    
-    			<form class="form-group label-floating">
-    				<label class="control-label">Имя альбома</label>
-    				<input class="form-control" placeholder="" type="text" value="">
-    			</form>
-    
-    			<div class="photo-album-wrapper">
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item create-album">
-    						<div class="content">
-    							<a href="#" class="btn btn-control bg-primary">
-    								<svg class="olymp-plus-icon"><use xlink:href="#olymp-plus-icon"></use></svg>
-    							</a>
-    
-    							<a href="#" class="title h5">Добавить больше фотографий...</a>
-    						</div>
-    					</div>
-    				</div>
-    
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item">
-    						<div class="form-group">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album6.jpg" alt="photo">
-    							<textarea class="form-control" placeholder="Write something about this photo..."></textarea>
-    						</div>
-    
-    						<form class="form-group label-floating is-select">
-    							<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-    
-    							<select class="selectpicker form-control style-2 show-tick" multiple data-max-options="2" data-live-search="true">
-    								<option title="Green Goo Rock" data-content='<div class="inline-items">
-    										<div class="author-thumb">
-    											<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar52-sm.jpg" alt="author">
-    										</div>
-    											<div class="h6 author-title">Green Goo Rock</div>
-    
-    										</div>'>Green Goo Rock
-    								</option>
-    
-    								<option title="Mathilda Brinker" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar74-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Mathilda Brinker</div>
-    										</div>'>Mathilda Brinker
-    								</option>
-    
-    								<option title="Marina Valentine" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar48-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Marina Valentine</div>
-    										</div>'>Marina Valentine
-    								</option>
-    
-    								<option title="Dave Marinara" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar75-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Dave Marinara</div>
-    										</div>'>Dave Marinara
-    								</option>
-    
-    								<option title="Rachel Howlett" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar76-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Rachel Howlett</div>
-    										</div>'>Rachel Howlett
-    								</option>
-    
-    							</select>
-    						</form>
-    					</div>
-    				</div>
-    
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item">
-    						<div class="form-group">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album7.jpg" alt="photo">
-    							<textarea class="form-control" placeholder="Write something about this photo..."></textarea>
-    						</div>
-    						<form class="form-group label-floating is-select">
-    							<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-    
-    							<select class="selectpicker form-control style-2 show-tick" multiple data-max-options="2" data-live-search="true">
-    								<option title="Green Goo Rock" data-content='<div class="inline-items">
-    										<div class="author-thumb">
-    											<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar52-sm.jpg" alt="author">
-    										</div>
-    											<div class="h6 author-title">Green Goo Rock</div>
-    
-    										</div>'>Green Goo Rock
-    								</option>
-    
-    								<option title="Mathilda Brinker" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar74-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Mathilda Brinker</div>
-    										</div>'>Mathilda Brinker
-    								</option>
-    
-    								<option title="Marina Valentine" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar48-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Marina Valentine</div>
-    										</div>'>Marina Valentine
-    								</option>
-    
-    								<option title="Dave Marinara" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar75-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Dave Marinara</div>
-    										</div>'>Dave Marinara
-    								</option>
-    
-    								<option title="Rachel Howlett" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar76-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Rachel Howlett</div>
-    										</div>'>Rachel Howlett
-    								</option>
-    
-    							</select>
-    						</form>
-    					</div>
-    				</div>
-    
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item">
-    						<div class="form-group">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album8.jpg" alt="photo">
-    							<textarea class="form-control" placeholder="Write something about this photo..."></textarea>
-    						</div>
-    
-    						<form class="form-group label-floating is-select">
-    							<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-    
-    							<select class="selectpicker form-control style-2 show-tick" multiple data-max-options="2" data-live-search="true">
-    								<option title="Green Goo Rock" data-content='<div class="inline-items">
-    										<div class="author-thumb">
-    											<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar52-sm.jpg" alt="author">
-    										</div>
-    											<div class="h6 author-title">Green Goo Rock</div>
-    
-    										</div>'>Green Goo Rock
-    								</option>
-    
-    								<option title="Mathilda Brinker" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar74-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Mathilda Brinker</div>
-    										</div>'>Mathilda Brinker
-    								</option>
-    
-    								<option title="Marina Valentine" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar48-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Marina Valentine</div>
-    										</div>'>Marina Valentine
-    								</option>
-    
-    								<option title="Dave Marinara" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar75-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Dave Marinara</div>
-    										</div>'>Dave Marinara
-    								</option>
-    
-    								<option title="Rachel Howlett" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar76-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Rachel Howlett</div>
-    										</div>'>Rachel Howlett
-    								</option>
-    
-    							</select>
-    						</form>
-    					</div>
-    				</div>
-    
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item">
-    						<div class="form-group">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album9.jpg" alt="photo">
-    							<textarea class="form-control" placeholder="Write something about this photo..."></textarea>
-    						</div>
-    
-    						<form class="form-group label-floating is-select">
-    							<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-    
-    							<select class="selectpicker form-control style-2 show-tick" multiple data-max-options="2" data-live-search="true">
-    								<option title="Green Goo Rock" data-content='<div class="inline-items">
-    										<div class="author-thumb">
-    											<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar52-sm.jpg" alt="author">
-    										</div>
-    											<div class="h6 author-title">Green Goo Rock</div>
-    										</div>'>Green Goo Rock
-    								</option>
-    
-    								<option title="Mathilda Brinker" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar74-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Mathilda Brinker</div>
-    										</div>'>Mathilda Brinker
-    								</option>
-    
-    								<option title="Marina Valentine" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar48-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Marina Valentine</div>
-    										</div>'>Marina Valentine
-    								</option>
-    
-    								<option title="Dave Marinara" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar75-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Dave Marinara</div>
-    										</div>'>Dave Marinara
-    								</option>
-    
-    								<option title="Rachel Howlett" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar76-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Rachel Howlett</div>
-    										</div>'>Rachel Howlett
-    								</option>
-    
-    							</select>
-    						</form>
-    					</div>
-    				</div>
-    
-    				<div class="photo-album-item-wrap col-3-width" >
-    					<div class="photo-album-item">
-    						<div class="form-group">
-    							<img loading="lazy" src="https://html.crumina.net/html-olympus/img/photo-album10.jpg" alt="photo">
-    							<textarea class="form-control" placeholder="Write something about this photo..."></textarea>
-    						</div>
-    
-    						<form class="form-group label-floating is-select">
-    							<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
-    
-    							<select class="selectpicker form-control style-2 show-tick" multiple data-max-options="2" data-live-search="true">
-    								<option title="Green Goo Rock" data-content='<div class="inline-items">
-    										<div class="author-thumb">
-    											<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar52-sm.jpg" alt="author">
-    										</div>
-    											<div class="h6 author-title">Green Goo Rock</div>
-    
-    										</div>'>Green Goo Rock
-    								</option>
-    
-    								<option title="Mathilda Brinker" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar74-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Mathilda Brinker</div>
-    										</div>'>Mathilda Brinker
-    								</option>
-    
-    								<option title="Marina Valentine" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar48-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Marina Valentine</div>
-    										</div>'>Marina Valentine
-    								</option>
-    
-    								<option title="Dave Marinara" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar75-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Dave Marinara</div>
-    										</div>'>Dave Marinara
-    								</option>
-    
-    								<option title="Rachel Howlett" data-content='<div class="inline-items">
-    											<div class="author-thumb">
-    												<img loading="lazy" src="https://html.crumina.net/html-olympus/img/avatar76-sm.jpg" alt="author">
-    											</div>
-    											<div class="h6 author-title">Rachel Howlett</div>
-    										</div>'>Rachel Howlett
-    								</option>
-    
-    							</select>
-    						</form>
-    
-    					</div>
-    				</div>
-    			</div>
-    
-    			<a href="#" class="btn btn-secondary btn-lg btn--half-width">Discard Everything</a>
-    			<a href="#" class="btn btn-primary btn-lg btn--half-width">Post Album</a>
-    
-    		</div>
+    			<form id="uploadPhotos" action="{{ route('users_add_album', $user->nickname) }}" enctype="multipart/form-data" method="post" class="modal-body">
+                    @csrf
+        			<div class="form-group label-floating">
+        			    
+        				<label class="control-label">Имя альбома</label>
+        				 <input class="form-control" name="album-name" placeholder="" type="text" value="">
+        			
+        			     <input type="file" name="files[]" multiple />
+        			</div>
+        
+        			<div class="photo-album-wrapper">
+        				<a class="photo-album-item-wrap col-3-width photo-album-add-photos" href="#">
+        					<div class="photo-album-item create-album">
+        						<div class="content">
+        							<div class="btn btn-control bg-primary">
+        								<svg class="olymp-plus-icon"><use xlink:href="#olymp-plus-icon"></use></svg>
+        							</div>
+        
+        							<div class="title h5">Добавить больше фотографий...</div>
+        						</div>
+        					</div>
+        				</a>
+        			</div>
+        
+        			<button class="btn btn-secondary btn-lg btn--half-width cancel-upload-album">Отменить</button>
+        			<button class="btn btn-primary btn-lg btn--half-width">
+        			    Опубликовать альбом<div class="ripple-container"></div>
+        			 </button>
+        
+        		</form>
     		</div>
     	</div>
     </div>
