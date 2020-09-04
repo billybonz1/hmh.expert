@@ -16,7 +16,7 @@
         				<div class="form-group">
         					<img loading="lazy" src="${e.target.result}" alt="photo">
         					<textarea class="form-control" name="desc[]" placeholder="Напишите что-нибудь об этом фото..."></textarea>
-        					
+        					<input type="hidden" name="index[]" value="${i}" />
         					<a href="#" data-index="${i}" class="close icon-close remove-album-photo">
                 				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
                 			</a>
@@ -38,8 +38,8 @@
           e.preventDefault();
           el.parentElement.parentElement.parentElement.remove();
           let i = el.getAttribute("data-index");
-          delete uploadPhotosFile.files[i];
-          console.log(uploadPhotosFile.files);
+          let files = Array.from(uploadPhotosFile.files);
+          files.splice(i, 1);
         }
       });
     });
@@ -60,7 +60,12 @@
 
       xhr.onload = function () {
         if (xhr.status === 200) {
-          console.log(xhr.responseText);
+          uploadPhotos.reset();
+          document.querySelector(".create-photo-album .close").click();
+          document.querySelectorAll("#create-photo-album .photo-album-item-wrap:not(a)").forEach(function (el) {
+            el.remove();
+          });
+          window.location.reload();
         } else {
           alert('Request failed.  Returned status of ' + xhr.status);
         }

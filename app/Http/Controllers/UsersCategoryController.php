@@ -16,6 +16,8 @@ use App\WallAlbum;
 
 use Illuminate\Http\Request;
 
+use Image;
+
 class UsersCategoryController extends Controller
 {
     
@@ -47,11 +49,16 @@ class UsersCategoryController extends Controller
     
     public function photos($nickname){
         $user = User::where("nickname", $nickname)->first();
+        $albumsCount = 8;
+        if(Auth::check()){
+            $photoCount = 7;
+        }
         if($user){
             return view("users.photos")->with([
                 "pageTitle" => $user->namef() . " - Фотографии",
                 "user" => $user,
                 "wallposts" => WallPost::take(8)->get(),
+                "wallalbums" => WallAlbum::take($albumsCount)->orderBy('created_at', 'desc')->get(),
                 "currentUser" => Auth::user()
             ]);
         }else{
@@ -62,18 +69,25 @@ class UsersCategoryController extends Controller
     public function addPhoto(Request $request){
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        
     }
-    
     
     public function addAlbum(Request $request){
         $data = $request->all();
         $files = $request->file('files');
         $arr = [];
-       
-        // foreach ($files as $file) {
-        //     $arr[] = $file->getClientOriginalExtension();
-        // }
+        
+        
+        
+        
+        $this->validate($request, [
+            'files' => 'required',
+            'files.*' => 'mimes:jpg,jpeg,png'
+        ]);
+        
+        
+        
+        $destinationPath = public_path('uploads/wall/'.Auth::user()->nickname);
+        $time = time();
         
         
         $album = WallAlbum::create([
@@ -81,7 +95,35 @@ class UsersCategoryController extends Controller
             "name" => $data['album-name']
         ]);
         
-        // return $album->name;
+        
+        foreach($data['index'] as $key=>$index){
+            
+            
+            $imageName = $time.".".$key.'.'.$files[$key]->getClientOriginalExtension();
+            $imageNameWithoutExt = $time.".".$key;
+            
+            $files[$key]->move($destinationPath, $imageName);
+            
+            $resize_image = Image::make($destinationPath."/".$imageName);
+            
+            $resize_image->resize(100, null, function($constraint){
+                $constraint->aspectRatio(); 
+            })->save($destinationPath."/".$imageNameWithoutExt.".100.".$files[$key]->getClientOriginalExtension());
+            
+            $resize_image->resize(800, null, function($constraint){
+                $constraint->aspectRatio(); 
+            })->save($destinationPath."/".$imageNameWithoutExt.".800.".$files[$key]->getClientOriginalExtension());
+            
+            
+            WallPhoto::create([
+                "name" => $imageName,
+                "desc" => $data['desc'][$key],
+                "user_id" => Auth::user()->id,
+                "album_id" => $album->id
+            ]);
+ 
+        }
+        
     }
     
     public function videos($nickname){

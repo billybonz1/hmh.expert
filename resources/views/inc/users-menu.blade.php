@@ -49,11 +49,11 @@
 						</div>
 
 						<div class="control-block-button">
-							<a href="35-YourAccount-FriendsRequests.html" class="btn btn-control bg-blue">
+							<a href="#" class="btn btn-control bg-blue">
 								<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
 							</a>
 
-							<a href="#" class="btn btn-control bg-purple">
+							<a href="/profile/messages" class="btn btn-control bg-purple">
 								<svg class="olymp-chat---messages-icon"><use xlink:href="#olymp-chat---messages-icon"></use></svg>
 							</a>
 

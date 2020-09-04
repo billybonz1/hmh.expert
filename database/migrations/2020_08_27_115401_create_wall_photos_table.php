@@ -15,8 +15,9 @@ class CreateWallPhotosTable extends Migration
     {
         Schema::create('wall_photos', function (Blueprint $table) {
             $table->id();
-            $table->string("url");
+            $table->string("name");
             $table->string("desc");
+            $table->bigInteger("album_id")->nullable();
             $table->bigInteger("user_id");
             $table->timestamps();
         });
