@@ -8,7 +8,7 @@ trait TimeElapsedString {
      * @param Request $request
      * @return $this|false|string
      */
-    public function timeElapsedString($full = false) {
+    public function timeElapsedString($full = true) {
         $now = new \DateTime();
         $ago = new \DateTime($this->created_at);
         $diff = $now->diff($ago);

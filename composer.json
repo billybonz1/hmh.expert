@@ -27,6 +27,7 @@
         "google/recaptcha": "^1.2",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.5",
+        "james-heinrich/getid3": "^1.9",
         "laravel/framework": "^7.9.2",
         "laravel/ui": "^2.0",
         "laravelista/comments": "^3.6",

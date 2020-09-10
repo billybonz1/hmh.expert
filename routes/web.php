@@ -190,9 +190,14 @@ Route::get('/users/{nickname}', 'UsersCategoryController@index')->name("users_wa
 Route::post('/users/addpost', 'UsersCategoryController@addPost')->middleware("auth");
 Route::get('/users/{nickname}/photos', 'UsersCategoryController@photos');
 Route::post('/users/{nickname}/photos/add', 'UsersCategoryController@addPhoto')->name("users_add_photo")->middleware("auth");
+
 Route::any('/users/{nickname}/photos/addalbum', 'UsersCategoryController@addAlbum')->name("users_add_album")->middleware("auth");
 
+
+
 Route::get('/users/{nickname}/videos', 'UsersCategoryController@videos');
+
+Route::post('/users/{nickname}/videos/addvideo', 'UsersCategoryController@addVideo')->name("users_add_video")->middleware("auth");
     
 Route::post('/users/{nickname}/{wallpost}/like', 'UsersCategoryController@likePost')->name("like_wall_post")->middleware("auth");
 

@@ -385,6 +385,9 @@
             						</div>
                                 @endforeach
         						
+        						<div class="pagination">
+        						    {!! $wallalbums->links() !!}
+        						</div>
         
         					</div>
         

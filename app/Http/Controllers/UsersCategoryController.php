@@ -12,6 +12,8 @@ use App\WallPost;
 
 use App\WallPhoto;
 
+use App\WallVideo;
+
 use App\WallAlbum;
 
 use Illuminate\Http\Request;
@@ -51,14 +53,14 @@ class UsersCategoryController extends Controller
         $user = User::where("nickname", $nickname)->first();
         $albumsCount = 8;
         if(Auth::check()){
-            $photoCount = 7;
+            $albumsCount = 7;
         }
         if($user){
             return view("users.photos")->with([
                 "pageTitle" => $user->namef() . " - Фотографии",
                 "user" => $user,
                 "wallposts" => WallPost::take(8)->get(),
-                "wallalbums" => WallAlbum::take($albumsCount)->orderBy('created_at', 'desc')->get(),
+                "wallalbums" => WallAlbum::orderBy('created_at', 'desc')->paginate($albumsCount),
                 "currentUser" => Auth::user()
             ]);
         }else{
@@ -132,12 +134,53 @@ class UsersCategoryController extends Controller
             return view("users.videos")->with([
                 "pageTitle" => $user->namef() . " - Видео",
                 "user" => $user,
-                "wallposts" => WallPost::take(8)->orderBy('created_at', 'ASC')->get(),
+                "wallvideos" => WallVideo::orderBy('created_at', 'DESC')->paginate(8),
                 "currentUser" => Auth::user()
             ]);
         }else{
             abort(404);
         }
+    }
+    
+    
+    public function addVideo(Request $request){
+        
+        
+        $this->validate($request, [
+            'name' => 'required',
+            'desc' => 'required',
+            'video' => ['mimes:mp4,avi', 'max:250000']
+        ]);
+        
+        $time = time();
+        
+        $video = $request->file('video');
+        
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        unset($data['video']);
+        $destinationPath = public_path('uploads/videos/'.Auth::user()->nickname);
+        $videoName = $time.".".$video->getClientOriginalExtension();
+        $videoNameWithoutExt = $time;
+        $video->move($destinationPath, $videoName);
+        
+        $data['file_name'] = $videoName;
+        
+        
+        $getID3 = new \getID3;
+        $file = $getID3->analyze($destinationPath."/".$videoName);
+        $duration = date('H:i:s', $file['playtime_seconds']);
+        
+        $data['duration'] = $duration;
+        
+        
+        $imageName = $time.".png";
+        Image::make($data['img'])->save($destinationPath."/".$imageName);
+        
+        $data['img'] = $imageName;
+        
+        $wallvideo = WallVideo::create($data);
+        return $wallvideo;
     }
     
     

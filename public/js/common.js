@@ -10,15 +10,23 @@ document.querySelectorAll(".tec-hover-icons a").forEach(function(a){
 });
 
 
-function closePopup(){
+function closePopup(stopVideo = true){
     document.querySelectorAll(".total-popup,.videocall-popup").forEach(function(popup){
         popup.classList.remove("active");
+        
+        if(popup.id == "videoPopup" && stopVideo){
+            popup.querySelector("video").setAttribute("src", "");
+        }
     });
+    document.body.classList.remove("modal-open");
+    
+    
 }
 
 function openPopup(id){
-    closePopup();
+    closePopup(false);
     document.querySelector(id).classList.add("active");
+    document.body.classList.add("modal-open");
 }
 
 

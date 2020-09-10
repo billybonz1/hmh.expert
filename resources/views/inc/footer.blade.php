@@ -782,9 +782,6 @@
         ];
         
         
-    
-        
-        
         connection.videosContainer = document.querySelector('#fromMe');
         connection.videosContainer1 = document.querySelector('#peerDiv');
         connection.onstream = function(event) {
