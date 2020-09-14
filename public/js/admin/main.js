@@ -65,7 +65,7 @@ Array.prototype.forEach.call( inputs, function( input )
                   avatarForm.querySelector("[name=height]").value = parseInt(event.detail.height);
               },
             });
-    		openPopup("#cropImagePopup");
+    		window.openPopup("#cropImagePopup");
 		}
 		
 

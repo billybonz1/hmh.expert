@@ -532,7 +532,7 @@ if(groupMessageSendForm){
                             
                             socket1.emit("message", message);
                         }else{
-                            openPopup("#payForMessage");
+                            window.openPopup("#payForMessage");
                         }
                         
                     }
@@ -543,7 +543,7 @@ if(groupMessageSendForm){
                 xhr.send(formData);
             }
         } else {
-            openPopup("#notLoggedInPopup");
+            window.openPopup("#notLoggedInPopup");
         }
         
         
@@ -602,7 +602,7 @@ document.querySelectorAll(".videocall-popup .top-chat-block form").forEach(funct
                 // xhr.send(formData);
             }
         } else {
-            openPopup("#notLoggedInPopup");
+            window.openPopup("#notLoggedInPopup");
         }
         
     });

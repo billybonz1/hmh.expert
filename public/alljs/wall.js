@@ -2423,7 +2423,7 @@
 
           xhr.send();
         } else {
-          openPopup("#notLoggedInPopup");
+          window.openPopup("#notLoggedInPopup");
         }
       }
     });

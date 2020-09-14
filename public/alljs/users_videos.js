@@ -29,14 +29,21 @@
             let namef = videoList.getAttribute("data-user-namef");
             let avatar = videoList.getAttribute("data-user-avatar");
             let userLink = videoList.getAttribute("data-user-link");
+            let likes = el.getAttribute("data-likes");
+            let id = el.getAttribute("data-id");
             let videoPopup = document.querySelector("#videoPopup");
             videoPopup.querySelector(".post__author img").setAttribute("src", avatar);
             videoPopup.querySelectorAll(".post__author a").forEach(function (a) {
               a.setAttribute("href", userLink);
             });
             videoPopup.querySelector("time").innerHTML = time;
+            videoPopup.querySelector(".model-like span").innerHTML = likes;
+            videoPopup.querySelector(".model-like").setAttribute("data-id", id);
+            videoPopup.querySelector(".post__author-name").innerHTML = namef;
             videoPopup.querySelector(".hentry.post p").innerHTML = desc;
-            openPopup("#videoPopup");
+            videoPopup.querySelector(".model-like").classList.remove("liked");
+            if (likes == "1") videoPopup.querySelector(".model-like").classList.add("liked");
+            window.openPopup("#videoPopup");
             video.play();
           } else if (el.tagName == "CANVAS") {
             uploadVideo.querySelectorAll(".video-frames .ka-col").forEach(function (col) {

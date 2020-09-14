@@ -1103,7 +1103,7 @@
 
 <script type="text/javascript" src="/js/glide.min.js" defer></script>
 <script type="text/javascript" src="/js/simplebar.min.js" defer></script>
-<script type="text/javascript" src="/js/common.js" defer></script>
+<script type="text/javascript" src="/alljs/common.js" defer></script>
 @if(Route::currentRouteName() == 'home')
     <script type="text/javascript" src="/js/home.js" defer></script>
 @else

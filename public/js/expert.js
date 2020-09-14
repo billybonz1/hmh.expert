@@ -45,7 +45,7 @@ if(reviewForm){
                     error.innerHTML = '<strong>Это поле обязательно для заполнения.</strong>';
                     text.after(error);
                 }else{
-                    openPopup("#sendReviewSuccess");
+                    window.openPopup("#sendReviewSuccess");
                 }
             }
             else {

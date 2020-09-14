@@ -8,6 +8,7 @@ use App\Traits\TimeElapsedString;
 class WallVideo extends Model
 {
     use TimeElapsedString;
+    use \Conner\Likeable\Likeable;
     protected $fillable = [
         'name',
         'desc',

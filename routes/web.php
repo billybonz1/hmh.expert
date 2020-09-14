@@ -211,3 +211,8 @@ Route::get('/favourite', 'FavouriteController@index')->name("favourite");
 Route::group(['namespace' => 'Website'], function () {
     Route::get('{slug1}/{slug2?}/{slug3?}', 'PagesController@index');
 });
+
+
+
+//Social Controller
+Route::post('/_social/like', 'SocialController@likePost')->name("social_like_post")->middleware("auth");

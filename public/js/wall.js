@@ -59,7 +59,7 @@ document.addEventListener("click", function(e){
                 }
         		xhr.send();
     		}else{
-    		    openPopup("#notLoggedInPopup");
+    		    window.openPopup("#notLoggedInPopup");
     		}
 		}
 	});
