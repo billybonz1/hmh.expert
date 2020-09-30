@@ -30,7 +30,7 @@
         <div class="footer-first">
             <div class="footer-logo">
                 <a href="#" class="logo">
-                    <img src="/public/img/logo.png" alt="">
+                    <img src="/img/logo.png" alt="">
                 </a>
             </div>
             <p>Все права защищены © 2020</p>
@@ -64,7 +64,7 @@
                 <div class="tcp-chat-message">
                     <div class="tcp-chat-message-top">
                         <a href="#">
-                            <img src="/public/img/user1.png" alt="">
+                            <img src="/img/user1.png" alt="">
                             <span>Кристина</span>
                         </a>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="tcp-chat-message">
                     <div class="tcp-chat-message-top">
                         <a href="#">
-                            <img src="/public/img/user2.png" alt="">
+                            <img src="/img/user2.png" alt="">
                             <span>Виктория</span>
                         </a>
                     </div>
@@ -86,7 +86,7 @@
                 <div class="tcp-chat-message">
                     <div class="tcp-chat-message-top">
                         <a href="#">
-                            <img src="/public/img/user1.png" alt="">
+                            <img src="/img/user1.png" alt="">
                             <span>Кристина</span>
                         </a>
                     </div>
@@ -97,7 +97,7 @@
                 <div class="tcp-chat-message">
                     <div class="tcp-chat-message-top">
                         <a href="#">
-                            <img src="/public/img/user2.png" alt="">
+                            <img src="/img/user2.png" alt="">
                             <span>Виктория</span>
                         </a>
                     </div>
@@ -232,7 +232,7 @@
 </div>
 
 
-@isset($currentUser)
+@auth
 <div id="payForMessage" class="total-popup videocall-popup">
     <div class="videocall-popup-inner" style="min-height: unset;max-width: 500px;">
         <form action="/profile/pay" class="main-form" method="post" style="margin-bottom: 0;">
@@ -269,7 +269,7 @@
         <div class="total-popup-close">X</div>
     </div>
 </div>
-@endisset
+@endauth
 
 
 
@@ -279,8 +279,6 @@
     <div class="videocall-popup-inner" style="min-height: unset;max-width: 500px;">
         <form action="/profile/pay" class="main-form" method="post" style="margin-bottom: 0;">
             @csrf
-          
-          
             <h1 style="padding: 0 15px; font-size: 30px;">
                 Введите пожалуйста сколько минут Вы хотите поговорить
             </h1>
@@ -318,7 +316,6 @@
 </div>
 
 
-
 <!--<script src="/js/socket.js"></script>-->
 <!--<script src="https://secret-savannah-83467.herokuapp.com/bundle.js"></script>-->
 <script src="https://vast-plateau-40039.herokuapp.com/dist/RTCMultiConnection.js"></script>
@@ -329,10 +326,8 @@
 <script src="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.js"></script>
 <script src="https://vast-plateau-40039.herokuapp.com/node_modules/recordrtc/RecordRTC.js"></script>
 
-
-
 <script>
-
+    //Audio Video Chat
     var base = 60;
     var clocktimer, dateObj, dh, dm, ds, ms;
     var readout = '';
@@ -1104,11 +1099,7 @@
 <script type="text/javascript" src="/js/glide.min.js" defer></script>
 <script type="text/javascript" src="/js/simplebar.min.js" defer></script>
 <script type="text/javascript" src="/alljs/common.js" defer></script>
-@if(Route::currentRouteName() == 'home')
-    <script type="text/javascript" src="/js/home.js" defer></script>
-@else
-    <script type="text/javascript" src="/js/home.js" defer></script>
-@endif
+<script type="text/javascript" src="/js/home.js" defer></script>
 
 <script type="text/javascript" src="/js/phone-mask.js" defer></script>
 <script type="text/javascript" src="/js/usersOnline.js" defer></script>

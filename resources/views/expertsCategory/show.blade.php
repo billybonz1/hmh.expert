@@ -6,7 +6,7 @@
 
             <div class="top-chat-block">
                 <div class="tcp-detail-info">
-                    <a href="/users/{{$user->nickname}}" class="tcp-detail-info-img" style="background-image: url(/public/img/expert-photo-mini.png);"></a>
+                    <a href="/users/{{$user->nickname}}" class="tcp-detail-info-img" style="background-image: url(/img/expert-photo-mini.png);"></a>
                     <div>
                         <div class="pe-author">
                             <h1>
@@ -49,17 +49,17 @@
                     </div>
                 </div>
                 <div class="tcp-experts">
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
-                    <div class="tcp-expert" style="background-image: url(/public/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
+                    <div class="tcp-expert" style="background-image: url(/img/expert-photo-mini.png);"></div>
                     <a href="#" class="tcp-next-experts">следующий эксперт</a>
                 </div>
                 <div class="tcp-video-live">
                     <div id="videos-container" class="broadcast-video"></div>
-                    <!--<video class="broadcast-video" poster="/public/img/live-video.jpg"></video>-->
+                    <!--<video class="broadcast-video" poster="/img/live-video.jpg"></video>-->
                     <div class="tcp-title">
                         <i class="tcp-video-icon"></i>
                         <span>{{ $user->name }}</span>

@@ -3,7 +3,7 @@
         <div class="top-chat-block-container">
             <div class="top-chat-block">
                 <div class="tcp-video-live">
-                    <img src="/public/img/live-video.jpg" alt="">
+                    <img src="/img/live-video.jpg" alt="">
                     <div class="tcp-title">
                         <i class="tcp-video-icon"></i>
                         <span>Виктория</span>
@@ -16,7 +16,7 @@
                         <div class="tcp-chat-message">
                             <div class="tcp-chat-message-top">
                                 <a href="#">
-                                    <img src="/public/img/user1.png" alt="">
+                                    <img src="/img/user1.png" alt="">
                                     <span>Кристина</span>
                                 </a>
                             </div>
@@ -27,7 +27,7 @@
                         <div class="tcp-chat-message">
                             <div class="tcp-chat-message-top">
                                 <a href="#">
-                                    <img src="/public/img/user2.png" alt="">
+                                    <img src="/img/user2.png" alt="">
                                     <span>Виктория</span>
                                 </a>
                             </div>
@@ -38,7 +38,7 @@
                         <div class="tcp-chat-message">
                             <div class="tcp-chat-message-top">
                                 <a href="#">
-                                    <img src="/public/img/user1.png" alt="">
+                                    <img src="/img/user1.png" alt="">
                                     <span>Кристина</span>
                                 </a>
                             </div>
@@ -49,7 +49,7 @@
                         <div class="tcp-chat-message">
                             <div class="tcp-chat-message-top">
                                 <a href="#">
-                                    <img src="/public/img/user2.png" alt="">
+                                    <img src="/img/user2.png" alt="">
                                     <span>Виктория</span>
                                 </a>
                             </div>

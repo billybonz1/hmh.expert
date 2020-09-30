@@ -35,7 +35,7 @@
 
                             <span class="current-avatar">
                                 @if($currentUser->avatar)
-                                    <img src="/public/images/avatars/{{ $currentUser->avatar }}" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
+                                    <img src="/images/avatars/{{ $currentUser->avatar }}" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
                                 @else
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
                                 @endif
@@ -129,7 +129,7 @@
 
 
 
-    <link rel="stylesheet" href="/public/js/cropper/cropper.min.css" />
-    <script type="application/javascript" src="/public/js/admin/main.js"></script>
-    <script type="application/javascript" src="/public/js/cropper/cropper.min.js"></script>
+    <link rel="stylesheet" href="/js/cropper/cropper.min.css" />
+    <script type="application/javascript" src="/js/admin/main.js"></script>
+    <script type="application/javascript" src="/js/cropper/cropper.min.js"></script>
 @endsection

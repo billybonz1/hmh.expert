@@ -392,7 +392,7 @@ var audio = document.createElement("AUDIO");
 audio.style = "margin-left: 100px;position: absolute;z-index: -1;top: 0;";
 audio.controls = true;
 document.body.appendChild(audio);
-audio.src = "/public/uploads/message.mp3"
+audio.src = "/uploads/message.mp3"
 
 
 var messageTimeout;
