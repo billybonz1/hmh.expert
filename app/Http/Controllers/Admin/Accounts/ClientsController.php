@@ -47,6 +47,7 @@ class ClientsController extends AdminController
         $roles = $attributes['roles'];
         unset($attributes['roles']);
         $attributes['password'] = bcrypt($attributes['password']);
+        $attributes['nickname'] = $attributes['email'];
 
         $client = $this->createEntry(User::class, $attributes);
 
