@@ -35,7 +35,7 @@
 
                             <span class="current-avatar">
                                 @if($currentUser->avatar)
-                                    <img src="/images/avatars/{{ $currentUser->avatar }}" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
+                                    <img src="{{ $currentUser->avatar() }}" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
                                 @else
                                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ $currentUser->name }} {{ $currentUser->lastname }}">
                                 @endif

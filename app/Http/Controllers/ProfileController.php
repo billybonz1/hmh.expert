@@ -26,6 +26,7 @@ use Image;
 use App\Http\Controllers\Traits\UploadImageHelper;
 use App\Http\Controllers\Admin\AdminController;
 use File;
+use Intervention\Image\ImageManager;
 
 class ProfileController extends AdminController
 {
@@ -240,7 +241,7 @@ class ProfileController extends AdminController
         }
     }
     public function avatarUpdate(Request $request){
-        // $currentUser = Auth::user();
+        $currentUser = Auth::user();
         // $data = $request->all();
         // $image = request()->avatar;
         // // $destinationPath = storage_path('app/public/avatars');
@@ -250,10 +251,18 @@ class ProfileController extends AdminController
         // Storage::disk("public")->putFileAs(
         //     'avatars', $image, $imageName
         // );
-
         // $crop_image = Image::make($destinationPath."/".$imageName);
+
+
         $path = $request->file('avatar')->store("public/avatars");
-        echo "/".str_replace("public", "storage", $path);
+
+        $imageName = last(explode("/", $path));
+        
+        // $manager = new ImageManager(array('driver' => 'imagick'));
+        // $image = $manager->make(str_replace("public", "storage", $path))->resize(100, 100);
+        
+        // $crop_image = Image::make();
+
         // echo $destinationPath."/".$imageName;
 
 
@@ -284,9 +293,11 @@ class ProfileController extends AdminController
         // if(!empty($avatar)){
         //     unlink($destinationPath."/".$avatar);
         // }
-        // $currentUser->avatar = $imageName;
-        // $currentUser->save();
+        $currentUser->avatar = $imageName;
+        $currentUser->save();
 
+        echo "/".str_replace("public", "storage", $path);
+        // return 1;
         // echo "/public/images/avatars/".$imageName;
     }
 

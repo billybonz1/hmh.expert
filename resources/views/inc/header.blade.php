@@ -39,6 +39,11 @@
                     
                     <div class="mt-user-dropdown">
                         <ul>
+                            @if($currentUser->hasRole("admin"))
+                                <li>
+                                    <a href="/admin">Администратор</a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="/profile">Мой аккаунт</a>
                             </li>
