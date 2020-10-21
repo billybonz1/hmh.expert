@@ -32,42 +32,16 @@ if (!function_exists('notify_icon')) {
     {
         switch ($level) {
             case 'danger':
-                return 'fas fa-times shake';
+                return 'fas fa-fw fa-times shake';
                 break;
             case 'warning':
-                return 'fas fa-warning shake';
+                return 'fas fa-fw fa-warning shake';
                 break;
             case 'success':
-                return 'far fa-smile bounce';
+                return 'far fa-fw fa-smile bounce';
                 break;
             default: // info / default
-                return 'fas fa-bell shake';
-                break;
-        }
-    }
-}
-
-if (!function_exists('notify_icon_small')) {
-    /**
-     * Get the icon for the notify level
-     *
-     * @param $level
-     * @return string
-     */
-    function notify_icon_small($level)
-    {
-        switch ($level) {
-            case 'danger':
-                return 'fas fa-times spin';
-                break;
-            case 'warning':
-                return 'fas fa-times-circle spin';
-                break;
-            case 'success':
-                return 'far fa-smile bounce';
-                break;
-            default: // info / default
-                return 'fas fa-bell spin';
+                return 'fas fa-fw fa-bell shake';
                 break;
         }
     }

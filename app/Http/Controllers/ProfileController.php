@@ -241,7 +241,7 @@ class ProfileController extends AdminController
         }
     }
     public function avatarUpdate(Request $request){
-        $currentUser = Auth::user();
+        // $currentUser = Auth::user();
         // $data = $request->all();
         // $image = request()->avatar;
         // // $destinationPath = storage_path('app/public/avatars');
@@ -254,9 +254,9 @@ class ProfileController extends AdminController
         // $crop_image = Image::make($destinationPath."/".$imageName);
 
 
-        $path = $request->file('avatar')->store("public/avatars");
+        // $path = $request->file('avatar')->store("public/avatars");
 
-        $imageName = last(explode("/", $path));
+        // $imageName = last(explode("/", $path));
         
         // $manager = new ImageManager(array('driver' => 'imagick'));
         // $image = $manager->make(str_replace("public", "storage", $path))->resize(100, 100);
@@ -266,22 +266,23 @@ class ProfileController extends AdminController
         // echo $destinationPath."/".$imageName;
 
 
-        // $currentUser = Auth::user();
-        // $data = $request->all();
-        // $image = request()->avatar;
-        // $time = time();
-        // $imageName = $time.'.'.$image->getClientOriginalExtension();
-        // $destinationPath = public_path('images/avatars');
-        // $image->move($destinationPath, $imageName);
-        // $crop_image = Image::make($destinationPath."/".$imageName);
-        // $resize_image226x196 = $crop_image;
-        // $crop_image->crop($data['width'], $data['height'], $data['x'], $data['y'])->encode('png', 100)->trim()->save($destinationPath."/".$imageName);
+        $currentUser = Auth::user();
+        $data = $request->all();
+        $image = request()->avatar;
+        $time = time();
+        $imageName = $time.'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('images/avatars');
+        $image->move($destinationPath, $imageName);
+        $crop_image = Image::make($destinationPath."/".$imageName);
+        $resize_image226x196 = $crop_image;
+        $resize_image = $crop_image;
+        $crop_image->crop($data['width'], $data['height'], $data['x'], $data['y'])->encode('png', 100)->trim()->save($destinationPath."/".$imageName);
 
         // $resize_image = Image::make($destinationPath."/".$imageName);
 
-        // $resize_image->resize(100, 100, function($constraint){
-        //     $constraint->aspectRatio();
-        // })->save($destinationPath."/".$imageName);
+        $resize_image->resize(100, 100, function($constraint){
+            $constraint->aspectRatio();
+        })->save($destinationPath."/".$imageName);
 
         
         // $imageName226x196 = $time.'.226x196.'.$image->getClientOriginalExtension();
@@ -296,9 +297,9 @@ class ProfileController extends AdminController
         $currentUser->avatar = $imageName;
         $currentUser->save();
 
-        echo "/".str_replace("public", "storage", $path);
-        // return 1;
-        // echo "/public/images/avatars/".$imageName;
+        // // echo "/".str_replace("public", "storage", $path);
+        // // return 1;
+        echo "/public/images/avatars/".$imageName;
     }
 
 

@@ -19,11 +19,11 @@
  * Service definition for Fitness (v1).
  *
  * <p>
- * Stores and accesses user data in the fitness store from apps on any platform.</p>
+ * The Fitness API for managing users' fitness tracking data.</p>
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://developers.google.com/fit/rest/" target="_blank">Documentation</a>
+ * <a href="https://developers.google.com/fit/rest/v1/get-started" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
@@ -60,6 +60,12 @@ class Google_Service_Fitness extends Google_Service
   /** See and add to info about your body temperature in Google Fit. I consent to Google sharing my body temperature information with this app.. */
   const FITNESS_BODY_TEMPERATURE_WRITE =
       "https://www.googleapis.com/auth/fitness.body_temperature.write";
+  /** See your heart rate data in Google Fit. I consent to Google sharing my heart rate information with this app.. */
+  const FITNESS_HEART_RATE_READ =
+      "https://www.googleapis.com/auth/fitness.heart_rate.read";
+  /** See and add to your heart rate data in Google Fit. I consent to Google sharing my heart rate information with this app.. */
+  const FITNESS_HEART_RATE_WRITE =
+      "https://www.googleapis.com/auth/fitness.heart_rate.write";
   /** See your Google Fit speed and distance data. */
   const FITNESS_LOCATION_READ =
       "https://www.googleapis.com/auth/fitness.location.read";
@@ -78,12 +84,18 @@ class Google_Service_Fitness extends Google_Service
   /** See and add info about your oxygen saturation in Google Fit. I consent to Google sharing my oxygen saturation information with this app.. */
   const FITNESS_OXYGEN_SATURATION_WRITE =
       "https://www.googleapis.com/auth/fitness.oxygen_saturation.write";
-  /** See info about your reproductive health in Google Fit. I consent to Google sharing my reporductive health information with this app.. */
+  /** See info about your reproductive health in Google Fit. I consent to Google sharing my reproductive health information with this app.. */
   const FITNESS_REPRODUCTIVE_HEALTH_READ =
       "https://www.googleapis.com/auth/fitness.reproductive_health.read";
-  /** See and add info about your reproductive health in Google Fit. I consent to Google sharing my reporductive health information with this app.. */
+  /** See and add info about your reproductive health in Google Fit. I consent to Google sharing my reproductive health information with this app.. */
   const FITNESS_REPRODUCTIVE_HEALTH_WRITE =
       "https://www.googleapis.com/auth/fitness.reproductive_health.write";
+  /** See your sleep data in Google Fit. I consent to Google sharing my sleep information with this app.. */
+  const FITNESS_SLEEP_READ =
+      "https://www.googleapis.com/auth/fitness.sleep.read";
+  /** See and add to your sleep data in Google Fit. I consent to Google sharing my sleep information with this app.. */
+  const FITNESS_SLEEP_WRITE =
+      "https://www.googleapis.com/auth/fitness.sleep.write";
 
   public $users_dataSources;
   public $users_dataSources_dataPointChanges;
@@ -100,9 +112,9 @@ class Google_Service_Fitness extends Google_Service
   public function __construct(Google_Client $client, $rootUrl = null)
   {
     parent::__construct($client);
-    $this->rootUrl = $rootUrl ?: 'https://www.googleapis.com/';
+    $this->rootUrl = $rootUrl ?: 'https://fitness.googleapis.com/';
     $this->servicePath = 'fitness/v1/users/';
-    $this->batchPath = 'batch/fitness/v1';
+    $this->batchPath = 'batch';
     $this->version = 'v1';
     $this->serviceName = 'fitness';
 
@@ -272,13 +284,13 @@ class Google_Service_Fitness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'limit' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'limit' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'patch' => array(
@@ -363,18 +375,9 @@ class Google_Service_Fitness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'activityType' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'repeated' => true,
-                ),
                 'endTime' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'includeDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
@@ -383,6 +386,15 @@ class Google_Service_Fitness extends Google_Service
                 'startTime' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'activityType' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                  'repeated' => true,
+                ),
+                'includeDeleted' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),'update' => array(
