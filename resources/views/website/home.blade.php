@@ -84,6 +84,7 @@
         </div>
         
         @if(Route::current()->getName() != "login" && Route::current()->getName() != "register" && Route::current()->getName() != "password.request")
+
             <div class="fourth-screen">
                 <div class="inner">
                     <div class="fs-news-block">
@@ -91,7 +92,7 @@
                             <a href="#" style="background-image: url(/img/news.png);">
                             </a>
                             <div>
-                                <h4>Заголовок </h4>
+                                <h4> Счастливые числа </h4>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
                                 </p>
@@ -99,23 +100,58 @@
                             </div>
                         </div>
                         <div class="fs-article">
-                            <a href="#" style="background-image: url(/img/news.png);">
-                                
+                            <a href="#" style="background-image: url(https://1001goroskop.ru/img/cards/koloda/_rub.png);">
                             </a>
                             <div>
-                                <h4>Заголовок </h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                                </p>
+                                <h4> Карта дня: гадание на картах Таро </h4>
+                                <p>Каким будет твой день? </p>
+                                <p> Для начала онлайн-гадания нажмите кнопку или сделайте двойной клик по колоде.</p>
+                                <p>Что принесет наступающий день? Романтическую встречу, удачу, переживания? А может быть, сюрприз? Узнай, каким будет твой день!</p>
+                                <p>Гадание с помощью колоды карт Таро – древнейший способ заглянуть в тайны своего будущего. Просто загадай в уме день, о котором ты хочешь узнать, и достань из колоды карту...</p>
                                 <a href="#">Подробнее</a>
                             </div>
                         </div>
                         <div class="fs-article">
                             <a href="#" style="background-image: url(/img/news.png);">
-                     
                             </a>
                             <div>
-                                <h4>Заголовок </h4>
+                                <h4> Гороскоп-2021 </h4>
+                                <div class="oven">
+                                Овен
+                                21.03 - 20.04</div>
+                                <div class="telec">
+                                Телец
+                                21.04 - 21.05</div>
+                                <div class="bliznec">
+                                Близнецы
+                                22.05 - 21.06</div>
+                                <div class="rak">
+                                Рак
+                                22.06 - 22.07</div>
+                                <div class="lev">
+                                Лев
+                                23.07 - 23.08</div>
+                                <div class="deva">
+                                Дева
+                                24.08 - 22.09</div>
+                                <div class="vesi">
+                                Весы
+                                23.09 - 22.10</div>
+                                <div class="scorpion">
+                                Скорпион
+                                23.10 - 21.11</div>
+                                <div class="strelec">
+                                Стрелец
+                                22.11 - 21.12</div>
+                                <div class="kozerog">
+                                Козерог
+                                22.12 - 20.01</div>
+                                <div class="vodaley">
+                                Водолей
+                                21.01 - 19.02</div>
+                                <div class="ruba">
+                                Рыбы
+                                20.02 - 20.03</div>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et . gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
                                 </p>
@@ -123,6 +159,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="fs-events">
                         <div class="fs-events-calendar">
                             <h3>Календарь мероприятий</h3>
@@ -253,6 +290,13 @@
                     </div>
                 </div>
             </div>
+
+            <style>
+
+            </style>
+            <script>
+            
+            </script>
             
             <div class="big-bottoms-buttons">
                 <div class="inner">
