@@ -158,20 +158,20 @@ class User extends Authenticatable implements MustVerifyEmail
         if(empty($this->avatar)){
             return "/img/male.jpg";
         }else{
-            if($size == "thumbnail"){
-                return "/storage/avatars/".$this->avatar;
-            }else{
-                $avatar = explode(".", $this->avatar);
-                if (file_exists(public_path('/images/avatars/').$avatar[0].".".$size.".".$avatar[1])){
-                    // return "/images/avatars/".$avatar[0].".".$size.".".$avatar[1];
-                    return "/storage/avatars/".$this->avatar;
-                }else{
-                    if(file_exists(public_path('/images/avatars/').$this->avatar)){
-                        return "/storage/avatars/".$this->avatar;
-                    }
-                }
+            // if($size == "thumbnail"){
+                return "/images/avatars/".$this->avatar;
+            // }else{
+            //     $avatar = explode(".", $this->avatar);
+            //     if (file_exists(public_path('/images/avatars/').$avatar[0].".".$size.".".$avatar[1])){
+            //         return "/images/avatars/".$avatar[0].".".$size.".".$avatar[1];
+            //         // return "/storage/avatars/".$this->avatar;
+            //     }else{
+            //         if(file_exists(public_path('/images/avatars/').$this->avatar)){
+            //             return "/images/avatars/".$this->avatar;
+            //         }
+            //     }
                 
-            }
+            // }
         }
     }
 

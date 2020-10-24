@@ -280,15 +280,14 @@ class ProfileController extends AdminController
 
         // $resize_image = Image::make($destinationPath."/".$imageName);
 
-        $resize_image->resize(100, 100, function($constraint){
+        $resize_image->resize(225, 225, function($constraint){
             $constraint->aspectRatio();
         })->save($destinationPath."/".$imageName);
 
+
         
         // $imageName226x196 = $time.'.226x196.'.$image->getClientOriginalExtension();
-        // $resize_image226x196->resize(226, 196, function($constraint){
-        //     $constraint->aspectRatio(); 
-        // })->save($destinationPath."/".$imageName226x196);
+        // $resize_image226x196->resize(226, 196)->save($destinationPath."/".$imageName226x196);
         
         // $avatar = $currentUser->avatar;
         // if(!empty($avatar)){
@@ -299,7 +298,7 @@ class ProfileController extends AdminController
 
         // // echo "/".str_replace("public", "storage", $path);
         // // return 1;
-        echo "/public/images/avatars/".$imageName;
+        echo "/images/avatars/".$imageName;
     }
 
 
@@ -342,7 +341,7 @@ class ProfileController extends AdminController
                     "title" => "Аккаунт"
                 ],
                 [
-                    "title" => "Мой бло��",
+                    "title" => "Мой блог",
                     "url" => "/profile/blog"
                 ],
                 [
