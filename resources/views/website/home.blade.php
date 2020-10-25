@@ -392,22 +392,30 @@
                                 .cards{
                                     display: flex;
                                     flex-wrap: wrap;
+                                    flex: 0 0 250px !important;
+                                    padding-right: 0 !important;
+                                    min-height: 325px;
+                                }
+                                .cards + div{
+                                    flex: 1;
                                 }
                                 .card {
                                     transform: perspective(1000px);
                                     transform-style: preserve-3d;
                                     position: relative;
-                                    margin: 70px;
-                                    width:  100px;
-                                    height: 200px;
+                                    width:  100%;
+                                    height: 100%;
+
                                 }
 
                                 .frontside,
                                 .backside {
                                     width: 100%;
                                     height: 100%;
-                                    border-radius: 15px;
-                                    box-shadow: 0 0 10px 2px #000;
+                                    border-radius: 6px;
+                                    box-shadow: 0 0 11px -3px #000;
+                                    background-size: cover;
+                                    background-position: top center;
                                 }
                                 .frontside {
                                     transition: transform 0.6s cubic-bezier(0.5, 0.3, 0.3, 1);
@@ -458,29 +466,30 @@
                                 }
 
                                 .square-container2 {
-                                    padding: 20px; 
-                                    text-align: center;
-                                    position: relative;
-                                    top: 50%;
-                                    transition: transform 0.6s cubic-bezier(0.5, 0.3, 0.3, 1);
-                                    transform: translateY(-50%) translateX(0px) translateZ(0px) scale(1);
-                                    transform-style: preserve-3d;
-                                    z-index: 2;
-                                    *{
-                                        color: lighten(red, 14);
-                                        text-shadow: 0 0 3px 0 #fff;
-                                    }
-                                    h1{
-                                        font-size: 50px;
-                                    }
-                                    h3{
-                                        font-size: 35px;
-                                        font-weight: bold;
-                                    }
-                                    p{
-                                        font-size: 24px;
-                                    }
+                                     padding: 20px;
+                                     text-align: center;
+                                     position: relative;
+                                     top: 50%;
+                                     transition: transform 0.6s cubic-bezier(0.5, 0.3, 0.3, 1);
+                                     transform: translateY(-50%) translateX(0px) translateZ(0px) scale(1);
+                                     transform-style: preserve-3d;
+                                     z-index: 2;
                                 }
+                                 .square-container2 * {
+                                     color: #ff4747;
+                                     text-shadow: 0 0 3px 0 #fff;
+                                }
+                                 .square-container2 h1 {
+                                     font-size: 50px;
+                                }
+                                 .square-container2 h3 {
+                                     font-size: 35px;
+                                     font-weight: bold;
+                                }
+                                 .square-container2 p {
+                                     font-size: 24px;
+                                }
+ 
                                 .card:hover .square-container2 {
 
                                 }
@@ -496,24 +505,9 @@
                              </style>
 
                             <div class="card">
-                                <div class='frontside'>
-                                    <div class="square-container3">
-                                        <img src="https://zeland.me/wp-content/uploads/posts/2018-09/1536660396_taro-uayta-dyavol.jpg"/>
-                                    </div>
-                                    <div class="flip-overlay"></div>
+                                <div class='frontside' style="background-image: url(https://zeland.me/wp-content/uploads/posts/2018-09/1536660396_taro-uayta-dyavol.jpg);">
                                 </div>
-                                <div class='backside'>
-                                    <div class="square-container2">
-                                        <h1>666</h1>
-                                        <h3>Карта дьявола</h3>
-                                        <p>
-                                            В ближайшее время будет все плохо
-                                        </p>
-                                        <p>Единственный способ избавиться от проклятия</p>
-                                        <h1>666</h1>
-                                    </div>
-                                    <div class="flip-overlay">
-                                    </div>
+                                <div class='backside' style="background-image: url(https://zeland.me/wp-content/uploads/posts/2018-09/1536660396_taro-uayta-dyavol.jpg);">
                                 </div>
                             </div>
                         </div>	
@@ -536,7 +530,7 @@
                         .goroskop-container>div{width:33.333333333333333333333333%;font-size: x-small;text-align:center;font-weight:500; transition:1s; border-radius:12px}
                         .goroskop-container br{padding-top:2px}
                         .oven .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/aries.png)}
-                        .goroskop-img {background-color:white !important; border-radius:30px;background-size:contain !important;max-width: 22px;height: 22px;margin: 0 auto;margin-bottom:5px}
+                        .goroskop-img {background-color:white !important; border-radius:30px;background-size:contain !important;max-width: 22px;height: 22px;margin: 0 auto;margin-bottom:5px;margin-top: 10px;}
                         .telec .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/taurus.png)}
                         .bliznec .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/gemini.png)}
                         .rak .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/cancer.png)}
@@ -562,7 +556,19 @@
                         .ss-adv-block img{
                             height: 100%;
                         }
-                        
+                        .fs-events-calendar a{
+                            text-decoration: none;
+                        }
+                        .fs-events-calendar a h3{
+                            transition: .2s all;
+                        }
+                        .fs-events-calendar a:hover h3{
+                            color: #3c3c51;
+                        }
+                        .fs-calendar-event{
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                        }
                   </style>
                             <div class="goroskop">
                                 <h4> Гороскоп-2021 </h4>
@@ -641,13 +647,51 @@
 
                     <div class="fs-events">
                         <div class="fs-events-calendar">
-                            <h3>Календарь мероприятий</h3>
+                            <a href="/calendar">
+                                <h3>Календарь мероприятий</h3>
+                            </a>
                             <div>
                                 <a href="#" class="fs-calendar-event">
                                     <div class="fs-ce-text">
                                         <img src="/img/lesson1.png" alt="">
                                         <div>
                                             <h4>Ирина</h4>
+                                            <p>Уроки макияжа</p>
+                                        </div>
+                                    </div>
+                                    <div class="fs-ce-date">
+                                        15.04
+                                    </div>
+                                </a>
+                                <a href="#" class="fs-calendar-event">
+                                    <div class="fs-ce-text">
+                                        <img src="/img/lesson1.png" alt="">
+                                        <div>
+                                            <h4>Кристина</h4>
+                                            <p>Уроки макияжа</p>
+                                        </div>
+                                    </div>
+                                    <div class="fs-ce-date">
+                                        15.04
+                                    </div>
+                                </a>
+                                <a href="#" class="fs-calendar-event">
+                                    <div class="fs-ce-text">
+                                        <img src="/img/lesson1.png" alt="">
+                                        <div>
+                                            <h4>Кристина</h4>
+                                            <p>Уроки макияжа</p>
+                                        </div>
+                                    </div>
+                                    <div class="fs-ce-date">
+                                        15.04
+                                    </div>
+                                </a>
+                                <a href="#" class="fs-calendar-event">
+                                    <div class="fs-ce-text">
+                                        <img src="/img/lesson1.png" alt="">
+                                        <div>
+                                            <h4>Кристина</h4>
                                             <p>Уроки макияжа</p>
                                         </div>
                                     </div>
