@@ -528,79 +528,90 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="fs-article">
-                <!--- style for GOROSKOP -->
-                <style> 
-                .goroskop {}
-                .oven{ max-width:22px; height:22px; background:url(https://1001goroskop.ru/img/zodiak/mini/aries.png); }
-                .telec{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/taurus.png); }
-                .bliznec{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/gemini.png); }
-                .rak{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/cancer.png); }
-                .lev{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/leo.png); }
-                .deva{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/virgo.png); }
-                .vesi{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/libra.png); }
-                .scorpion{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/scorpio.png); }
-                .strelec{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/sagittarius.png); }
-                .vodo { max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/aquarius.png); }
-                .ruba{ max-width:22px; height:22px;background:url(https://1001goroskop.ru/img/zodiak/mini/pisces.png); }
-                </style>
-  
-
-
+                
+                    <style>
+                        .goroskop{display:flex;flex-wrap:wrap}
+                        .goroskop h4{width:100%;flex:0 0 100%}
+                        .goroskop-container{display:flex;flex-wrap:wrap;width:64%;padding-right:20px}
+                        .goroskop p{flex:1}
+                        .goroskop-container>div{width:33.333333333333333333333333%;font-size: x-small;text-align:center;font-weight:500}
+                        .goroskop-container br{padding-top:2px}
+                        .oven .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/aries.png)}
+                        .goroskop-img {background-size:contain !important;max-width: 22px;height: 22px;margin: 0 auto;margin-bottom:5px}
+                        .telec .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/taurus.png)}
+                        .bliznec .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/gemini.png)}
+                        .rak .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/cancer.png)}
+                        .lev .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/leo.png)}
+                        .deva .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/virgo.png)}
+                        .vesi .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/libra.png)}
+                        .scorpion .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/scorpio.png)}
+                        .strelec .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/sagittarius.png)}
+                        .vodo .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/aquarius.png)}
+                        .ruba .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/pisces.png)}
+                        .kozerog .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/capricorn.png)}
+                  </style>
                             <div class="goroskop">
                                 <h4> Гороскоп-2021 </h4>
-                                <div class="oven">
-                                Овен
-                                21.03 - 20.04</div>
-                                <div class="telec">
-                                Телец
-                                21.04 - 21.05</div>
-                                <div class="bliznec">
-                                Близнецы
-                                22.05 - 21.06</div>
-                                <div class="rak">
-                                Рак
-                                22.06 - 22.07</div>
-                                <div class="lev">
-                                Лев
-                                23.07 - 23.08</div>
-                                <div class="deva">
-                                Дева
-                                24.08 - 22.09</div>
-                                <div class="vesi">
-                                Весы
-                                23.09 - 22.10</div>
-                                <div class="scorpion">
-                                Скорпион
-                                23.10 - 21.11</div>
-                                <div class="strelec">
-                                Стрелец
-                                22.11 - 21.12</div>
-                                <div class="kozerog">
-                                Козерог
-                                22.12 - 20.01</div>
-                                <div class="vodo">
-                                Водолей
-                                21.01 - 19.02</div>
-                                <div class="ruba">
-                                Рыбы
-                                20.02 - 20.03</div>
-
-               <div class="gor2">
-                            
-                                <h4>Год чудес и невиданных перемен. Библии исполняется 3333 года.
+                                <div class="goroskop-container">
+                                            <div class="oven">
+                                            <div class="goroskop-img"></div>
+                                            Овен<br>
+                                            21.03 - 20.04</div>
+                                            <div class="telec">
+                                            <div class="goroskop-img"></div>
+                                            Телец<br>
+                                            21.04 - 21.05</div>
+                                            <div class="bliznec">
+                                            <div class="goroskop-img"></div>
+                                            Близнецы<br>
+                                            22.05 - 21.06</div>
+                                            <div class="rak">
+                                            <div class="goroskop-img"></div>
+                                            Рак<br>
+                                            22.06 - 22.07</div>
+                                            <div class="lev">
+                                            <div class="goroskop-img"></div>
+                                            Лев<br>
+                                            23.07 - 23.08</div>
+                                            <div class="deva">
+                                            <div class="goroskop-img"></div>
+                                            Дева<br>
+                                            24.08 - 22.09</div>
+                                            <div class="vesi">
+                                            <div class="goroskop-img"></div>
+                                            Весы<br>
+                                            23.09 - 22.10</div>
+                                            <div class="scorpion">
+                                            <div class="goroskop-img"></div>
+                                            Скорпион<br>
+                                            23.10 - 21.11</div>
+                                            <div class="strelec">
+                                            <div class="goroskop-img"></div>
+                                            Стрелец<br>
+                                            22.11 - 21.12</div>
+                                            <div class="kozerog">
+                                            <div class="goroskop-img"></div>
+                                            Козерог<br>
+                                            22.12 - 20.01</div>
+                                            <div class="vodo">
+                                            <div class="goroskop-img"></div>
+                                            Водолей<br>
+                                            21.01 - 19.02</div>
+                                            <div class="ruba">
+                                            <div class="goroskop-img"></div>
+                                            Рыбы<br>
+                                            20.02 - 20.03</div>
+                                </div>
+                                <p>Год чудес и невиданных перемен. Библии исполняется 3333 года.
                                    Думаю, все уже успели понять, что мы живем в очень необычное время. 
                                    2020-й оставил неизгладимый след во всех сферах: пандемия, стихийные бедствия, 
-                                   бунты в Америке. Хочется надеяться, что в наступающем 2021-м году все это останется в прошлом. Что говорят об этом звезды?</h4>
-                                <a href="#">Подробнее</a>
+                                   бунты в Америке. Хочется надеяться, что в наступающем 2021-м году все это останется в прошлом. Что говорят об этом звезды?<a href="#">Подробнее</a></p>
                             </div>
                         </div>
                     </div>
-                </div>
-                 
+                  
+
 
 
 
