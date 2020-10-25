@@ -566,8 +566,8 @@
                             color: #3c3c51;
                         }
                         .fs-calendar-event{
-                            padding-top: 20px;
-                            padding-bottom: 20px;
+                            padding-top: 21.5px;
+                            padding-bottom: 21.5px;
                         }
                   </style>
                             <div class="goroskop">
