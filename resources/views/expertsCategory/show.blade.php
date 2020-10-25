@@ -6,7 +6,7 @@
 
             <div class="top-chat-block">
                 <div class="tcp-detail-info">
-                    <a href="/users/{{$user->nickname}}" class="tcp-detail-info-img" style="background-image: url(/img/expert-photo-mini.png);"></a>
+                    <a href="/users/{{$user->nickname}}" class="tcp-detail-info-img" style="background-image: url({{$user->avatar()}});"></a>
                     <div>
                         <div class="pe-author">
                             <h1>

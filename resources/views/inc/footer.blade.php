@@ -319,7 +319,6 @@
 <!--<script src="/js/socket.js"></script>-->
 <!--<script src="https://secret-savannah-83467.herokuapp.com/bundle.js"></script>-->
 <script src="https://vast-plateau-40039.herokuapp.com/dist/RTCMultiConnection.js"></script>
-
 <script src="https://vast-plateau-40039.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js"></script>
 <script src="https://vast-plateau-40039.herokuapp.com/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="https://vast-plateau-40039.herokuapp.com/dev/getHTMLMediaElement.css">
@@ -327,6 +326,7 @@
 <script src="https://vast-plateau-40039.herokuapp.com/node_modules/recordrtc/RecordRTC.js"></script>
 
 <script>
+    var userIDel = document.querySelector("[data-user-id]");
     //Audio Video Chat
     var base = 60;
     var clocktimer, dateObj, dh, dm, ds, ms;
@@ -339,7 +339,7 @@
       ms = 0,
       init = 0;
       
-      
+    //обьект в строку ссылку
     var serialize = function(obj) {
         var str = [];
         for (var p in obj)
@@ -367,7 +367,6 @@
     
     //функция для старта секундомера
     function StartTIME() {
-        console.log("time started");
         var cdateObj = new Date();
         var t = (cdateObj.getTime() - dateObj.getTime()) - (s * 1000);
         if (t > 999) {
@@ -446,8 +445,6 @@
                 init = 0;
             }
         }, 2000);
-        
-        
     }
 
     function IsJsonString(str) {
@@ -464,14 +461,44 @@
     var socket1 = io.connect('https://vast-plateau-40039.herokuapp.com/', {
         'sync disconnect on unload': true
     });
+
+    var connection = new RTCMultiConnection();
+    connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
+
+    connection.iceServers = [
+        {
+            'urls': [
+                'stun:stun.l.google.com:19302',
+                'stun:stun1.l.google.com:19302',
+                'stun:stun2.l.google.com:19302',
+                'stun:stun.l.google.com:19302?transport=udp',
+            ]
+        },
+        {
+            urls: 'turn:numb.viagenie.ca',
+            credential: 'muazkh',
+            username: 'webrtc@live.com'
+        },
+        {
+            urls: 'turn:192.158.29.39:3478?transport=udp',
+            credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+            username: '28224511:1379330808'
+        },
+        {
+            urls: 'turn:192.158.29.39:3478?transport=tcp',
+            credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+            username: '28224511:1379330808'
+        }
+    ];
+
     if(document.querySelector(".broadcast-video")){
-        var connection = new RTCMultiConnection();
-            connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
-            connection.session = {
-                audio: true,
-                video: true,
-                oneway: true
-            };
+        
+            
+        connection.session = {
+            audio: true,
+            video: true,
+            oneway: true
+        };
         
         connection.sdpConstraints.mandatory = {
             OfferToReceiveAudio: false,
@@ -480,31 +507,7 @@
         
         // https://www.rtcmulticonnection.org/docs/iceServers/
         // use your own TURN-server here!
-        connection.iceServers = [
-            {
-                'urls': [
-                    'stun:stun.l.google.com:19302',
-                    'stun:stun1.l.google.com:19302',
-                    'stun:stun2.l.google.com:19302',
-                    'stun:stun.l.google.com:19302?transport=udp',
-                ]
-            },
-            {
-                urls: 'turn:numb.viagenie.ca',
-                credential: 'muazkh',
-                username: 'webrtc@live.com'
-            },
-            {
-                urls: 'turn:192.158.29.39:3478?transport=udp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            },
-            {
-                urls: 'turn:192.158.29.39:3478?transport=tcp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            }
-        ];
+        
         
         connection.videosContainer = document.getElementById('videos-container');
         connection.onstream = function(event) {
@@ -529,12 +532,12 @@
             }
         
             if(event.type === 'local') {
-              video.volume = 0;
-              try {
-                  video.setAttributeNode(document.createAttribute('muted'));
-              } catch (e) {
-                  video.setAttribute('muted', true);
-              }
+                video.volume = 0;
+                try {
+                    video.setAttributeNode(document.createAttribute('muted'));
+                } catch (e) {
+                    video.setAttribute('muted', true);
+                }
             }
             video.srcObject = event.stream;
         
@@ -647,18 +650,8 @@
             checkRoom();
             
         }
-        
-        
-        
+          
     }else if(document.querySelectorAll("[data-id-to-call]").length > 0 || document.querySelector(".is-expert")){
-        // ......................................................
-        // ..................RTCMultiConnection Code.............
-        // ......................................................
-        
-        var connection = new RTCMultiConnection();
-        
-        // by default, socket.io server is assumed to be deployed on your own URL
-        connection.socketURL = 'https://vast-plateau-40039.herokuapp.com:443/';
         
         // comment-out below line if you do not have your own socket.io server
         // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
@@ -747,35 +740,7 @@
             return sdp;
         };
         // END_FIX_VIDEO_AUTO_PAUSE_ISSUES
-        
-        // https://www.rtcmulticonnection.org/docs/iceServers/
-        // use your own TURN-server here!
-        connection.iceServers = [
-            {
-                'urls': [
-                    'stun:stun.l.google.com:19302',
-                    'stun:stun1.l.google.com:19302',
-                    'stun:stun2.l.google.com:19302',
-                    'stun:stun.l.google.com:19302?transport=udp',
-                ]
-            },
-            {
-                urls: 'turn:numb.viagenie.ca',
-                credential: 'muazkh',
-                username: 'webrtc@live.com'
-            },
-            {
-                urls: 'turn:192.158.29.39:3478?transport=udp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            },
-            {
-                urls: 'turn:192.158.29.39:3478?transport=tcp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            }
-        ];
-        
+    
         
         connection.videosContainer = document.querySelector('#fromMe');
         connection.videosContainer1 = document.querySelector('#peerDiv');
@@ -846,7 +811,7 @@
             
             
             var numberOfUsersInTheRoom = connection.getAllParticipants().length;
-            console.log("Users Number: " + numberOfUsersInTheRoom);
+            // console.log("Users Number: " + numberOfUsersInTheRoom);
             
             //Создатель комнаты не учитывается
             if(numberOfUsersInTheRoom == 1){
@@ -897,7 +862,7 @@
             
         }
         connection.onMediaError = function(e) {
-            console.log(e.message);
+            // console.log(e.message);
             if (e.message === 'Concurrent mic process limit.') {
                 if (DetectRTC.audioInputDevices.length <= 1) {
                     alert('Please select external microphone. Check github issue number 483.');
@@ -913,7 +878,7 @@
             }
         };
         
-        var userIDel = document.querySelector("[data-user-id]");
+        
         
         if(userIDel){
             
@@ -949,7 +914,7 @@
                     xhr.onload = function() {
                         if (xhr.status === 200) {
                             data.price = parseInt(xhr.responseText.replace(/\D/g, ""));
-                            console.log(xhr.responseText);
+                            // console.log(xhr.responseText);
                             document.querySelector("#payForVideoChat .current-service-price").innerHTML = xhr.responseText + "/минута";
                             
                             returnData = data;
@@ -991,7 +956,7 @@
                             
                             
                             document.querySelector(".top-balance").innerHTML = data.balance;
-                            console.log(data);
+                            // console.log(data);
                             
                             if(data.service == "videoCall"){
                                 openPopup("#videocall");
@@ -1076,13 +1041,16 @@
     
     socket1.on("userCall", function(data){
         console.log(data);
+        if(userIDel != data.id){
+
+        }
         openPopup("#videocallAccept");
         
         
         document.querySelector("#acceptCall").addEventListener("click", function(e){
             e.preventDefault();
-            closePopup();
-            openPopup("#videocall");
+            window.closePopupAll(true);
+            window.openPopup("#videocall");
             connection.join(data.roomID);
         });
         
@@ -1107,6 +1075,3 @@
 <script src="/js/messages.js" defer></script>
 
 <script src="/js/expert.js" defer></script>
-@if(strpos(url()->current(), 'profile/messages') !== false)
-    
-@endif

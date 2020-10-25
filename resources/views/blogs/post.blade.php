@@ -20,9 +20,11 @@
                     </div>
                     <div class="blog-attr">
                         <strong>Автор:</strong> 
-                        <a href="/user/{{ $post->author()->id }}">
-                            {{ $post->author()->name }} {{ $post->author()->lastname }}
-                        </a>
+                        @if($post->author())
+                            <a href="/user/{{ $post->author()->id }}">
+                                {{ $post->author()->name }} {{ $post->author()->lastname }}
+                            </a>
+                        @endif
                     </div>
                     
                     <div class="blog-attr">

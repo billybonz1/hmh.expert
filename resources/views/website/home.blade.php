@@ -552,6 +552,16 @@
                         .fourth-screen .inner{
                             align-items: stretch;
                         }
+
+                        .top-expert{
+                            height: 100%;   
+                        }
+                        .second-screen .inner{
+                            align-items: stretch;
+                        }
+                        .ss-adv-block img{
+                            height: 100%;
+                        }
                         
                   </style>
                             <div class="goroskop">

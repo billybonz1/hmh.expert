@@ -164,7 +164,7 @@ gulp.task( 'deploy2', function () {
 
 gulp.task( 'deploy3', function () {
  
-    return watch(['public/*',"!node_modules","!.c9"]).pipe(sftp({
+    return watch(['public/*']).pipe(sftp({
         host: '185.233.119.218',
         user: 'root',
         password: '5nG3cg9GYR3u',
@@ -188,14 +188,14 @@ gulp.task( 'deploy4', function () {
 
 
 gulp.task('watchstyles', function() {
-	return watch('./**/*.scss')
+	return watch('./public/**/*.scss')
 	.pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
 	.pipe(autoprefixer(['last 15 versions']))
 	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-	.pipe(gulp.dest('./'))
-	.pipe(browserSync.stream())
+	.pipe(gulp.dest('./public'))
+	// .pipe(browserSync.stream())
 });
 
 
 gulp.task('watch', ['watchimages', 'watchstyles']);
-gulp.task('default', [/*'browser-sync',*/'watch', 'deploy2', 'deploy3', 'deploy4']);
+gulp.task('default', [/*'browser-sync',*/'watch', 'deploy3']);

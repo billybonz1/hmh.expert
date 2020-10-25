@@ -156,7 +156,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function avatar($size = "thumbnail"){
         if(empty($this->avatar)){
-            return "/img/male.jpg";
+            return "/img/profilefoto255x255.webp";
         }else{
             // if($size == "thumbnail"){
                 return "/images/avatars/".$this->avatar;

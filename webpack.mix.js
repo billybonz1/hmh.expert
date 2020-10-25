@@ -28,7 +28,7 @@ if(COMPILE == 'all' || COMPILE == 'js') {
     // update public path for js to compile into /resources
     mix.js('resources/assets/js/admin.js', 'js/vendor/admin_compiled.js');
     mix.js('resources/assets/js/website.js', 'js/vendor/website_compiled.js');
-
+ 
     mix.scripts([
         'public/js/vendor/admin_compiled.js',
         pathJS + '/titan/buttons.js',

@@ -31,7 +31,9 @@
                                         <p>
                                             {{ $post->short_desc() }}
                                         </p>
-                                        <h5>Автор: {{ $post->author()->name }} {{ $post->author()->lastname }}</h5>
+                                        @if($post->author())
+                                            <h5>Автор: {{ $post->author()->name }} {{ $post->author()->lastname }}</h5>
+                                        @endif
                                         <span class="post-date">{{ $post->created_at }}</span>
                                     </a>
                                 </div>

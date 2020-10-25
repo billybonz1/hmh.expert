@@ -251,6 +251,7 @@ $bgmenu: #3c3c51;
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    height: 100%; 
     &:hover{
         .tec-hover{
             opacity: 1;

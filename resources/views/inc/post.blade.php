@@ -10,9 +10,11 @@
             </p>
             <div class="blogs-props">
                 <div>
+                    @if($post->author())
                     <div>
                         Автор: <a href="/users/{{ $post->author()->id }}">{{ $post->author()->name }} {{ $post->author()->lastname }}</a>
                     </div>
+                    @endif
                     
                     <div>
                         Комментариев: {{ count($post->approvedComments) }}
