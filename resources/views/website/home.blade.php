@@ -385,10 +385,8 @@
                                         
                                     });
                         </script>
-
                         <div class="fs-article">
                         <div class="cards">
-
                         <!-- style for card day --->
                         <style>
                                 .cards{
@@ -532,8 +530,8 @@
                 
                     <style>
                         .goroskop{display:flex;flex-wrap:wrap}
-                        .goroskop h4{width:100%;flex:0 0 100%;margin-bottom:15px;}
-                        .goroskop-container{display:flex;flex-wrap:wrap;width:64%;padding-right:20px}
+                        .goroskop h4{width:100%;flex:0 0 100%;margin-bottom:15px;text-align:right;padding-right:14px}
+                        .goroskop-container{display:flex;flex-wrap:wrap;width:57%;padding-right:20px}
                         .goroskop p{flex:1}
                         .goroskop-container>div{width:33.333333333333333333333333%;font-size: x-small;text-align:center;font-weight:500; transition:1s; border-radius:12px}
                         .goroskop-container br{padding-top:2px}
@@ -551,6 +549,10 @@
                         .ruba .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/pisces.png)}
                         .kozerog .goroskop-img{background:url(https://1001goroskop.ru/img/zodiak/mini/capricorn.png)}
                         .goroskop-container>div:hover {background-color:#ff4c4c; color:white}
+                        .fourth-screen .inner{
+                            align-items: stretch;
+                        }
+                        
                   </style>
                             <div class="goroskop">
                                 <h4> Гороскоп-2021 </h4>
