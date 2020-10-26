@@ -1,0 +1,27 @@
+{
+    "remotePath": "/var/www/hmh.expert",
+    "host": "185.233.119.218",
+    "username": "root",
+    "password": "5nG3cg9GYR3u",
+    "port": 2222,
+    "secure": false,
+    "protocol": "sftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ""
+        ],
+        "path": ""
+    }
+}
